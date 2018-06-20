@@ -1,0 +1,48 @@
+{% extends 'head_html5.html' %}
+
+{% block content %}
+   <!-- /. 开头的标题  开始 -->
+            <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                           login  <small>kktest</small>
+                        </h1>
+                    </div>
+                </div>
+  <!-- /.开头的标题  结束  -->
+  <!-- /.登录的表单  开始  -->
+     <div class="row">
+           <div class="col-md-4 col-sm-4 col-md-offset-4">
+                <div class="panel panel-primary">
+                        <div class="panel-heading">登录</div>
+                    <form action="" method="POST">
+                    {% csrf_token %}
+                        <div class="panel-body">
+                       {{ my_login_form }}
+                        </div>
+                        <div class="panel-footer">
+                            <td><center> <button type="submit"    name="my_login_name"     class="btn btn-default">login</button></center></td>
+                        </div>
+                    </form>
+                </div>
+            </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
