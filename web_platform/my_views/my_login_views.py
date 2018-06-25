@@ -1,10 +1,10 @@
 from django.shortcuts import render,HttpResponse
 from web_platform.my_forms.my_login_form import my_login_form
 from django.contrib.auth import authenticate,login
-
+from web_platform.my_models.get_basic_data import get_basic_data
 
 def my_login(request):
-    context_data={}
+    context_data=get_basic_data()
     context_data['my_login_form']=my_login_form
     if request.method == 'POST':
         the_my_login=my_login_form(request.POST)

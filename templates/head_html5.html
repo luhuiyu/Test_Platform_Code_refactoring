@@ -67,6 +67,7 @@
 </head>
    <!-- 这一块是静态文件 结束 -->
 
+
   <!--正文 开始 -->
 <body>
     <div id="wrapper">
@@ -186,7 +187,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a  href="?register=1"><i class="fa fa-user fa-fw"></i> register</a>
+                        <li><a  href="/my_register"><i class="fa fa-user fa-fw"></i> register</a>
                         </li>
                         <li><a href="/set_up"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -212,9 +213,11 @@
                         <a href=""><i class="fa fa-sitemap"></i> 项目列表<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                                <!--  项目列表  开始  -->
-                                  <!--/.
-                                     <li><a  href="/project?the_project_name={{ x.project_name}}" id="the_project_name"   > {{ x.project_name}}</a></li>
-                                    -->
+                                   {% for x  in my_project %}
+                                         <li>
+                                             <a  href="/project?the_project_name={{ x.project_name}}" id="the_project_name"   > {{ x.project_name}}</a>
+                                        </li>
+                                {% endfor %}
                             <!--  项目列表  结束  -->
                                 </ul>
                             </li>
@@ -225,13 +228,14 @@
                         <a href="/simple_case"><i class="fa fa-desktop" ></i>简单case管理</a>
                     </li>
                 <li>
-                        <a href=""><i class="fa fa-qrcode"></i> Tools<span class="fa arrow"></span></a>
+                        <a href=""><i id="my_tools" class="fa fa-qrcode"></i> Tools<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                              {% for x  in my_tools %}
                             <li>
                                        <a href="/{{ x.tools_address}}"> {{ x.tools_name}}</a>
                             </li>
                                 {% endfor %}
+
                                 </ul>
                             </li>
                     <li>
@@ -242,11 +246,16 @@
         </nav>
             <!--/. 导航侧  结束  -->
 
+
+
+
     {% block content %}
         <!-- /. 开头的基本的结构  开始 -->
             <div id="page-wrapper" >
             <div id="page-inner">
 			 <div class="row">
+                  <textarea class="form-control" rows="5"  id="my_tools_li" ></textarea>
+                  <span id='my_tools_li'></span>
                     <div class="col-md-12">
                      这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。
                     </div>
@@ -258,7 +267,6 @@
 
 
       <!-- /. js  -->
-
 
 
 

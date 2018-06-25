@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse
 from web_platform.my_forms.my_register_form import my_register_form
 from django.contrib.auth.models import User
+from web_platform.my_models.get_basic_data import get_basic_data
 def my_register(request):
     '''
     用于处理注册的逻辑，
@@ -8,7 +9,7 @@ def my_register(request):
     :param request:
     :return:
     '''
-    context_data = {}
+    context_data=get_basic_data()
     context_data['my_register_form'] = my_register_form
     if request.method == 'POST':
         the_my_register = my_register_form(request.POST)
