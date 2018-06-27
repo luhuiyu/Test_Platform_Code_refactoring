@@ -66,11 +66,11 @@ class  my_case_of_text(models.Model):
     operation_steps= models.CharField(max_length=2550)
     expected_results=models.CharField(max_length=2550)
     remarks=models.CharField(max_length=2550)
-    App_version = models.CharField(max_length=255)
-    script_type = models.CharField(max_length=300)
-    script_address = models.CharField(max_length=300)
-    revise_type= models.CharField(max_length=300)
-    sign=models.CharField(max_length=300)
+    App_version = models.CharField(null=True,blank=True,max_length=255)
+    script_type = models.CharField(null=True,blank=True,max_length=300)
+    script_address = models.CharField(null=True,blank=True,max_length=300)
+    revise_type= models.CharField(null=True,blank=True,max_length=300)
+    sign=models.CharField(null=True,blank=True,max_length=300)
 
 class user (models.Model):
     user_name = models.CharField(max_length=300)
