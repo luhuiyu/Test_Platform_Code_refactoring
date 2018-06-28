@@ -5,6 +5,11 @@ from web_platform.my_api.basic_api import get_request_data
 from  web_platform.my_forms.my_project_form import *
 from  web_platform.models import  *
 class save_api_case_api(APIView):
+    '''
+    保存api case 有两种情况
+    修改已有case,则from里面有 id
+    反之新建case则没有.
+    '''
     def post(self,request, *args, **kwargs):
    #     A=get_request_data(self, request)
         new_api_case=get_api_case_form(request.POST)

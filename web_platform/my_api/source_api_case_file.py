@@ -7,6 +7,11 @@ from web_platform.my_settings import *
 
 
 class source_api_case_file(APIView):
+    '''
+    查看api  case 文件的内容
+    传进 case id
+    返回  代码  文件地址
+    '''
     def post(self, request, *args, **kwargs):
         api_case_id=get_request_data(self, request)
         case_address=my_case_of_API.objects.get(id=api_case_id['source_id'])

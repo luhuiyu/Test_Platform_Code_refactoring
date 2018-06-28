@@ -21,8 +21,8 @@
                                 <ul class="nav nav-tabs">
                                     <li  class="active"><a href="#txt_case" data-toggle="tab">用例管理</a></li>
                                     <li  id="api_case_tab" class=""><a href="#api_case" data-toggle="tab">API脚本管理</a></li>
-                                    <li class=""><a href="#ui_case" data-toggle="tab">UI脚本管理</a></li>
-                                     <li class=""><a href="#simple_case" data-toggle="tab">简单case管理</a></li>
+                                    <li id="ui_case_tab" class=""><a href="#ui_case" data-toggle="tab">UI脚本管理</a></li>
+                                     <li  id="simple_case_tab"  class=""><a href="#simple_case" data-toggle="tab">简单case管理</a></li>
                                 </ul>
                             </div>
                              <!-- /. 导航栏--结束  -->
@@ -108,23 +108,26 @@
                     </div>
                 </div>
 <!-- /.  业务模块 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 </div>
 
+<!-- /. source_file_modal 模块  -- 开始  -->
+<div class="modal fade" id="source_file_modal" tabindex="-1" role="dialog" aria-labelledby="source_file_modal" aria-hidden="true">
+      <div class="modal-dialog modal-lg ">
+           <div class="modal-content">
+                {% csrf_token %}
+                    <div class="panel panel-default">
+                        <div class="form-group">
+                            <label>脚本内容</label>
+                            <textarea class="form-control"  id="case_data"  name="case_data" rows="20" > </textarea>
+                        </div>
+                    </div>
+                    <button type="submit"  id="updata_api_case" class="btn btn-default"  name="updata_path"  value=" " >更新</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+           </div>
+      </div>
+</div>
+<!-- /. source_file_modal 模块 -- 结束  -->
 
 
 
@@ -194,7 +197,19 @@
 
 
 
+<!-- /. AJAX 获取 ui_case 页面  开始 -->
+<script>
+    $(document).ready(function(){
+     $('#ui_case_tab').click(function(){
+          var the_project_name =  '{{ the_project_name }}';
+        $.post("{% url 'my_project_ui_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name}, function(data){
+         $('#ui_case_module').html(data);
+        });
+      });
+    });
 
+</script>
+<!-- /. AJAX 获取 api_case 页面  结束 -->
 
 
 

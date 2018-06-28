@@ -1,6 +1,6 @@
 from  web_platform.models import  my_case_of_text
 
-def get_cast_text_dict(context_data):
+def get_case_text_dict(context_data):
     '''
     返回 当前项目的case数据，json格式
     {   module_name1：{

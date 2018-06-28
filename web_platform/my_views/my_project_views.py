@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponse
 from web_platform.my_models.get_basic_data import get_basic_data
 from  web_platform.my_forms.my_project_form import *
-from  web_platform.my_models.get_txet_case import get_cast_text_dict
-from  web_platform.my_models.get_api_case import get_cast_api_dict
+from  web_platform.my_models.get_txet_case import get_case_text_dict
+from  web_platform.my_models.get_api_case import get_case_api_dict
+from  web_platform.my_models.get_ui_case import get_case_ui_dict
+
 from  web_platform.models import  *
 
 from django_ajax.decorators import ajax
@@ -18,7 +20,7 @@ def my_project(request):
     if request.method == 'GET':
         the_project_name = request.GET.get("the_project_name")
         context_data['the_project_name'] = the_project_name
-        context_data=get_cast_text_dict(context_data)
+        context_data=get_case_text_dict(context_data)
     elif request.method == 'POST':
         new_text_case=get_text_case_form(request.POST)
         if new_text_case.is_valid():
@@ -70,8 +72,21 @@ def my_project_api_case(request):
         the_project_name = request.POST.get("the_project_name")
         context_data['the_project_name'] = the_project_name
         context_data['get_api_case_form'] = get_api_case_form
-        context_data=get_cast_api_dict(context_data)
+        context_data=get_case_api_dict(context_data)
         return render(request=request, template_name='my_ajax_html5/my_project_api_case_ajax.html',
                       context=context_data)
     else:
         return render(request=request, template_name='my_ajax_html5/my_project_api_case_ajax.html')
+
+
+def my_project_ui_case(request):
+    context_data = get_basic_data()
+    if request.method == 'POST':
+        the_project_name = request.POST.get("the_project_name")
+        context_data['the_project_name'] = the_project_name
+        context_data['get_ui_case_form'] = get_ui_case_form
+        context_data=get_case_ui_dict(context_data)
+        return render(request=request, template_name='my_ajax_html5/my_project_ui_case_ajax.html',
+                      context=context_data)
+    else:
+        return render(request=request, template_name='my_ajax_html5/my_project_ui_case_ajax.html')

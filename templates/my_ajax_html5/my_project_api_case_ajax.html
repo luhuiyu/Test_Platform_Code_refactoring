@@ -40,8 +40,9 @@
          api case
         </button></center>
      </td>
+
     <div class="modal fade" id="add_api_case" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog ">
             <div class="modal-content">
                     {{ get_api_case_form }}
                      <div class="modal-footer">
@@ -54,23 +55,6 @@
 </div>
 <!-- /. api_case 模块 添加case-- 结束  -->
 
-<!-- /. source_file_modal 模块  -- 开始  -->
-<div class="modal fade" id="source_file_modal" tabindex="-1" role="dialog" aria-labelledby="source_file_modal" aria-hidden="true">
-      <div class="modal-dialog">
-           <div class="modal-content">
-                {% csrf_token %}
-                    <div class="panel panel-default">
-                        <div class="form-group">
-                            <label>脚本内容</label>
-                            <textarea class="form-control"  id="case_data"  name="case_data" rows="20" > </textarea>
-                        </div>
-                    </div>
-                    <button type="submit"  id="updata_api_case" class="btn btn-default"  name="updata_path"  value=" " >更新</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-           </div>
-      </div>
-</div>
-<!-- /. source_file_modal 模块 -- 结束  -->
 
 
     <!-- /. 开始时自动填充  project_name  开始 -->
@@ -82,7 +66,6 @@
     <!-- /. 开始时自动填充  project_name   结束 -->
 
 <!-- /. AJAX  查看case的文件 开始 -->
-
 <script>
     $(document).ready(function(){
      $('.btn-sm.source').click(function(){

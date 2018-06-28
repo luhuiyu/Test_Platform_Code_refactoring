@@ -6,6 +6,11 @@ from  web_platform.models import *
 from web_platform.my_settings import *
 
 class save_api_case_file_api(APIView):
+    '''
+    报存case文件
+    传两个参数  case_code  代码
+                updata_api_case  py文件的地址
+    '''
     def post(self, request, *args, **kwargs):
         api_case_data = get_request_data(self, request)
         case_data=api_case_data['case_code']
