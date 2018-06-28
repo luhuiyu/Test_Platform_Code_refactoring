@@ -57,46 +57,31 @@
 
 
 
-    <!-- /. 开始时自动填充  project_name  开始 -->
+<!-- /. 开始时自动填充  project_name  开始 -->
 <script>
     $(document).ready(function(){
      $("#api_project_name").val('{{ the_project_name }}');
     });
 </script>
-    <!-- /. 开始时自动填充  project_name   结束 -->
+<!-- /. 开始时自动填充  project_name   结束 -->
 
 <!-- /. AJAX  查看case的文件 开始 -->
 <script>
     $(document).ready(function(){
      $('.btn-sm.source').click(function(){
         var   source_id=$(this).val();
-        $.post("{% url 'source_api_case_file' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'source_id':source_id}, function(data){
+        $.post("{% url 'source_case_file' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'source_id':source_id,'source_type':'api'}, function(data){
             $("#case_data").val(data['case_code']);
-            $("#updata_api_case").val(data['api_case_path'])
+            $("#updata_api_case").val(data['case_path'])
         });
       });
     });
 </script>
 <!-- /. AJAX  查看case的文件  结束 -->
 
-<!-- /. AJAX  更新case的文件 开始 -->
-<script>
-    $(document).ready(function(){
-     $('#updata_api_case').click(function(){
-        var   case_code = $("#case_data").val();
-        var   updata_api_case = $("#updata_api_case").val();
-        $.post("{% url 'save_api_case_file_api' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'case_code':case_code,'updata_api_case':updata_api_case}, function(data){
-            $("#source_file_modal").hide();
-            $(".modal-backdrop").remove();
-            $("body").removeClass('modal-open');
-        });
-      });
-    });
-</script>
 
-<!-- /. AJAX  更新case的文件 结束 -->
 
-  <!-- /. 点击 查看 获取case的数据 开始  -->
+<!-- /. 点击 查看 获取case的数据 开始  -->
 <script>
     $(document).ready(function(){
      $('.btn-sm.look_apicase').click(function(){
@@ -114,10 +99,9 @@
       });
     });
 </script>
-    <!-- /. 点击 查看 获取case的数据 结束  -->
+<!-- /. 点击 查看 获取case的数据 结束  -->
 
-
-  <!-- /. 点击 添加 case  提交case数据 开始  -->
+<!-- /. 点击 添加 case  提交case数据 开始  -->
 <script>
 
     $(document).ready(function(){
@@ -135,7 +119,7 @@
       });
     });
 </script>
-  <!-- /. 点击 添加 case  提交case数据 开始  -->
+<!-- /. 点击 添加 case  提交case数据 开始  -->
 
 
 

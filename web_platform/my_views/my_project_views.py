@@ -4,10 +4,7 @@ from  web_platform.my_forms.my_project_form import *
 from  web_platform.my_models.get_txet_case import get_case_text_dict
 from  web_platform.my_models.get_api_case import get_case_api_dict
 from  web_platform.my_models.get_ui_case import get_case_ui_dict
-
 from  web_platform.models import  *
-
-from django_ajax.decorators import ajax
 
 def my_project(request):
     '''
@@ -56,10 +53,8 @@ def my_project(request):
                     revise_type=1,
                 )
                 now_text_case_models.save()
-            context_data = get_cast_text_dict(context_data)
+            context_data = get_case_text_dict(context_data)
     return render(request=request, template_name='my_project_html5.html', context=context_data)
-
-
 
 def my_project_api_case(request):
     '''
@@ -78,7 +73,6 @@ def my_project_api_case(request):
     else:
         return render(request=request, template_name='my_ajax_html5/my_project_api_case_ajax.html')
 
-
 def my_project_ui_case(request):
     context_data = get_basic_data()
     if request.method == 'POST':
@@ -90,3 +84,30 @@ def my_project_ui_case(request):
                       context=context_data)
     else:
         return render(request=request, template_name='my_ajax_html5/my_project_ui_case_ajax.html')
+
+def my_project_simple_case(request):
+    context_data = get_basic_data()
+    if request.method == 'POST':
+        context_data['api_list']={}
+        the_project_name = request.POST.get("the_project_name")
+        the_api_name=request.POST.get("api_name")
+        context_data['the_project_name'] = the_project_name
+        if the_project_name :
+            simple_case_data = comparison_library.objects.filter(project_name=the_project_name).values('api_name').distinct()
+            api_list = []
+            for y in simple_case_data:
+                api_list.append(y)
+            context_data['api_list'] = api_list
+        if  the_api_name  and the_project_name :
+            all_case = comparison_library.objects.filter(project_name=the_project_name,api_name=the_api_name).all()
+            all_case_list = []
+            for x in all_case:
+                all_case_list.append(
+                    {'id': x.id, 'send_json': x.send_json, 'remarks': x.remarks,
+                     'api_name': x.api_name, 'project_name': x.project_name})
+            context_data['all_case_value']=all_case_list
+            context_data['the_api_name']=the_api_name
+        context_data['get_simple_case_form'] = get_simple_case_form
+        return render(request=request, template_name='my_ajax_html5/my_project_simple_case_ajax.html',
+                      context=context_data)
+    return render(request=request, template_name='my_ajax_html5/my_project_simple_case_ajax.html', context=context_data)

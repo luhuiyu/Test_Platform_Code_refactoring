@@ -1,0 +1,91 @@
+<div class="form-group">
+    <div class="form-group">
+        <label for="disabledSelect" >api_name</label>
+        <select class="form-control"  id='api_name'  >
+            {% for x in api_list %}
+                <option id="project_index" >{{ x.api_name}}</option>
+               {% endfor %}
+        </select>
+    </div>
+</div>
+
+<!-- /. simple_case 模块 表格-- 开始  -->
+{% if all_case_value %}
+    <table class="table table-striped table-bordered table-hover"   style="table-layout: fixed;width: 700 px" >
+          <thead>
+                <tr>
+                    <th>id</th>
+                    <th>send_json</th>
+                    <th>remarks</th>
+                    <th>revise</th>
+                    <th>delete</th>
+                </tr>
+                <tbody>
+                    {% for case_value in all_case_value %}
+                        <tr>
+                             <td  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" >{{ case_value.id }}</td>
+                             <td  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"  >    {{ case_value.send_json }}  </td>
+                             <td style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"  >{{ case_value.remarks }}</td>
+                             <td><button class="btn btn-default btn-sm"  data-toggle="modal" data-target="#add_simple_case"  value="{{ case_value.id }}" >revise</button></td>
+                             <td>  <button type="submit"  id="delete_simple_{{case_value.id}}"  class="btn btn-danger btn-sm delete "  name="delete_simple_{{case_value.id}}"     value=" { 'id' :{{ case_value.id }}  ,'case_type':'simple'} "   >delete</button> </td>
+                        </tr>
+                  {% endfor %}
+               </tbody>
+         </thead>
+    </table>
+{% endif %}
+    <!-- /. simple_case 模块 表格-- 结束  -->
+
+
+<!-- /. simple_case 模块 添加case-- 开始  -->
+<div class="form-group">
+     <td>
+        <center><button class="btn btn-success" data-toggle="modal" data-target="#add_simple_case">
+         simple case
+        </button></center>
+     </td>
+
+    <div class="modal fade" id="add_simple_case" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                    {{ get_simple_case_form }}
+                     <div class="modal-footer">
+                         <button type="submit"  id="add_simple_case_butt" class="btn btn-default"  name="add_simple_case"  value="now_add_simple_case"  >添加case</button>
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                     </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. simple_case 模块 添加case-- 结束  -->
+
+<!-- /. simple_case 模块 查询api的详细data-- 开始  -->
+<script>
+    $(document).ready(function(){
+      $("#api_name").change(function(){
+          var api_name = $("#api_name").val();
+           var the_project_name = '{{ the_project_name }}' ;
+        $.post("{% url 'my_project_simple_case'%}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name,'api_name':api_name}, function(data){
+                 $('#simple_case_module').html(data);
+        });
+      });
+    });
+</script>
+<!-- /. simple_case 模块 查询api的详细data-- 结束  -->
+
+
+<!-- /. AJAX 获取 删除 simple_case 的 id 和 case_type  开始 -->
+<script>
+    $(document).ready(function(){
+     $('.btn-sm.delete').click(function(){
+        var delete_case_data =$(this).val();
+        $.post("{% url 'delete_case_api' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'delete_case_data':delete_case_data}, function(data){
+            var the_project_name =  '{{ the_project_name }}';
+            $.post("{% url 'my_project_simple_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name , 'api_name':'{{ the_api_name }}'}, function(data){
+            $('#simple_case_module').html(data);
+             });
+        });
+      });
+    });
+</script>
+<!-- /. AJAX 获取 删除 simple_case 的 id 和 case_type  结束 -->

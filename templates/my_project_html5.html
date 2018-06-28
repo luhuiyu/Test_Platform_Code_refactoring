@@ -195,8 +195,6 @@
 </script>
 <!-- /. AJAX 获取 删除 case 的 id 和 case_type  结束 -->
 
-
-
 <!-- /. AJAX 获取 ui_case 页面  开始 -->
 <script>
     $(document).ready(function(){
@@ -209,10 +207,37 @@
     });
 
 </script>
-<!-- /. AJAX 获取 api_case 页面  结束 -->
+<!-- /. AJAX 获取 ui_case 页面  结束 -->
 
+<!-- /. AJAX 获取 simple_case 页面  开始 -->
+<script>
+    $(document).ready(function(){
+     $('#simple_case_tab').click(function(){
+          var the_project_name =  '{{ the_project_name }}';
+        $.post("{% url 'my_project_simple_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name}, function(data){
+         $('#simple_case_module').html(data);
+        });
+      });
+    });
 
+</script>
+<!-- /. AJAX 获取 simple_case 页面  结束 -->
 
+<!-- /. AJAX  更新case的文件 开始 -->
+<script>
+    $(document).ready(function(){
+     $('#updata_api_case').click(function(){
+        var   case_code = $("#case_data").val();
+        var   updata_api_case = $("#updata_api_case").val();
+        $.post("{% url 'save_api_case_file_api' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'case_code':case_code,'updata_api_case':updata_api_case}, function(data){
+            $("#source_file_modal").hide();
+            $(".modal-backdrop").remove();
+            $("body").removeClass('modal-open');
+        });
+      });
+    });
+</script>
+<!-- /. AJAX  更新case的文件 结束 -->
 
 
 {% endblock %}

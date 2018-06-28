@@ -10,6 +10,8 @@ class save_api_case_file_api(APIView):
     报存case文件
     传两个参数  case_code  代码
                 updata_api_case  py文件的地址
+
+    复用 保存 ui的case
     '''
     def post(self, request, *args, **kwargs):
         api_case_data = get_request_data(self, request)

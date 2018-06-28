@@ -61,3 +61,87 @@
     });
 </script>
 <!-- /. 开始时自动填充  project_name   结束 -->
+
+<!-- /. AJAX  查看case的文件 开始 -->
+<script>
+    $(document).ready(function(){
+     $('.btn-sm.source_ui').click(function(){
+        var   source_id=$(this).val();
+        $.post("{% url 'source_case_file' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'source_id':source_id,'source_type':'ui'}, function(data){
+            $("#case_data").val(data['case_code']);
+            $("#updata_api_case").val(data['case_path'])
+        });
+      });
+    });
+</script>
+<!-- /. AJAX  查看case的文件 结束 -->
+
+
+
+<!-- /. 点击 查看 获取case的数据 开始  -->
+<script>
+    $(document).ready(function(){
+     $('.btn-sm.look_uicase').click(function(){
+        var case_id =$(this).val();
+        $.post("{% url 'get_ui_case_data_api' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'id':case_id}, function(data){
+            $("#ui_case_id").val(data['case_id']);
+            $("#ui_project_name").val(data['project_name']);
+            $("#ui_module_name").val(data['module_name']);
+            $("#ui_case_name").val(data['case_name']);
+            $("#ui_case_address").val(data['case_address']);
+            $("#ui_App_version").val(data['App_version']);
+            $("#my_case_of_text_id").val(data['my_case_of_text_id']);
+        });
+      });
+    });
+</script>
+<!-- /. 点击 查看 获取case的数据 结束  -->
+
+
+
+
+  <!-- /. 点击 添加 case  提交case数据 开始  -->
+<script>
+
+    $(document).ready(function(){
+     $('#add_ui_case_butt').click(function(){
+        var   source_id=$(".form-control.ui_case").serialize();
+        $.post("{% url 'save_ui_case_api' %}", source_id , function(data){
+            $("#add_ui_case").hide();
+            $(".modal-backdrop").remove();
+            $("body").removeClass('modal-open');
+            var the_project_name =  '{{ the_project_name }}';
+            $.post("{% url 'my_project_ui_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name}, function(data){
+            $('#ui_case_module').html(data);
+             });
+        });
+      });
+    });
+</script>
+  <!-- /. 点击 添加 case  提交case数据 开始  -->
+
+
+
+
+
+
+
+
+
+
+<!-- /. AJAX 获取 删除 ui case 的 id 和 case_type  开始 -->
+<script>
+    $(document).ready(function(){
+     $('.btn-sm.delete').click(function(){
+        var delete_case_data =$(this).val();
+        $.post("{% url 'delete_case_api' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'delete_case_data':delete_case_data}, function(data){
+            $('#ui_case_module').html('   ');
+            var the_project_name =  '{{ the_project_name }}';
+            $.post("{% url 'my_project_ui_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name}, function(data){
+            $('#ui_case_module').html(data);
+             });
+        });
+      });
+    });
+</script>
+<!-- /. AJAX 获取 删除 api case 的 id 和 case_type  结束 -->

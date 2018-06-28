@@ -20,7 +20,6 @@ class get_api_case_data_api(APIView):
             'case_address':case_data.case_address,
             'App_version':case_data.App_version,
             'my_case_of_text_id':case_data.my_case_of_text_id,
-
         }
         return Response(return_dict,status=200, template_name=None, headers=None,
                  exception=False, content_type='json')

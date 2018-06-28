@@ -28,6 +28,7 @@ def get_case_api_dict(context_data):
                     'project_name': y.project_name,
                     'module_name': y.module_name,
                     'case_name': y.case_name,
+                    'api_name':y.api_name
                 }
             )
         case_of_api_dict[x['module_name']] = case_of_api_list

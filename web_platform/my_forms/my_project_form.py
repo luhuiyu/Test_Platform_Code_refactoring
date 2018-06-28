@@ -34,13 +34,20 @@ class get_api_case_form(forms.Form):
 
 
 class get_ui_case_form(forms.Form):
-    ui_case_id = forms.CharField(required=False, label='用例id(ui_case_id)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_case_id', 'name': 'ui_case_id', 'class': 'form-control api_case'}))
-    ui_project_name = forms.CharField(label='项目名(project_name)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_project_name', 'name': 'ui_project_name', 'class': 'form-control api_case'}))
-    ui_module_name = forms.CharField(label='模块名(ui_module_name)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_module_name', 'name': 'ui_module_name', 'class': 'form-control api_case'}))
-    ui_case_name= forms.CharField(label='ui_case_name',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_case_name', 'name': 'ui_case_name','class':'form-control api_case'}))
-    ui_case_address=forms.CharField(label='ui_case_address',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_case_address', 'name': 'ui_case_address','class':'form-control api_case'  }))
-    ui_App_version= forms.CharField(label='app版本(App_version)',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_App_version', 'name': 'ui_App_version','class':'form-control api_case ' }))
-    my_case_of_text_id=  forms.CharField( required=False,label='my_case_of_text_id',max_length=200,widget=widgets.TextInput(attrs={'id': 'my_case_of_text_id', 'name': 'my_case_of_text_id','class':'form-control api_case'}))
+    ui_case_id = forms.CharField(required=False, label='用例id(ui_case_id)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_case_id', 'name': 'ui_case_id', 'class': 'form-control ui_case'}))
+    ui_project_name = forms.CharField(label='项目名(project_name)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_project_name', 'name': 'ui_project_name', 'class': 'form-control ui_case'}))
+    ui_module_name = forms.CharField(label='模块名(ui_module_name)', max_length=200, widget=widgets.TextInput(attrs={'id': 'ui_module_name', 'name': 'ui_module_name', 'class': 'form-control ui_case'}))
+    ui_case_name= forms.CharField(label='ui_case_name',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_case_name', 'name': 'ui_case_name','class':'form-control ui_case'}))
+    ui_case_address=forms.CharField(label='ui_case_address',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_case_address', 'name': 'ui_case_address','class':'form-control ui_case'  }))
+    ui_App_version= forms.CharField(label='app版本(App_version)',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_App_version', 'name': 'ui_App_version','class':'form-control ui_case ' }))
+    my_case_of_text_id=  forms.CharField( required=False,label='my_case_of_text_id',max_length=200,widget=widgets.TextInput(attrs={'id': 'my_case_of_text_id', 'name': 'my_case_of_text_id','class':'form-control ui_case'}))
 
 
-
+class get_simple_case_form(forms.Form):
+    simple_case_id = forms.CharField(required=False, label='id', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_case_id', 'name': 'simple_case_id', 'class': 'form-control simple_case'}))
+    simple_api_name = forms.CharField(required=False, label='simple_api_name', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_api_name', 'name': 'simple_api_name', 'class': 'form-control simple_case'}))
+    simple_send_json = forms.CharField(required=False, label='simple_send_json', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_send_json', 'name': 'simple_send_json', 'class': 'form-control simple_case'}))
+    simple_receive_json =forms.CharField(required=False, label='simple_receive_json', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_receive_json', 'name': 'simple_receive_json', 'class': 'form-control simple_case'}))
+    simple_status_code = forms.CharField(required=False, label='simple_status_code', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_status_code', 'name': 'simple_status_code', 'class': 'form-control simple_case'}))
+    simple_remarks = forms.CharField(required=False, label='simple_remarks', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_remarks', 'name': 'simple_remarks', 'class': 'form-control simple_case'}))
+    project_name = forms.CharField(required=False, label='project_name', max_length=200, widget=widgets.TextInput(attrs={'id': 'project_name', 'name': 'project_name', 'class': 'form-control simple_case'}))
