@@ -25,6 +25,7 @@ urlpatterns = [
     path(r'logout', logout, name='logout'),
     path(r'my_register', my_register, name='my_register'),
     path(r'project', my_project_views.my_project, name='my_project'),
+    path(r'report', my_report_views.my_report, name='my_project'),
     path(r'my_project_api_case', my_project_views.my_project_api_case, name='my_project_api_case'),
     path(r'my_project_ui_case', my_project_views.my_project_ui_case, name='my_project_ui_case'),
     path(r'my_project_simple_case', my_project_views.my_project_simple_case, name='my_project_simple_case'),
@@ -32,10 +33,12 @@ urlpatterns = [
     path(r'rest_api/get_text_case_rest_api', get_text_case_data_api.get_text_case_rest_api.as_view(), name='get_text_case_rest_api'),
     path(r'rest_api/get_text_case_data_api', get_api_case_data_api.get_api_case_data_api.as_view(),name='get_api_case_rest_api'),
     path(r'rest_api/get_ui_case_data_api', get_ui_case_data_api.get_ui_case_data_api.as_view(),name='get_ui_case_data_api'),
+    path(r'rest_api/get_simple_case_data_api', get_simple_case_data_api.get_simple_case_data_api.as_view(),name='get_simple_case_data_api'),
     path(r'rest_api/delete_case_api', delete_case_api.delete_case.as_view(),name='delete_case_api'),
     path(r'rest_api/source_case_file', source_case_file.source_case_file.as_view(), name='source_case_file'),
     path(r'rest_api/save_api_case_api', save_api_case_api.save_api_case_api.as_view(),name='save_api_case_api'),
     path(r'rest_api/save_ui_case_api', save_ui_case_api.save_ui_case_api.as_view(), name='save_ui_case_api'),
+    path(r'rest_api/save_simple_case_api', save_simple_case_api.save_simple_case_api.as_view(), name='save_simple_case_api'),
     path(r'rest_api/save_api_case_file_api', save_api_case_file_api.save_api_case_file_api.as_view(), name='save_api_case_file_api'),
 
 

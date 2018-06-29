@@ -123,12 +123,6 @@
 
 
 
-
-
-
-
-
-
 <!-- /. AJAX 获取 删除 ui case 的 id 和 case_type  开始 -->
 <script>
     $(document).ready(function(){
@@ -145,3 +139,25 @@
     });
 </script>
 <!-- /. AJAX 获取 删除 api case 的 id 和 case_type  结束 -->
+
+
+
+  <!-- /. 点击 添加 case  提交case数据 开始  -->
+<script>
+
+    $(document).ready(function(){
+     $('#add_ui_case_butt').click(function(){
+        var   source_id=$(".form-control.ui_case").serialize();
+        $.post("{% url 'save_ui_case_api' %}", source_id , function(data){
+            $("#add_ui_case").hide();
+            $(".modal-backdrop").remove();
+            $("body").removeClass('modal-open');
+            var the_project_name =  '{{ the_project_name }}';
+            $.post("{% url 'my_project_ui_case' %}", {'csrfmiddlewaretoken': '{{ csrf_token }}' ,'the_project_name':the_project_name}, function(data){
+            $('#ui_case_module').html(data);
+             });
+        });
+      });
+    });
+</script>
+  <!-- /. 点击 添加 case  提交case数据 开始

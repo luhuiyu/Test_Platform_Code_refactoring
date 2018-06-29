@@ -1,0 +1,380 @@
+{% extends 'head_html5.html' %}
+{% block content %}
+      <!-- /. head  -->
+      <!--  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet" />
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+    <link href="/static/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="/static/css/custom-styles.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>  -->
+
+
+<script src="/static/js/easypiechart-data.js"></script>
+
+
+    
+  <!-- /. 开头的基本的结构  -->
+            <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                             <small></small>
+                        </h1>
+                    </div>
+                                 <div class="col-md-12">
+                                     <div class="panel panel-default"> <!-- 背景 -->
+                                        <div class="panel_title">
+                                           <div class="panel-heading">
+                                       应用信息
+                                    </div>
+                                            </div>
+                                          <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <th>应用名称</th>
+                                                <td><span class="cut" title={{ App_name }}>{{ App_name }}</span></td>
+
+                                                <th>耗时</th>
+                                                <td><span class="cut" title={{ report_data.Collapse_time }}>{{ report_data.Collapse_time }} s</span></td>
+                                                <th>提测时间</th>
+                                                <td>{{ create_time|date:"m-d H:i" }}</td>
+
+                                            </tr>  <!-- /. 列表第一行结束  -->
+                                            <tr><!-- /. 列表第二行开始  -->
+                                                <th>测试类型</th>
+                                                <td>
+                                                    {{ test_type }}
+                                                    </td>
+                                                <th>测试终端数</th>
+                                                <td>{{ terminal_number }}</td>
+                                                <th>测试结果</th>
+                                                {% if report_result == '1' %}
+                                                    <td>通过</td>
+                                                {% else %}
+                                                    <td>未通过</td>
+                                                {% endif %}
+                                                </tr>
+                                            </table>
+                </div>
+   </div>
+            </div>
+
+                                              <!-- /. 结束  -->
+
+
+
+           <div class="row">
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>终端完成率</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent={{ completion_rate }} ><span class="percent">{{ completion_rate }}%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Case通过率</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent={{ pass_tate }} ><span class="percent">{{ pass_tate }}%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Case失败率</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent={{failure_rate}} ><span class="percent">{{ failure_rate }}%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Case崩溃率</h4>
+						<div class="easypiechart" id="easypiechart-red" data-percent={{Collapse_rate}} ><span class="percent">{{ Collapse_rate }}%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+
+  {% if test_type == "apitest" %}
+
+       <!-- /. ROW  -->
+       {% for x  in test_case_result %}
+                                    <!-- /. 模态框  -->
+                                                <div class="modal fade" id="{{ x.case_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                     <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title" id="myModalLabel">报错信息</h4>
+                                                        </div>
+                                                          <div class="modal-body">
+                                                              {% if  x.error_info.0.id %}
+                                                                  <table class="table table-striped table-bordered table-hover">
+                                                                  <thead>
+                                                            <tr>
+                                                                <th>id</th>
+                                                                <th>result</th>
+                                                                <th>error_info</th>
+                                                            </tr>
+                                                                </thead>
+                                                                    {% for y  in  x.error_info %}
+                                                                   <tr>
+                                                                   <td>{{ y.id}}</td>
+                                                                   <td>{{ y.result }}</td>
+                                                                  <td>{{ y.error_info }}</td>
+                                                                   </tr>
+                                                                  {% endfor %}
+                                                              {% else %}
+                                                               {{ x.error_info }}
+                                                                {% endif %}
+                                                              </table>
+                                                        </div>
+                                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                                     </div>
+                                                </div>
+                                                </div>
+                                {% endfor %}
+   <!-- /. ROW  -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">全部</a>
+                                </li>
+                                <li class=""><a href="#profile" data-toggle="tab">运行异常</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class=" tab-pane fade active in" id="home">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>模块</th>
+                                                <th>case</th>
+                                                <th>运行结果</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for x  in test_case_result %}
+                                            <tr>
+
+                                            <td>{{ x.case_id}}</td>
+                                                <td>{{ x.module_name }}</td>
+                                                <td>{{ x.case_name}}</td>
+                                                {%  if  x.result  == 1  %}
+                                                    <td>通过</td>
+                                                {% else %}
+                                               <td>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_id}}">
+                                              未通过
+                                            </button></td>
+
+                                                {% endif %}
+                                            </tr>
+                                             {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+                                <div class="tab-pane fade" id="profile">
+                                     <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>模块</th>
+                                                <th>csse</th>
+                                                <th>运行结果</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for x  in test_case_result %}
+
+                                            {% if  x.result != 1 %}
+                                                <tr>
+                                                <td>{{ x.case_id}}</td>
+                                                <td>{{ x.module_name }}</td>
+                                                <td>{{ x.case_name}}</td>
+                                                {%  if  x.result  == 1  %}
+                                                    <td>通过</td>
+                                                {% else %}
+                                               <td>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_id}}">
+                                              未通过
+                                            </button></td>
+                                                {% endif %}
+                                            </tr>
+                                               {% endif %}
+                                             {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                                 {% endif %}
+                    <!-- /. ROW  -->
+  {% if test_type == "uitest" %}
+
+<div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">全部</a>
+                                </li>
+                                <li class=""><a href="#profile" data-toggle="tab">运行异常</a>
+                                </li>
+                            </ul>
+<div class="tab-content">
+                                <div class=" tab-pane fade active in" id="home">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>模块</th>
+                                                <th>case</th>
+                                                <th>运行结果</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                          {% for x  in test_case_result %}
+                                            <tr>
+                                            <td>{{ x.case_id}}</td>
+                                                <td>{{ x.module_name}}</td>
+                                                <td>{{ x.case_name}}</td>
+                                                {%  if  x.case_not_pass == 0  %}
+                                                    <td>通过</td>
+                                                {% else %}
+                                               <td>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_name}}">
+                                              未通过
+                                            </button></td>
+                                                {% endif %}
+                                             {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="profile">
+                                     <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>模块</th>
+                                                <th>csse</th>
+                                                <th>运行结果</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for x  in test_case_result %}
+                                            {% if  x.case_not_pass != 0 %}
+                                            <tr>
+                                             <td>{{ x.case_id}}</td>
+                                                <td>{{ x.module_name}}</td>
+                                                <td>{{ x.case_name}}</td>
+                                                {%  if  x.case_not_pass == 0  %}
+                                                    <td>通过</td>
+                                                {% else %}
+
+                                               <td>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_name}}">
+                                              未通过
+                                            </button></td>
+                                                {% endif %}
+                                            </tr>
+                                               {% endif %}
+                                             {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+</div>
+
+      {% for x  in test_case_result %}
+                                    <!-- /. 模态框  -->
+                                                <div class="modal fade" id="{{ x.case_name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                     <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title" id="myModalLabel">报错信息</h4>
+                                                        </div>
+                                                          <div class="modal-body">
+                                                            {%  if  x.error_info %}
+                                                            {{  x.error_info }}
+                                                             {% else %}
+                                                                 <table class="table table-striped table-bordered table-hover">
+                                                               <thead>
+                                                            <tr>
+                                                                <th>driverName</th>
+                                                                <th>result</th>
+                                                                <th>error_info</th>
+                                                                <th>img</th>
+                                                            </tr>
+                                                                </thead>
+                                                              {% for y  in  x.devices_result_list %}
+                                                                   <tr>
+                                                                   <td>{{ y.driverName}}</td>
+                                                                   <td>{{ y.result }}</td>
+                                                                   <td>{{ y.error_info }}</td>
+                                                                   {% if y.img  %}
+                                                                   <td> <center> <button type="submit"    name="report_index"   class="btn btn-default">查看</button></center></td>
+                                                                    {% else %}
+                                                                     <td></td>
+                                                                   {% endif %}
+                                                               </tr>
+
+                                                             {% endfor %}
+                                                             </table>
+
+                                                             {% endif %}
+                                                        </div>
+                                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                                     </div>
+                                                </div>
+                                                </div>
+                            <!-- /. ROW  -->
+                                {% endfor %}
+                                 {% endif %}
+           {% endblock %}

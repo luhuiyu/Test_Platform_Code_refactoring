@@ -7,4 +7,5 @@ __all__=[
     'my_login_views',
     'my_register_views',
     'my_project_views',
+    'my_report_views',
 ]

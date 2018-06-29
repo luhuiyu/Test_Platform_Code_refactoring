@@ -103,7 +103,7 @@ def my_project_simple_case(request):
             all_case_list = []
             for x in all_case:
                 all_case_list.append(
-                    {'id': x.id, 'send_json': x.send_json, 'remarks': x.remarks,
+                    {'id': x.id,  'remarks': x.remarks,
                      'api_name': x.api_name, 'project_name': x.project_name})
             context_data['all_case_value']=all_case_list
             context_data['the_api_name']=the_api_name

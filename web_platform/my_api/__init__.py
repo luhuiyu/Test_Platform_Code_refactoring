@@ -6,7 +6,9 @@ __all__=[
      'source_case_file',
      'save_api_case_api',
      'save_api_case_file_api',
+    'save_simple_case_api',
      'get_ui_case_data_api',
      'save_ui_case_api',
+    'get_simple_case_data_api',
 
 ]
