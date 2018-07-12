@@ -1,0 +1,199 @@
+{% extends 'head_html5.html' %}
+{% block content %}
+       <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            添加课程 <small>kk_test</small>
+                        </h1>
+                    </div>
+                </div>
+    {% if not ruesl  %}
+         <div class="panel panel-default">
+
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <tbody>
+                                    <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                                <label for="disabledSelect" >选择门店</label>
+
+                                                <select class="form-control"  name='store_name'>
+                                                    {% for x  in store_name %}
+
+                                                        <option >{{ x }}</option>
+
+                                                      {% endfor %}
+                                                </select>
+                                            </div>
+
+                                     <div class="form-group">
+                                                <label for="disabledSelect" >选择时间</label>
+                                         <div class="form-group">
+                                              <input type="date" name='day' value={{ now_time_day}}  />      <input type="time" name='up_time' value={{ now_time_h}} />
+                                    </div>
+                                          <div class="form-group">
+                                                <label for="disabledSelect" >选择课程类型</label>
+                                                <select class="form-control" id="course_code" name='course_code'>
+                                                     {% for x  in course_code %}
+                                                    <option >{{ x }}</option>
+                                                     {% endfor %}
+                                                </select>
+                                            </div>
+                                      <div id='course_time_list'>
+
+                                      </div>
+                                                <div class="form-group"  hidden="hidden"    >
+                                                             <textarea class="form-control" rows="5"  name="course_time" id="course_time" ></textarea>
+                                                              </div>
+                                          <div class="form-group">
+                                                <label for="disabledSelect" >上课人数</label>
+                                                <select class="form-control"  name='user_number'>
+                                                     {% for x  in user_number %}
+                                                        <option >{{ x }}</option>
+                                                      {% endfor %}
+                                                </select>
+                                            </div>
+                                         <div class="form-group" if {{ classes_checkin_number }} !=[])>
+                                                <label for="disabledSelect" >签到人数</label>
+                                                <select class="form-control"  name='classes_checkin_number'>
+                                                    {% for x  in classes_checkin_number %}
+                                                        <option >{{ x }}</option>
+                                                      {% endfor %}
+                                                </select>
+                                            </div>
+                                         <div class="form-group">
+                                                <label for="disabledSelect" >用户组</label>
+                                                <select class="form-control"  name='user_index'>
+                                                     <option >0</option>
+                                                        <option >1</option>
+                                                      <option >2</option>
+                                                      <option >3</option>
+                                                    <option >4</option>
+                                                </select>
+                                            </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  Modals-->
+             <center><button class="btn btn-default" id="bt" data-toggle="myModal" data-target="#myModal">提交</button></center>
+
+</form>
+         </div>
+
+
+
+
+                     <!--  Modals-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button  class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                              查看历史纪录
+                            </button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+
+                                    <!-- 表格-->
+                                        <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>create_time</th>
+                                            <th>start_time</th>
+                                             <th>class_id</th>
+                                             <th>course_code</th>
+                                            <th>store_name</th>
+                                        </tr>
+                                    </thead>
+                                            <tbody>
+                                             {%  for z in class_id_record %}
+                                                 <tr>
+                                                 <td>{{ z.id }}</td>
+                                                  <td>{{ z.create_time }}</td>
+                                                  <td>{{ z.start_time }}</td>
+                                                  <td>{{ z.class_id }}</td>
+                                                  <td>{{ z.course_code }}</td>
+                                                  <td>{{ z.store_name }}</td>
+                                                 </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                                <!-- 表格-->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End Modals-->
+
+
+        </div>
+<script>
+    $(document).ready(function(){
+      $("#course_code").change(function(){
+          var course_code = $("#course_code").val();
+        $.post("{% url 'get_subject_total' %}", {'course_code':course_code}, function(data){
+             $('#course_time_list').html(data.content);
+        });
+      });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function(){
+          var course_code = $("#course_code").val();
+        $.post("{% url 'get_subject_total' %}", {'course_code':course_code}, function(data){
+             $('#course_time_list').html(data.content);
+
+        });
+
+    });
+</script>
+
+
+
+
+
+
+
+
+{% endif %}
+    {% if  ruesl  %}
+
+            <div class="row">
+                </div>
+                <center><div class="col-md-4 col-sm-4 col-md-offset-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                           class_id
+                        </div>
+                        <div class="panel-body">
+                            <p>  {{ class_id }}</p>
+                        </div>
+                        <a href="/add_class">
+                        <div class="panel-footer">
+                            <button class="btn btn-default" id="bt"  name='back_add_class' data-toggle="myModal" value="返回"  data-target="#myModal">
+                          返回
+                            </button>
+                        </div>
+                       </a>
+                    </div>
+                </div></center>
+
+
+
+    {% endif %}
+
+
+{% endblock %}

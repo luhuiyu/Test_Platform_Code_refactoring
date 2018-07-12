@@ -7,19 +7,15 @@ from  web_platform.models import *
 
 def my_task(request):
     context_data = get_basic_data()
-    a=time.time()
     if request.method == 'GET' and request.GET.get('test_type')== 'apitest' :
-        print(request.GET)
         context_data=get_api_case_info(context_data)
         context_data["todaytime"] = str(time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(time.time())))
-        print(time.time() - a)
         return render(request=request, template_name='my_task_html5/my_task_api_html5.html', context=context_data)
     elif  request.method == 'GET' and request.GET.get('test_type')== 'uitest' :
         context_data["todaytime"] = str(time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(time.time())))
         context_data=get_ui_case_info(context_data)
         return render(request=request, template_name='my_task_html5/my_task_ui_html5.html', context=context_data)
     elif  request.method == 'POST' :
-        print(request.POST)
         selected_case=request.POST.getlist("selected_case")
         task_info=request.POST.get('task_info')
         todaytime = request.POST.get('todaytime')
@@ -38,5 +34,4 @@ def my_task(request):
     else:
         context_data = get_task_queue(context_data)
         context_data = get_all_report(context_data)
-        print(time.time()-a)
         return render(request=request, template_name='my_task_html5.html', context=context_data)

@@ -9,4 +9,6 @@ __all__=[
     'my_project_views',
     'my_report_views',
     'my_task_views',
+    'my_index_views',
+    'my_devices_phone_views',
 ]

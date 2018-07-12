@@ -1,0 +1,176 @@
+{% extends 'head_html5.html' %}
+{% block content %}
+   <!-- /. 开头的基本的结构  -->
+            <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                </div>
+  <!-- /. 结束  <div class="row">
+				<div class="col-md-12"       >
+					<div class="panel panel-default" style="background:#1cc09f"  >
+						<div class="panel-body">
+
+                      <img src="\static\img\bannerLogo.png" alt=""/>
+
+						</div>
+					</div>
+					</div>
+				</div>-->
+
+
+<div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder bg-color-green green">
+                            <div class="panel-left pull-left green">
+                                <i class="fa fa-bar-chart-o fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right pull-right">
+								<h3>{{ my_project_total }}</h3>
+                               <strong> 当前项目数</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder bg-color-blue blue">
+                              <div class="panel-left pull-left blue">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+								</div>
+
+                            <div class="panel-right pull-right">
+							<h3>{{ my_case_of_text_total }} </h3>
+                               <strong> txt_case</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder bg-color-red red">
+                            <div class="panel-left pull-left red">
+                                <i class="fa fa fa-comments fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right pull-right">
+							 <h3>{{ my_case_of_api_total }} </h3>
+                               <strong> api_case </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder bg-color-brown brown">
+                            <div class="panel-left pull-left brown">
+                                <i class="fa fa-users fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right pull-right">
+							<h3>{{ my_case_of_ui_total }}</h3>
+                             <strong>ui_case</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							历史运行记录
+						</div>
+						<div class="panel-body">
+							<div id="morris-line-chart"></div>
+						</div>
+					</div>
+					</div>
+				</div>
+
+
+
+
+
+                <script  type="text/javascript">
+
+
+
+
+
+(function ($) {
+    "use strict";
+    var mainApp = {
+
+        initFunction: function () {
+            /*MENU
+            ------------------------------------*/
+            $('#main-menu').metisMenu();
+
+            $(window).bind("load resize", function () {
+                if ($(this).width() < 768) {
+                    $('div.sidebar-collapse').addClass('collapse')
+                } else {
+                    $('div.sidebar-collapse').removeClass('collapse')
+                }
+            });
+
+
+
+            /* MORRIS LINE CHART
+			----------------------------------------*/
+            Morris.Line({
+                element: 'morris-line-chart',
+                data: [
+                    {% for x in daily_report %}
+					  { y: {{ x.moonday|safe  }} , a: {{x.report_total}}, b:   {{ x.pass_report_total}},c: {{x.failure_report_total}}},
+                    {% endfor %}
+				],
+
+
+      xkey: 'y',
+      ykeys: ['a', 'b','c'],
+      labels: ['report_total', 'pass_report','failure_report'],
+      fillOpacity: 0.6,
+      hideHover: 'auto',
+      behaveLikeLine: true,
+      resize: true,
+      pointFillColors:['#ffffff'],
+      pointStrokeColors: ['black'],
+      lineColors:['black','#008000','red']
+
+            });
+
+
+        },
+
+        initialization: function () {
+            mainApp.initFunction();
+
+        }
+
+    }
+    // Initializing ///
+
+    $(document).ready(function () {
+        mainApp.initFunction();
+		$("#sideNav").click(function(){
+			if($(this).hasClass('closed')){
+				$('.navbar-side').animate({left: '0px'});
+				$(this).removeClass('closed');
+				$('#page-wrapper').animate({'margin-left' : '260px'});
+
+			}
+			else{
+			    $(this).addClass('closed');
+				$('.navbar-side').animate({left: '-260px'});
+				$('#page-wrapper').animate({'margin-left' : '0px'});
+			}
+		});
+    });
+
+}(jQuery));
+
+                </script>
+
+{% endblock %}
