@@ -26,6 +26,7 @@ urlpatterns = [
     path(r'my_register', my_register, name='my_register'),
     path(r'project', my_project_views.my_project, name='my_project'),
     path(r'report', my_report_views.my_report, name='my_project'),
+    path(r'task', my_task_views.my_task, name='my_task'),
     path(r'my_project_api_case', my_project_views.my_project_api_case, name='my_project_api_case'),
     path(r'my_project_ui_case', my_project_views.my_project_ui_case, name='my_project_ui_case'),
     path(r'my_project_simple_case', my_project_views.my_project_simple_case, name='my_project_simple_case'),

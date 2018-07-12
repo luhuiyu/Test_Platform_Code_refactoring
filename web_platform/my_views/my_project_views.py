@@ -68,10 +68,10 @@ def my_project_api_case(request):
         context_data['the_project_name'] = the_project_name
         context_data['get_api_case_form'] = get_api_case_form
         context_data=get_case_api_dict(context_data)
-        return render(request=request, template_name='my_ajax_html5/my_project_api_case_ajax.html',
+        return render(request=request, template_name='my_project_html5/my_project_api_case_ajax.html',
                       context=context_data)
     else:
-        return render(request=request, template_name='my_ajax_html5/my_project_api_case_ajax.html')
+        return render(request=request, template_name='my_project_html5/my_project_api_case_ajax.html')
 
 def my_project_ui_case(request):
     context_data = get_basic_data()
@@ -80,10 +80,10 @@ def my_project_ui_case(request):
         context_data['the_project_name'] = the_project_name
         context_data['get_ui_case_form'] = get_ui_case_form
         context_data=get_case_ui_dict(context_data)
-        return render(request=request, template_name='my_ajax_html5/my_project_ui_case_ajax.html',
+        return render(request=request, template_name='my_project_html5/my_project_ui_case_ajax.html',
                       context=context_data)
     else:
-        return render(request=request, template_name='my_ajax_html5/my_project_ui_case_ajax.html')
+        return render(request=request, template_name='my_project_html5/my_project_ui_case_ajax.html')
 
 def my_project_simple_case(request):
     context_data = get_basic_data()
@@ -108,6 +108,6 @@ def my_project_simple_case(request):
             context_data['all_case_value']=all_case_list
             context_data['the_api_name']=the_api_name
         context_data['get_simple_case_form'] = get_simple_case_form
-        return render(request=request, template_name='my_ajax_html5/my_project_simple_case_ajax.html',
+        return render(request=request, template_name='my_project_html5/my_project_simple_case_ajax.html',
                       context=context_data)
-    return render(request=request, template_name='my_ajax_html5/my_project_simple_case_ajax.html', context=context_data)
+    return render(request=request, template_name='my_project_html5/my_project_simple_case_ajax.html', context=context_data)

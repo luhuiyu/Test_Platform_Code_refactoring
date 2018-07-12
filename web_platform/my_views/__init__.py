@@ -8,4 +8,5 @@ __all__=[
     'my_register_views',
     'my_project_views',
     'my_report_views',
+    'my_task_views',
 ]
