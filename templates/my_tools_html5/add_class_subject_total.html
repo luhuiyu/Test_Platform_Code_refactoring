@@ -1,0 +1,22 @@
+
+<div class="form-group">
+                                                <label for="disabledSelect" >课程节数</label>
+                                                <select class="form-control"  id="course_times" name='course_time'>
+                                                      {% for i  in subject_total %}
+                                                <option >{{ i }}</option>
+                                            {% endfor %}
+
+                                                </select>
+                                            </div>
+
+
+ <script>
+    $(document).ready(function(){
+         $("#course_time").val(1);
+      $("#course_times").click(function(){
+          var case_receive_json = $("#course_times").val();
+        $("#course_time").val(case_receive_json);
+      });
+    });
+</script>
+

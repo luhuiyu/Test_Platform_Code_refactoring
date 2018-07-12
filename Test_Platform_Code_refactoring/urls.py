@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from web_platform.views import *
 from web_platform.my_api import *
+from web_platform.my_api.my_tools_api import *
 from  web_platform.my_views import *
+from  web_platform.my_views.my_tools import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'head', my_basics_html, name='head'),
@@ -43,6 +45,7 @@ urlpatterns = [
     path(r'rest_api/save_ui_case_api', save_ui_case_api.save_ui_case_api.as_view(), name='save_ui_case_api'),
     path(r'rest_api/save_simple_case_api', save_simple_case_api.save_simple_case_api.as_view(), name='save_simple_case_api'),
     path(r'rest_api/save_api_case_file_api', save_api_case_file_api.save_api_case_file_api.as_view(), name='save_api_case_file_api'),
-
-
+    path(r'tools/add_class', add_class_views.add_classes,name='add_classes'),
+    path(r'tools/make_report', make_report_views.make_rerort,name='make_report'),
+    path(r'tools/add_class_subject_total',add_class_ajax_api.get_subject_total,name='get_subject_total'),
 ]

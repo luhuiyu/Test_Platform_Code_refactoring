@@ -1,0 +1,117 @@
+{% extends 'head_html5.html' %}
+{% block content %}
+
+     <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            创建报告 <small>现网转测试网</small>
+                        </h1>
+                    </div>
+                </div>
+    {% if not ruesl   or ruesl == 'not' %}
+         <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <tbody>
+                                    <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                                <label for="disabledSelect" >添加现网class_id</label>
+                                                 <input class="form-control" name="class_id" >
+                                            </div>
+                                          <div class="form-group">
+                                                <label for="disabledSelect" >选择课程类型</label>
+                                                <select class="form-control"  name='course_code'>
+                                                     {% for x  in course_code %}
+                                                    <option >{{ x }}</option>
+                                                     {% endfor %}
+                                                </select>
+                                            </div>
+                                    <div class="form-group">
+                                                <label for="disabledSelect" >课程节数</label>
+                                                <select class="form-control"  name='course_time'>
+                                                     {% for x  in course_time %}
+                                                        <option >{{ x }}</option>
+                                                      {% endfor %}
+                                                </select>
+                                            </div>
+                                   <div class="form-group">
+                                                <label for="disabledSelect" >用户组</label>
+                                                <select class="form-control"  name='user_index'>
+                                                      <option >0</option>
+                                                      <option >1</option>
+                                                      <option >2</option>
+                                                      <option >3</option>
+                                                      <option >4</option>
+                                                </select>
+                                            </div>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <center> <!--  Modals-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-default" id="bt" data-toggle="myModal" data-target="#myModal">
+                             提交
+                            </button>
+                            </center>
+
+
+
+{% endif %}
+
+            {% if  ruesl == 'ok' %}
+
+            <div class="row">
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                           report    buz_class_id : {{ buz_class_id }}
+                        </div>
+                        <div class="panel-body">
+                         <table class="table table-striped table-bordered table-hover">
+                          <thead>
+                                <tr>
+                                         <th>得分</th>
+                                         <th>卡路里消耗</th>
+                                         <th>地址</th>
+                                </tr>
+                        </thead>
+                             <tbody>
+                           {% for x in report_url_data %}
+                                <tr>
+                               <td>{{ x.score }}</td>
+                            <td>{{ x.burnCalories }}</td>
+                               <td>{{ x.reportUrl }}</td>
+                                </tr>
+                            {% endfor %}
+                         </tbody>
+                        </table>
+
+
+                        </div>
+                        <a href="/make_report">
+                        <div class="panel-footer">
+                            <button class="btn btn-default" id="bt"  name='back_add_class' data-toggle="myModal" value="返回"  data-target="#myModal">
+                          返回
+                            </button>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+
+
+
+    {% endif %}
+
+
+{% endblock %}

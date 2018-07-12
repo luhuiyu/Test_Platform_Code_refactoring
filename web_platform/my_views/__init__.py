@@ -11,4 +11,5 @@ __all__=[
     'my_task_views',
     'my_index_views',
     'my_devices_phone_views',
+    'my_tools',
 ]

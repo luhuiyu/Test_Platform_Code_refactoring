@@ -142,7 +142,7 @@
     $(document).ready(function(){
       $("#course_code").change(function(){
           var course_code = $("#course_code").val();
-        $.post("{% url 'get_subject_total' %}", {'course_code':course_code}, function(data){
+        $.post("{% url 'get_subject_total' %}", {'course_code':course_code,csrfmiddlewaretoken: '{{ csrf_token  }}'}, function(data){
              $('#course_time_list').html(data.content);
         });
       });
@@ -153,7 +153,7 @@
 <script>
     $(document).ready(function(){
           var course_code = $("#course_code").val();
-        $.post("{% url 'get_subject_total' %}", {'course_code':course_code}, function(data){
+        $.post("{% url 'get_subject_total' %}", {'course_code':course_code,csrfmiddlewaretoken: '{{ csrf_token  }}'}, function(data){
              $('#course_time_list').html(data.content);
 
         });
