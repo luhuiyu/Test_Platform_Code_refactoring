@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from  web_platform.my_models.get_basic_data import get_basic_data
 from  web_platform.my_models.get_my_report import get_report,get_maxid
+from django.contrib.auth.decorators import login_required
+@login_required
 def my_report(request):
     context_data = get_basic_data()
     id = get_maxid()

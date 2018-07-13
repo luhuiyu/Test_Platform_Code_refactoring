@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse
 from web_platform.my_forms.my_login_form import my_login_form
 from django.contrib.auth import authenticate,login
 from web_platform.my_models.get_basic_data import get_basic_data
+from django.contrib.auth.decorators import login_required
 
 def my_login(request):
     context_data=get_basic_data()

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+LOGIN_URL = '/my_login'  #未登录时的跳转页面
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,7 +137,7 @@ LANGUAGE_CODE = 'zh-Hans'
 TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = True  # 原本是 True  ，改成False就不会报错了
 
 
 # Static files (CSS, JavaScript, Images)

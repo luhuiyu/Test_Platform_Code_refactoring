@@ -2,6 +2,10 @@ from django.shortcuts import render,HttpResponse
 from web_platform.my_forms.my_register_form import my_register_form
 from django.contrib.auth.models import User
 from web_platform.my_models.get_basic_data import get_basic_data
+from django.contrib.auth.decorators import login_required
+
+
+
 def my_register(request):
     '''
     用于处理注册的逻辑，

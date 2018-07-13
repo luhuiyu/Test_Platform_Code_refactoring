@@ -21,6 +21,7 @@ from web_platform.my_api.my_tools_api import *
 from  web_platform.my_views import *
 from  web_platform.my_views.my_tools import *
 urlpatterns = [
+    path('', my_index_views.index_views, name='main'),
     path('admin/', admin.site.urls),
     path(r'head', my_basics_html, name='head'),
     path(r'my_login', my_login, name='my_login'),
@@ -29,7 +30,8 @@ urlpatterns = [
     path(r'project', my_project_views.my_project, name='my_project'),
     path(r'report', my_report_views.my_report, name='my_project'),
     path(r'task', my_task_views.my_task, name='my_task'),
-    path(r'index', my_index_views.index_views, name='index_views'),
+    path(r'index', my_index_views.index_views, name='index'),
+    path(r'set_up', my_set_up_views.set_up, name='set_up'),
     path(r'devices_phone', my_devices_phone_views.devices_phone_views, name='devices_phone_views'),
     path(r'my_project_api_case', my_project_views.my_project_api_case, name='my_project_api_case'),
     path(r'my_project_ui_case', my_project_views.my_project_ui_case, name='my_project_ui_case'),

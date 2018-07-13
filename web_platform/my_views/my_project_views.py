@@ -5,7 +5,8 @@ from  web_platform.my_models.get_txet_case import get_case_text_dict
 from  web_platform.my_models.get_api_case import get_case_api_dict
 from  web_platform.my_models.get_ui_case import get_case_ui_dict
 from  web_platform.models import  *
-
+from django.contrib.auth.decorators import login_required
+@login_required
 def my_project(request):
     '''
     负责 home页面的处理

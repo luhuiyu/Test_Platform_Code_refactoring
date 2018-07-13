@@ -1,10 +1,13 @@
 from django.shortcuts import render,HttpResponseRedirect
 from  web_platform.my_models.get_basic_data import get_basic_data
 from  web_platform.my_models.get_my_task import *
-import time
 import uuid
 from  web_platform.models import *
+from django.contrib.auth.decorators import login_required
+import time
+from django.utils import timezone
 
+@login_required
 def my_task(request):
     context_data = get_basic_data()
     if request.method == 'GET' and request.GET.get('test_type')== 'apitest' :
@@ -19,7 +22,11 @@ def my_task(request):
         selected_case=request.POST.getlist("selected_case")
         task_info=request.POST.get('task_info')
         todaytime = request.POST.get('todaytime')
-        todaytime = str(todaytime).replace('T', ' ')
+        todaytime=time.mktime(time.strptime(todaytime, "%Y-%m-%dT%H:%M:%S"))
+        '''
+        时间格式   为  2018-07-13 06:14:43+00:00
+        '''
+        todaytime=timezone.datetime.fromtimestamp(todaytime,tz=timezone.utc)
         task_info=eval(task_info)
         project_name=task_info['project_name']
         test_type=task_info['test_type']

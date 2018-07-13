@@ -12,4 +12,5 @@ __all__=[
     'my_index_views',
     'my_devices_phone_views',
     'my_tools',
+    'my_set_up_views',
 ]

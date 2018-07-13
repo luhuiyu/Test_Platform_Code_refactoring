@@ -3,7 +3,8 @@ from web_platform.my_models.my_devices_phone import get_devices_info
 from  web_platform.my_models.get_basic_data import get_basic_data
 from web_platform.models import devices_phone
 from django.shortcuts import render,HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
+@login_required
 def devices_phone_views(request):
     context = get_basic_data()
     if request.method == 'POST':
