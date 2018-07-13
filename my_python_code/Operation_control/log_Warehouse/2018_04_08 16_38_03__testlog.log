@@ -1,0 +1,34 @@
+[ 2018-04-08 16:38:03,915 - 错误的账号和密码.py:14 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905544",response="ZTAzYzI5MmNlMGNkYTc4M2YwZGMwNGVjMjhkMzJiOWM="'}
+[ 2018-04-08 16:38:03,939 - 错误的账号和密码.py:16 - INFO ] [Case_login]   404
+[ 2018-04-08 16:38:03,966 - 错误的账号正确的密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="12600905550",response="ZTBmNWEyNjIyY2U4NThjNmRiYjU5NDY2OWVjMTQyYzE="'}
+[ 2018-04-08 16:38:03,987 - 错误的账号正确的密码.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:38:04,016 - 长度不够的账号.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="1560090555",response="ZTAxOWQ4MGYzZDg5NWZkYzJlODMzNjFkNTU5MjkzMzY="'}
+[ 2018-04-08 16:38:04,040 - 长度不够的账号.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:38:04,068 - 长度过长的账号.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="156009055510",response="ZDU3N2RjNGU3ODc1ZWI2Nzk4ZWRjODVkN2EwZWJmMGE="'}
+[ 2018-04-08 16:38:04,103 - 长度过长的账号.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:38:04,107 - 正确的账号错误的密码.py:25 - INFO ] [test_case]   测试正确的手机号，错误的密码
+[ 2018-04-08 16:38:04,130 - 正确的账号错误的密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="NWM3ZDRiN2JmNmFmZGQwYzk1OGJmZjU3OTY0MDBhYzA="'}
+[ 2018-04-08 16:38:04,150 - 正确的账号错误的密码.py:17 - INFO ] [Case_login]   403
+[ 2018-04-08 16:38:04,154 - 正确的账号和密码.py:48 - INFO ] [test_case]   测试正确的手机号，正确的密码
+[ 2018-04-08 16:38:04,184 - 正确的账号和密码.py:29 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="ZDg1MzliMjg1MTY2YzM2OThmZmEyZGI4NjA1MmYzYzM="'}
+[ 2018-04-08 16:38:04,233 - 正确的账号没有密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="MjE5MzNlZjJjY2FlMjk3NmZiZWJkMWRhMzg5YzU4OWQ="'}
+[ 2018-04-08 16:38:04,256 - 正确的账号没有密码.py:17 - INFO ] [Case_login]   403
+[ 2018-04-08 16:38:04,260 - 登录请求的格式不正确.py:77 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'a56sdadaad44a3d4a3d54'}
+[ 2018-04-08 16:38:04,280 - 登录请求的格式不正确.py:85 - INFO ] [Case_login]   400
+[ 2018-04-08 16:39:26,205 - 错误的账号和密码.py:14 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905544",response="OGE0MTg3Y2MyNGExMzJkMmE2ZTJjYzA4YzA0YWZiN2U="'}
+[ 2018-04-08 16:39:26,228 - 错误的账号和密码.py:16 - INFO ] [Case_login]   404
+[ 2018-04-08 16:39:26,250 - 错误的账号正确的密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="12600905550",response="YmVhYTVhM2QyODI1YTYzZTBiY2JmYTkxNDhiNDdlOGY="'}
+[ 2018-04-08 16:39:26,269 - 错误的账号正确的密码.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:39:26,293 - 长度不够的账号.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="1560090555",response="NWU3MGE1ZjhhOTFlNjdmNWQ0MWIyMDY3OGZlOTBlOTc="'}
+[ 2018-04-08 16:39:26,317 - 长度不够的账号.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:39:26,347 - 长度过长的账号.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="156009055510",response="YmE4NjEwYTkxNjg5NjRlZWM2NmE0NTU3OWI5MDVlYWM="'}
+[ 2018-04-08 16:39:26,372 - 长度过长的账号.py:17 - INFO ] [Case_login]   404
+[ 2018-04-08 16:39:26,376 - 正确的账号错误的密码.py:25 - INFO ] [test_case]   测试正确的手机号，错误的密码
+[ 2018-04-08 16:39:26,403 - 正确的账号错误的密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="YjM4MWY3ZmE4MGE0ZGQ5YWVmZWZjM2JkZTRhY2JmMTg="'}
+[ 2018-04-08 16:39:26,432 - 正确的账号错误的密码.py:17 - INFO ] [Case_login]   403
+[ 2018-04-08 16:39:26,436 - 正确的账号和密码.py:48 - INFO ] [test_case]   测试正确的手机号，正确的密码
+[ 2018-04-08 16:39:26,454 - 正确的账号和密码.py:29 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="OTU4ZWU1NTFiNzhhYjY0ZTBjZGU1NDBjNDZlZjU4N2U="'}
+[ 2018-04-08 16:39:26,502 - 正确的账号没有密码.py:15 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="NTZhZjVjZDEyZmUyZjdkZTRhMGMwNzk2ODY5ZDVmNjg="'}
+[ 2018-04-08 16:39:26,533 - 正确的账号没有密码.py:17 - INFO ] [Case_login]   403
+[ 2018-04-08 16:39:26,538 - 登录请求的格式不正确.py:77 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'a56sdadaad44a3d4a3d54'}
+[ 2018-04-08 16:39:26,576 - 登录请求的格式不正确.py:85 - INFO ] [Case_login]   400

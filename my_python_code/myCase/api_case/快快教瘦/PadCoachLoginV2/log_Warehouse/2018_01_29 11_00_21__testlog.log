@@ -1,0 +1,2 @@
+[ 2018-01-29 11:00:21,829 - 登录请求的json格式不正确.py:20 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'a56sdadaad44a3d4a3d54'}
+[ 2018-01-29 11:00:21,921 - 登录请求的json格式不正确.py:22 - INFO ] [Case_login]   400

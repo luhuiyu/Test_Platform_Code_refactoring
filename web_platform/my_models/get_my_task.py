@@ -1,5 +1,6 @@
 from  web_platform.models import *
 import time
+from django.utils import timezone
 
 
 def get_all_report(context):
@@ -78,3 +79,25 @@ def  get_case_id_by_module_name_and_project_name(selected_case,test_type):
     else:
         raise KeyError
     return  case_id_list
+
+
+
+
+
+def get_task_queue_custom(context,task_type_custom,task_state_custom):
+    now_time = timezone.now()
+    get_now_task=task_management.objects.filter(task_type=task_type_custom,task_state=task_state_custom,create_time__lte=now_time).order_by("-id")
+    #print(get_now_task)
+    task_all=[]
+    for x in get_now_task:
+        task_one=[]
+        task_one.append(x.id)
+        task_one.append(x.task_type)
+        task_one.append(x.task_project)
+        task_one.append(x.task_state)
+        task_one.append(x.create_time)
+        task_one.append(x.task_data)
+        task_one.append(x.task_uuid)
+        task_all.append(task_one)
+    context['task_state_list'] = task_all
+    return context

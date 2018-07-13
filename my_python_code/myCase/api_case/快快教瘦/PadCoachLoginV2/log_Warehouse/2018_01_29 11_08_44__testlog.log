@@ -1,0 +1,2 @@
+[ 2018-01-29 11:08:44,727 - 正确的账号没有密码.py:15 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="ZDdkNjE2YWYzNjYzMTNmOTdjZGI0MDY5NzE0ODhjY2Y="'}
+[ 2018-01-29 11:08:44,842 - 正确的账号没有密码.py:17 - INFO ] [Case_login]   403

@@ -1,0 +1,2 @@
+[ 2018-03-09 11:11:50,272 - 正确的账号和密码.py:48 - INFO ] [test_case]   测试正确的手机号，正确的密码
+[ 2018-03-09 11:11:50,317 - 正确的账号和密码.py:29 - INFO ] [Case_login]   {'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="NzA0Y2I3MWUxMzIzZGVkMmRiZWZmYzYzYjE1NDkwMWM="'}

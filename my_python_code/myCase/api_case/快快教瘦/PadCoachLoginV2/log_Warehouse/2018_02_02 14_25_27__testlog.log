@@ -1,0 +1,2 @@
+[ 2018-02-02 14:25:27,480 - 正确的账号和密码.py:48 - INFO ] [test_case]   测试正确的手机号，正确的密码
+[ 2018-02-02 14:25:27,536 - 正确的账号和密码.py:29 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'user="15600905550",response="OTNmMDE0OTgyYzA1ZGE1NzUxNDlmN2FiOTBmNzY3MTk="'}

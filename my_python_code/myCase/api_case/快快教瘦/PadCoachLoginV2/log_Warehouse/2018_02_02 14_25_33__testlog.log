@@ -1,0 +1,3 @@
+[ 2018-02-02 14:25:33,401 - 错误的账号和密码.py:49 - INFO ] [test_case]   错误的账号和密码
+[ 2018-02-02 14:25:33,500 - 错误的账号和密码.py:29 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'user="15600901111",response="NzA5ZTU0YTMzZTNmNDBjZjdkYzI1NmFmZjlhZDJkMGQ="'}
+[ 2018-02-02 14:25:33,555 - 错误的账号和密码.py:33 - INFO ] [Case_login]   404
