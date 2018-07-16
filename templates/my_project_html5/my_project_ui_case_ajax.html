@@ -43,6 +43,7 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                     {{ get_ui_case_form }}
+                <input class="form-control ui_case"  value="{{ csrf_token }}"  name="csrfmiddlewaretoken" type="hidden"   >
                      <div class="modal-footer">
                          <button type="submit"  id="add_ui_case_butt" class="btn btn-default"  name="add_ui_case"  value="now_add_ui_case"  >添加case</button>
                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

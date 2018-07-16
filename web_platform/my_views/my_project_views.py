@@ -56,7 +56,7 @@ def my_project(request):
                 now_text_case_models.save()
             context_data = get_case_text_dict(context_data)
     return render(request=request, template_name='my_project_html5.html', context=context_data)
-
+@login_required
 def my_project_api_case(request):
     '''
     负责 api case 页面的处理
@@ -73,7 +73,7 @@ def my_project_api_case(request):
                       context=context_data)
     else:
         return render(request=request, template_name='my_project_html5/my_project_api_case_ajax.html')
-
+@login_required
 def my_project_ui_case(request):
     context_data = get_basic_data()
     if request.method == 'POST':
@@ -85,7 +85,7 @@ def my_project_ui_case(request):
                       context=context_data)
     else:
         return render(request=request, template_name='my_project_html5/my_project_ui_case_ajax.html')
-
+@login_required
 def my_project_simple_case(request):
     context_data = get_basic_data()
     if request.method == 'POST':

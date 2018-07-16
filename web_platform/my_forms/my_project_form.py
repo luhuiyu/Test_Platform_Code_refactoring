@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 class get_text_case_form(forms.Form):
     text_case_id= forms.CharField( required=False,label='用例id(id)',max_length=200,widget=widgets.TextInput(attrs={'id': 'text_case_id', 'name': 'text_case_id','class':'form-control'}) )
@@ -39,7 +39,6 @@ class get_ui_case_form(forms.Form):
     ui_case_address=forms.CharField(label='ui_case_address',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_case_address', 'name': 'ui_case_address','class':'form-control ui_case'  }))
     ui_App_version= forms.CharField(label='app版本(App_version)',max_length=200,widget=widgets.TextInput(attrs={'id': 'ui_App_version', 'name': 'ui_App_version','class':'form-control ui_case ' }))
     my_case_of_text_id=  forms.CharField( required=False,label='my_case_of_text_id',max_length=200,widget=widgets.TextInput(attrs={'id': 'my_case_of_text_id', 'name': 'my_case_of_text_id','class':'form-control ui_case'}))
-
 
 class get_simple_case_form(forms.Form):
     simple_case_id = forms.CharField(required=False, label='simple_case_id', max_length=200, widget=widgets.TextInput(attrs={'id': 'simple_case_id', 'name': 'simple_case_id', 'class': 'form-control simple_case'}))

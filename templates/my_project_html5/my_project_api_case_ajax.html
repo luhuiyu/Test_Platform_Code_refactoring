@@ -45,6 +45,7 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                     {{ get_api_case_form }}
+                    <input class="form-control api_case"  value="{{ csrf_token }}"  name="csrfmiddlewaretoken" type="hidden"   >
                      <div class="modal-footer">
                          <button type="submit"  id="add_api_case_butt" class="btn btn-default"  name="add_api_case"  value="now_add_api_case"  >添加case</button>
                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -107,7 +108,7 @@
     $(document).ready(function(){
      $('#add_api_case_butt').click(function(){
         var   source_id=$(".form-control.api_case").serialize();
-        $.post("{% url 'save_api_case_api' %}", source_id , function(data){
+        $.post("{% url 'save_api_case_api' %}",source_id , function(data){
             $("#add_api_case").hide();
             $(".modal-backdrop").remove();
             $("body").removeClass('modal-open');

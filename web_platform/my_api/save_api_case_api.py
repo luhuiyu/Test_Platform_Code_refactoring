@@ -12,7 +12,9 @@ class save_api_case_api(APIView):
     '''
     def post(self,request, *args, **kwargs):
    #     A=get_request_data(self, request)
+        print(request.POST)
         new_api_case=get_api_case_form(request.POST)
+        print(new_api_case)
         if new_api_case.is_valid():
             new_api_case=new_api_case.clean()
             if new_api_case['api_case_id'] == '':
