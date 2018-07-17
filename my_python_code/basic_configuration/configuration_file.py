@@ -1,24 +1,31 @@
 import requests
 from my_python_code.mysql.Basic_information import *
 
-my_python_code_path=r'/my_python_code'
-my_apicase_path=r'.myCase.api_case'
-my_appium_path=r'.myCase.appium_case'
-Complete_path=r'F:/Test_Platform'
-my_api_case_log=r'F:\Test_Platform\my_log\my_api_case_log.txt'
 
-#    case_address=r'F:/Test_Platform'+ '/my_python_code/myCase/appium_case/快快教瘦/test_case'
-
+MY_PYTHON_CODE_PATH=r'F:\Test_Platform_Code_refactoring'
+MY_PYTHON_CODE_NAME=r'my_python_code'
+MY_APICASE_PATH=r'myCase\api_case'
+MY_API_CASE_LOG=r'F:\Test_Platform\my_log\my_api_case_log.txt'
+my_api_case_log=MY_API_CASE_LOG
 
 client = requests.session()  # requests 长链接
-
 kk_test=my_sql_link_test() #连接kk的测试库
-
 user_uuid = '4be9950e-cb60-4d0d-8861-f22debd00210' #用于测试的用户
-
 web_user_name='luhuiyu'
-
 oss_url='http://kkuserdata.oss-cn-beijing.aliyuncs.com/bodydata/'
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 uuid_idct={'1':  [
     '3b1d5be6-90f2-46c4-ac6f-82df7433584d',

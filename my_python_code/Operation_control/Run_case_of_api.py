@@ -35,7 +35,8 @@ def  run_api_case():
                 case_one = my_case_of_API.objects.get(id=y)  # 根据 case表的id 查询case的信息，用于运行
                 App_version=case_one.App_version
                 try:
-                    case_address=my_python_code_path[1:]+my_apicase_path+'.'+case_one.project_name+'.'+case_one.case_address+'.'+case_one.case_name
+                    case_address = (
+                    MY_PYTHON_CODE_NAME + '\\' + MY_APICASE_PATH + '\\' + case_one.project_name + '.' + case_one.case_address + '.' + case_one.case_name).replace(  '\\', '.')
                     exec ('import  '+ case_address)
                     example=eval(case_address+'.API_case()')
                     running_result=example.test_case()
@@ -81,9 +82,8 @@ def  run_api_case():
 
 
 if __name__ == '__main__':
-    while 1:
         run_api_case()
-        time.sleep(10)
+
 
 
 
