@@ -14,11 +14,11 @@ class API_case(Basics_case):
   def __init__(self):
     self.API_name =my_python_code.myCase.api_case.interface.接口记录.上传学员运动数据
     Basics_case.__init__(self)  #子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
-  @get_error
+#  @get_error
   def test_case(self):
       login_heard=login( self.client)
       a=orm_to_mysql(my_sql_link_test())
-      old_class_data=self.client.get("http://kkuserdata.oss-cn-beijing.aliyuncs.com/bodydata/f7af6d77-1750-49b5-99b6-a0f5246061ba.txt")
+      old_class_data=self.client.get("http://kkuserdata.oss-cn-beijing.aliyuncs.com/bodydata/96519c15-158c-4c62-bbc5-84ed0b87a00a.txt")
       class_id=old_class_data.json()['classDataList'][0]['classesId']
       old_user_class_data_id=a.table('user_class_data').select('MAX(id)',class_id=class_id).one()['MAX(id)']
       old_report_uuid=a.table('user_report').select(classes_id=class_id).one()['uuid']
