@@ -19,15 +19,15 @@ class my_sql_link(Singleton):
 class my_sql_link_test(Singleton):
     def __init__(self):
         # self.db = pymysql.connect("47.93.124.146", "kas", "kuaikuaikas", "kk_test", 33061, charset='utf8')  # 连接数据库
-        try:
+      #  try:
            # self.db = pymysql.connect("127.0.0.1", "root", "admin", "test_platform", 3306, charset='utf8')  # 连接数据库
             self.db = pymysql.connect("192.168.41.20", "kms", "kuaikuaikms", "kk_test", 33061, charset='utf8')  # 连接数据库
             self.cursor = self.db.cursor()
             self.cursor_dict = self.db.cursor(cursor=pymysql.cursors.DictCursor)
-            print('test',id(self))
-        except:
-             print('连接数据库失败')
-             return
+       #     print('test',id(self))
+      #  except:
+        #     print('连接数据库失败')
+       #      return
 
 class my_sql_link_buz(Singleton):
     def __init__(self):

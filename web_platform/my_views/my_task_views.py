@@ -6,7 +6,9 @@ from  web_platform.models import *
 from django.contrib.auth.decorators import login_required
 import time
 from django.utils import timezone
-
+import os
+import subprocess
+from  web_platform.my_settings import *
 @login_required
 def my_task(request):
     context_data = get_basic_data()
@@ -37,6 +39,8 @@ def my_task(request):
                         task_type=test_type,
                         task_data={'case_list': case_id_list},
                         create_time=todaytime).save()
+       # os.system('python    '+MY_RUN_API_CASE  )
+        os.popen('python    '+MY_RUN_API_CASE )
         return HttpResponseRedirect('/task')
     else:
         context_data = get_task_queue(context_data)

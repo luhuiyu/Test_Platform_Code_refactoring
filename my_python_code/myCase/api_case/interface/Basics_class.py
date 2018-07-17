@@ -44,7 +44,7 @@ class Basics_case():
     self.logger.addHandler(handler)  # 为logger添加handler
     self.logger.setLevel(logging.INFO)
     self.orm = orm_to_mysql(my_sql_link())
-    # print(id(self.logger))
+    #  self.logger.info(id(self.logger))
     try:    #如果有给json就使用给的json，没有就给一个默认的
          if  standard_json :
              pass
@@ -96,7 +96,7 @@ class Basics_case():
               sgin = False
           if 'result'  in rult.keys(): error_list.append(rult)
           end_time=time.time()
-          print(end_time-start_time)
+          self.logger.info(end_time-start_time)
       self.orm.close()
       if sgin: return {"result": 1}
       else:return {"result": 0, "error_info": error_list}
@@ -128,11 +128,11 @@ class Basics_case():
                       else:
                           dict_repeat[i[0]] = i[1]
                           dict_rult.pop(i[0])
-                          # print(dict_rult)
-                          #   print(dict_repeat)
+                          #  self.logger.info(dict_rult)
+                          #    self.logger.info(dict_repeat)
       return dict_repeat
 
 
 if __name__=='__main__':
     example=Basics_case()
-    print(example.test_case())
+    self.logger.info(example.test_case())

@@ -5,14 +5,13 @@ from web_platform.my_models.get_basic_data import get_basic_data
 from django.contrib.auth.decorators import login_required
 
 
-
 def my_register(request):
-    '''
+    """
     用于处理注册的逻辑，
     有一个对应的表单 my_register_form
     :param request:
     :return:
-    '''
+    """
     context_data=get_basic_data()
     context_data['my_register_form'] = my_register_form
     if request.method == 'POST':

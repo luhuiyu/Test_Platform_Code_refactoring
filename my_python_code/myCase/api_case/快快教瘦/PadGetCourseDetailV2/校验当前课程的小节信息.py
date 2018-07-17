@@ -18,4 +18,3 @@ class API_case(Basics_case):
         Basics_case.__init__(self)  # 子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
 if __name__ == '__main__':
     example = API_case()
-    print(example.test_case())

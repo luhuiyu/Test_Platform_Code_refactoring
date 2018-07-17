@@ -33,14 +33,14 @@ class API_case(Basics_case):
             case_rult = self.client.post(url=self.url + 获取当前课程的报告列表, json={"classesId": class_id,"subjectId": 1441109786806272}, headers=login_heard)
             new_report_list=case_rult.json()
 
-            print(new_report_list)
+            self.logger.info(new_report_list)
             old_report_list['classReportList'][0]['reportUrl']=1
             new_report_list['classReportList'][0]['reportUrl']=1
             if  old_report_list==new_report_list:
                 rult_list.append({'case_name':str(x['remarks']),'result':1})
             else:
                 rult_list.append({'case_name': str(x['remarks']), 'result': 0,})
-        print(rult_list)
+        self.logger.info(rult_list)
         return {"result": 1}
 if __name__ == '__main__':
     example = API_case()

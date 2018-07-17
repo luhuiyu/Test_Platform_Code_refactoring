@@ -104,7 +104,7 @@
                                                 <td>{{ x.2 }}</td>
                                                 <td>{{ x.3 }}</td>
                                                 <td>{{ x.5 }}</td>
-                                                <td> <a href= "{% url 'my_project' %}?id={{ x.6 }}"><center> <button type="submit"    name="report_index"  value={{ x.6 }}  class="btn btn-default">查看</button></center></td></a>
+                                                <td> <a href= "{% url 'my_report' %}?id={{ x.6 }}"><center> <button type="submit"    name="report_index"  value={{ x.6 }}  class="btn btn-default">查看</button></center></td></a>
                                               </tr>
                                         {% endfor %}
                                     {% endif %}

@@ -26,7 +26,7 @@ def get_all_report(context):
 
 def get_task_queue(context):
     get_now_task=task_management.objects.filter(task_state__lt=2).order_by("-id")[:5]
-    print(get_now_task)
+    #print(get_now_task)
     task_all=[]
     for x in get_now_task:
         task_one=[]

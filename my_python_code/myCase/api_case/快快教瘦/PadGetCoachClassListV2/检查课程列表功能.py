@@ -21,4 +21,4 @@ class API_case(Basics_case):
    # @get_error
 if __name__ == '__main__':
     example = API_case()
-    print(example.test_case())
+    logger.info(example.test_case())

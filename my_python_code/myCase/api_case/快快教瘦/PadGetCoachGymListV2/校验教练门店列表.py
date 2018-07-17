@@ -20,4 +20,4 @@ class API_case(Basics_case):
 
 if __name__ == '__main__':
     example = API_case()
-    print(example.test_case())
+    self.logger.info(example.test_case())

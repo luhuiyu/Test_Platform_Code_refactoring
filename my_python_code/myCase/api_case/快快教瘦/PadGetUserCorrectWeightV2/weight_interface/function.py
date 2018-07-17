@@ -55,7 +55,7 @@ def weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_F
         weight_json["initWeightData"]["fatRate"] = fatRate  ## 脂肪率
         weight_json["userUuid"] = user_uuid
         corr_weigt = client.post(url='http://test.kuaikuaikeji.com/kcas/PadGetUserCorrectWeightV2', json=weight_json)
-        print(corr_weigt.json()["corrWeightData"] )
+       # logger.info(corr_weigt.json()["corrWeightData"] )
         #print(str(corr_weigt.json()["corrWeightData"]["fatRate"]))
         if float(corr_weigt.json()["corrWeightData"]["fatRate"])==float(corr_Fatrate):
             return {"result":1}
@@ -116,7 +116,7 @@ class weight_case_class(Basics_case):
             weight_json["userUuid"] = user_uuid
             corr_weigt = client.post(url='http://test.kuaikuaikeji.com/kcas/PadGetUserCorrectWeightV2',
                                      json=weight_json)
-            print(corr_weigt.json()["corrWeightData"])
+           # print(corr_weigt.json()["corrWeightData"])
             # print(str(corr_weigt.json()["corrWeightData"]["fatRate"]))
             if float(corr_weigt.json()["corrWeightData"]["fatRate"]) == float(corr_Fatrate):
                 return {"result": 1}
