@@ -11,7 +11,6 @@ class my_sql_link(Singleton):
          self.cursor=self.db.cursor()
          self.cursor_dict = self.db.cursor(cursor=pymysql.cursors.DictCursor)
         # print('test_platform',id(self))
-
      def close(self):
          self.db.close()
 

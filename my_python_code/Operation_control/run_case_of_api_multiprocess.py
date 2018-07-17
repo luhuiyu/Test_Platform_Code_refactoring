@@ -27,7 +27,7 @@ def run_case_of_api_main(work_process_quantity=4):
     p1 = Process(target=task_distribution, args=(case_id_queue,))
   #  p1.daemon = True
     p1.start()
-    for  x  in range(10):
+    for  x  in range(work_process_quantity):
         work_process = Process(target=case_work, args=(case_id_queue,))
         work_process.start()
     p1.join()
@@ -40,10 +40,13 @@ def task_distribution(case_id_queue):
     task_type='apitest'
     task_state_custom=0
     now_time=timezone.now()
-    get_now_task=task_management.objects.filter(task_type=task_type,
-                                                task_state=task_state_custom,
-                                                create_time__lte=now_time
-                                                   ).order_by("-id")[0]
+    try:
+        get_now_task=task_management.objects.filter(task_type=task_type,
+                                                    task_state=task_state_custom,
+                                                    create_time__lte=now_time
+                                                       ).order_by("-id")[0]
+    except IndexError:
+        return False
     for case_id in eval(get_now_task.task_data) ['case_list']:
         case_id_queue.put(case_id)
     return True
@@ -98,4 +101,4 @@ def result_handling():
     pass
 
 if __name__=='__main__':
-    run_case_of_api_main(4)
+    run_case_of_api_main(6)

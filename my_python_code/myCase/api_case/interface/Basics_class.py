@@ -37,8 +37,9 @@ class Basics_case():
   def __init__(self):  #基本设置
     self.url = my_python_code.myCase.api_case.interface.Basic_information.main_url  # 主地址，可以切换现网 测试网或者不同app的
     self.client = requests.session()    #定义一个长链接
-    self.db=kk_test.db  #赋值数据库
-    self.cursor=kk_test.cursor
+    a=my_sql_link_test()
+    self.db=a.db  #赋值数据库
+    self.cursor=a.cursor
     #self.logger = logging.getLogger('Basics_case')  #不填就捕获所有的log
     self.logger = logging.getLogger()
     self.logger.addHandler(handler)  # 为logger添加handler
