@@ -107,7 +107,9 @@ def run_ui_case():
                     the_case_not_pass = 0
                     App_version=case_info.App_version
                     try:
-                        case_address = my_python_code_path[1:] + my_appium_path + '.' + case_info.project_name + '.' + case_info.case_address + '.' + case_info.case_name
+                        case_address = (
+                            MY_PYTHON_CODE_NAME + '\\' + MY_APPIUM_PATH + '\\' + case_one.project_name + '.' + case_one.case_address + '.' + case_one.case_name).replace(
+                            '\\', '.')
                         run_testcase(rult,phone_list,case_address)
                         for i in range(len(get_phone_list)):
                             now_rult=rult.get()
