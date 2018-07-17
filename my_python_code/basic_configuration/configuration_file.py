@@ -5,7 +5,7 @@ from my_python_code.mysql.Basic_information import *
 MY_PYTHON_CODE_PATH=r'F:\Test_Platform_Code_refactoring'
 MY_PYTHON_CODE_NAME=r'my_python_code'
 MY_APICASE_PATH=r'myCase\api_case'
-MY_API_CASE_LOG=r'F:\Test_Platform\my_log\my_api_case_log.txt'
+MY_API_CASE_LOG=r'F:\Test_Platform_Code_refactoring\my_log\my_api_case_log.txt'
 my_api_case_log=MY_API_CASE_LOG
 
 client = requests.session()  # requests 长链接
