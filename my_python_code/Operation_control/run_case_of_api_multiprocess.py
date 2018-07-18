@@ -145,4 +145,4 @@ def result_handling(task_info,the_case_result,statistical_results):
     update_state.task_state = 2
     update_state.save()
 if __name__=='__main__':
-    run_case_of_api_main(10)
+    run_case_of_api_main(4)

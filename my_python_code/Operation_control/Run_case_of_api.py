@@ -1,15 +1,12 @@
-import os
 import uuid
 from my_python_code.basic_configuration.configuration_file import *
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Test_Platform_Code_refactoring.settings")  # NoQA
 os.environ.get(MY_PYTHON_CODE_PATH)
 import django
-django.setup()  # NoQA
-from  my_python_code.mysql.Basic_information import my_sql_link
-from web_platform.my_models.get_my_task import get_task_queue_custom
+django.setup()
 from web_platform.models import task_management,my_case_of_API,my_report
 from my_python_code.basic_configuration.configuration_file import *
-from multiprocessing import Process,Queue,Pool,Lock
+from multiprocessing import Process,Queue,Lock
 from django.utils import timezone
 import time
 
@@ -43,6 +40,8 @@ def run_case_of_api_main(work_process_quantity=4):
         work_process = Process(target=case_work, args=(case_id_queue,my_db_lock,the_case_result,statistical_results,start_test,))
         work_process.start()
     p1.join()
+
+
 def task_distribution(case_id_queue,task_info,start_test,work_process):
     '''
     获取任务，把case_id传进 队列 case_id_Queue
@@ -107,6 +106,7 @@ def case_work(case_id_Queue,my_db_lock,the_case_result,statistical_results,start
     except  Exception as e :
         return
 
+
 def result_handling(task_info,the_case_result,statistical_results):
     the_task_info=task_info.get()
     update_state = task_management.objects.get(id=the_task_info.id)
@@ -144,5 +144,7 @@ def result_handling(task_info,the_case_result,statistical_results):
     my_report(user_name=web_user_name, report_data=report_data, report_result=report_result,uuid=uuid.uuid4(), App_name=the_task_info.task_project, terminal_number=1, test_type=the_task_info.task_type,App_version=App_version).save()
     update_state.task_state = 2
     update_state.save()
+
+
 if __name__=='__main__':
     run_case_of_api_main(10)

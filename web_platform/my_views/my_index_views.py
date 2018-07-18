@@ -12,7 +12,7 @@ def index_views(request):
     context_data["my_case_of_text_total"]= my_case_of_text.objects.count()
     context_data["my_case_of_api_total"]=my_case_of_API.objects.count()
     context_data["my_case_of_ui_total"]=my_case_of_UI.objects.count()
-    context_data['my_project_total']=my_report.objects.count()
+    context_data['my_project_total']=my_project.objects.count()
     daily_report=[]
     for x in range(10):
         up_time=timezone.now()+ timezone.timedelta(days=-x)
