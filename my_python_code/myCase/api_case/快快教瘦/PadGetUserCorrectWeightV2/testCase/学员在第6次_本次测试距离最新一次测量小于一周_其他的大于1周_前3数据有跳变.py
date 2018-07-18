@@ -17,12 +17,11 @@ logging.basicConfig(level=logging.INFO)
 from my_python_code.myCase.api_case.interface.Basics_class import Basics_case
 
 class API_case(Basics_case):
-
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        Basics_case.__init__(self, my_db_lock=kwargs['my_db_lock'])
 
         self.API_name = my_python_code.myCase.api_case.interface.接口记录.登录
 
-        Basics_case.__init__(self)  #子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
 
     '''
     3. 学员在第4次及以后测量时，依赖最后2次数据，按照以下限制：
@@ -42,7 +41,7 @@ class API_case(Basics_case):
                 corr_time_list = [3600000, 3500000, 3024006, 1728000, 1296000, 86401]
                 fatRate = 30  # 称重得到的体脂率
                 corr_Fatrate = 24  # 被修改后的体脂率
-                case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list)
+                case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock) 
 
                 return case_Result
 

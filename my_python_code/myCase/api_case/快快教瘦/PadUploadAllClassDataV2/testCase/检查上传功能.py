@@ -4,17 +4,18 @@ from my_python_code.myCase.api_case.interface.login_args import login
 from imp import reload
 import logging,json
 logging.basicConfig(level=logging.INFO)
-from my_python_code.myCase.api_case.interface.Basics_class import Basics_case,get_error
+from my_python_code.myCase.api_case.interface.Basics_class import Basics_case,get_error,my_lock
 import my_python_code.myCase.api_case.interface.Basic_information
 import  my_python_code.myCase.api_case.interface.接口记录
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
 from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link
+from multiprocessing import Process,Queue,Pool,Lock
 
 class API_case(Basics_case):
-  def __init__(self):
-    self.API_name =my_python_code.myCase.api_case.interface.接口记录.上传学员运动数据
-    Basics_case.__init__(self)  #子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
-#  @get_error
+  def __init__(self, *args, **kwargs):
+        Basics_case.__init__(self, my_db_lock=kwargs['my_db_lock'])
+        self.API_name =my_python_code.myCase.api_case.interface.接口记录.上传学员运动数据
+  @my_lock
   def test_case(self):
       login_heard=login( self.client)
       a=orm_to_mysql(my_sql_link_test())
@@ -31,5 +32,5 @@ class API_case(Basics_case):
       assert old_report_uuid != new_report_uuid ,'报告保存到数据库出错'
       return {"result":1}
 if __name__=='__main__':
-    example=API_case()
+    example=API_case(my_db_lock=Lock())
     print(example.test_case())

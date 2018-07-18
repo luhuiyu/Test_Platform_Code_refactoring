@@ -12,10 +12,9 @@ logging.basicConfig(level=logging.INFO)
 true=True
 false=False
 class API_case(Basics_case):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        Basics_case.__init__(self, my_db_lock=kwargs['my_db_lock'])
         self.API_name =  获取当前课程的报告列表
-        self.orm = orm_to_mysql(my_sql_link())
-        Basics_case.__init__(self)  # 子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
 
 if __name__ == '__main__':
     example = API_case()

@@ -12,9 +12,9 @@ from  my_python_code.mysql.ORM_of_mysql import orm_to_mysql
 from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link
 
 class API_case(Basics_case):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        Basics_case.__init__(self, my_db_lock=kwargs['my_db_lock'])
         self.API_name =  获取当前班级的学员信息
-        Basics_case.__init__(self)  # 子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
 
    # @get_error
     def test_case(self):

@@ -6,9 +6,9 @@ import logging
 logging.basicConfig(level=logging.INFO)
 from my_python_code.myCase.api_case.interface.Basics_class import Basics_case
 class API_case(Basics_case):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        Basics_case.__init__(self,my_db_lock = kwargs['my_db_lock'])
         self.API_name = my_python_code.myCase.api_case.interface.接口记录.登录
-        Basics_case.__init__(self)  #子类中含有__init__时，不会自动调用父类__init__，如需使用父类__init__中的变量，则需要在子类__init__中显式调用
 
     def Case_login(self,client,user_phone='',password='123456'):
         headers=my_python_code.myCase.api_case.interface.login_args.headers(client,user_phone,password)

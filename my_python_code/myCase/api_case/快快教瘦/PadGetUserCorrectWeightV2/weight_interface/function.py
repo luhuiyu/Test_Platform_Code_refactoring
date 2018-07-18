@@ -4,6 +4,7 @@ from copy import deepcopy
 import requests,time
 import pymysql
 from my_python_code.myCase.api_case.interface.Basics_class import Basics_case
+from multiprocessing import Process,Queue,Pool,Lock
 
 def clean_user_daily_weight(db,cursor,user_uuid):#这个函数是为了清空测试账号的称重信息
     sql = 'DELETE  FROM user_daily_weight WHERE user_uuid=\''+user_uuid+'\''
@@ -42,7 +43,8 @@ def get_error(test_case):
     return wrapper
 
 
-def weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time):#测试用的方法，用例都要先调用这个
+def weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time,my_lock):#测试用的方法，用例都要先调用这个
+    my_lock.acquire()
     try:
         fatRate=str(fatRate)
         clean_user_daily_weight(db, cursor, user_uuid)  # 为了清空测试账号的称重信息
@@ -58,12 +60,14 @@ def weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_F
        # logger.info(corr_weigt.json()["corrWeightData"] )
         #print(str(corr_weigt.json()["corrWeightData"]["fatRate"]))
         if float(corr_weigt.json()["corrWeightData"]["fatRate"])==float(corr_Fatrate):
+            my_lock.release()
             return {"result":1}
         else:
+            my_lock.release()
             return   {"result":0,"error_info": str(corr_weigt.json())}
     except Exception as e:
-            return {"result":-1,"error_info": '\''+str(e)+'\''}
-
+        my_lock.release()
+        return {"result":-1,"error_info": '\''+str(e)+'\''}
 
 class weight_case_class(Basics_case):
     def clean_user_daily_weight(self,db, cursor, user_uuid):  # 这个函数是为了清空测试账号的称重信息
@@ -101,8 +105,9 @@ class weight_case_class(Basics_case):
                 return {"result": -1, "error_info": '\'' + str(e) + '\''}
 
         return wrapper
-    def weight_testCase(self,client, db, cursor, user_uuid, old_fatRate_list, fatRate, corr_Fatrate,
-                        corr_time):  # 测试用的方法，用例都要先调用这个
+
+    def weight_testCase(self,client, db, cursor, user_uuid, old_fatRate_list, fatRate, corr_Fatrate, corr_time,my_lock):  # 测试用的方法，用例都要先调用这个
+        my_lock.acquire()
         try:
             fatRate = str(fatRate)
             self.clean_user_daily_weight(db, cursor, user_uuid)  # 为了清空测试账号的称重信息
@@ -119,10 +124,13 @@ class weight_case_class(Basics_case):
            # print(corr_weigt.json()["corrWeightData"])
             # print(str(corr_weigt.json()["corrWeightData"]["fatRate"]))
             if float(corr_weigt.json()["corrWeightData"]["fatRate"]) == float(corr_Fatrate):
+                my_lock.release()
                 return {"result": 1}
             else:
+                my_lock.release()
                 return {"result": 0, "error_info": str(corr_weigt.json())}
         except Exception as e:
+            my_lock.release()
             return {"result": -1, "error_info": '\'' + str(e) + '\''}
 
 

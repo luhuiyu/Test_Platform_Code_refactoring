@@ -1,6 +1,5 @@
 import threading
 import pymysql,os,time
-Lock = threading.Lock()
 from my_python_code.mysql.Singleton  import  Singleton
 
 

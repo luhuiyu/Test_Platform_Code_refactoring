@@ -11,7 +11,7 @@ def test_Case(client,db, cursor, user_uuid ):
         corr_time_list = [int,int]# 数据创建的时间 int类型
         fatRate = int  # 称重得到的体脂率  int类型
         corr_Fatrate = int # 被修改后的体脂率   int类型
-        case_Result=weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list)
+        case_Result=weight_testCase(client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock)
         if case_Result==0:
             print('-出现错误')
         return case_Result

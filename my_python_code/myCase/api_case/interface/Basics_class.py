@@ -5,10 +5,12 @@ import requests
 from my_python_code.myCase.api_case.interface.login_args import headers
 import logging.handlers
 import time
-import os
+from my_python_code.mysql.Singleton  import  Singleton
 from my_python_code.basic_configuration.configuration_file import *
 from  my_python_code.mysql.ORM_of_mysql import orm_to_mysql
 from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link
+from multiprocessing import Process,Queue,Pool,Lock
+
 #if not os.path.exists( 'log_Warehouse'):
     #    os.makedirs('log_Warehouse')
 
@@ -32,9 +34,18 @@ def get_error(test_case):  # 装饰器，
             return {"result": -1, "error_info": '\'' + str(e) + '\''}
 
     return wrapper
+def my_lock(fun):
+    def __my_lock(self,*args,**kwargs):
+        if self.my_db_lock:
+            self.my_db_lock.acquire()
+        my_rult=fun(self, *args, **kwargs)
+        if self.my_db_lock:
+            self.my_db_lock.release()
+        return my_rult
+    return __my_lock
 class Basics_case():
   @get_error
-  def __init__(self):  #基本设置
+  def __init__(self,*args,**kwargs):  #基本设置
     self.url = my_python_code.myCase.api_case.interface.Basic_information.main_url  # 主地址，可以切换现网 测试网或者不同app的
     self.client = requests.session()    #定义一个长链接
     a=my_sql_link_test()
@@ -45,6 +56,10 @@ class Basics_case():
     self.logger.addHandler(handler)  # 为logger添加handler
     self.logger.setLevel(logging.INFO)
     self.orm = orm_to_mysql(my_sql_link())
+    if kwargs['my_db_lock']:
+         self.my_db_lock=kwargs['my_db_lock']
+    else:
+        pass
     #  self.logger.info(id(self.logger))
     try:    #如果有给json就使用给的json，没有就给一个默认的
          if  standard_json :
@@ -68,7 +83,9 @@ class Basics_case():
       self.login_headers=headers1
       return headers1
   @get_error
-  def test_case(self):  # 对比和 web_platform_pad_pesourcelist 保存的数据是否一致
+  def test_case(self,*args,**kwargs):  # 对比和 web_platform_pad_pesourcelist 保存的数据是否一致
+      if self.my_db_lock:
+          self.my_db_lock.acquire()
       heard = self.login()
       error_list = []
       sgin = True
@@ -99,8 +116,12 @@ class Basics_case():
           end_time=time.time()
           self.logger.info(end_time-start_time)
       self.orm.close()
-      if sgin: return {"result": 1}
-      else:return {"result": 0, "error_info": error_list}
+      if self.my_db_lock:
+          self.my_db_lock.release()
+      if sgin:
+          return {"result": 1}
+      else:
+          return {"result": 0, "error_info": error_list}
   @get_error
   def compare(self,expected_result,json=None):  #对比结果 统一调用获取最后结果的时候都用他
       operation_resultself=self.test_case(self,json)
@@ -108,7 +129,6 @@ class Basics_case():
           return 1
       else:
         return 0
-
   def contrast_json(self,*args):
       dict_rult = {}
       dict_repeat = {}
@@ -136,4 +156,4 @@ class Basics_case():
 
 if __name__=='__main__':
     example=Basics_case()
-    self.logger.info(example.test_case())
+    print(example.test_case())
