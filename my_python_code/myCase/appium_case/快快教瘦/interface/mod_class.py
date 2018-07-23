@@ -43,6 +43,7 @@ def appium(platformVersion, driverName,url):
     desired_caps['unicodeKeyboard'] = 'true'
    # desired_caps['exported'] ='true'
     desired_caps['automationName'] ='appium' #使用的引擎
+ #   desired_caps['automationName'] = 'Uiautomator2'
     desired_caps['resetKeyboard'] = 'true'
     desired_caps['newCommandTimeout']='30' #最大无响应时间
     driver = webdriver.Remote(url, desired_caps)

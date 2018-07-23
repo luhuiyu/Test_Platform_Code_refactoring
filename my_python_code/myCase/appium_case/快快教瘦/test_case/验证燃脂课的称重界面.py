@@ -38,7 +38,7 @@ def test_case(context):
     operate.inspect_weight()
     assert  driver.find_elements_by_id(称重按钮)[0].text == '65.0KG'
     #验证用户没有数据的时候的显示
-    driver.find_elements_by_id(称重按钮)[1].click()
+    driver.find_elements_by_id(称重按钮)[0].click()
     driver.find_element_by_id(称重_年龄).clear()
     driver.find_element_by_id(称重_安静心率).clear()
     driver.find_element_by_id(称重_姓名).clear()
@@ -52,7 +52,73 @@ def test_case(context):
     driver.find_element_by_id(称重_安静心率).set_value('65')
     driver.find_element_by_id(称重_姓名).set_value('appium_test')
     driver.find_element_by_id(称重_身高).set_value('165')
+    #验证 年龄的范围 6-60
+    driver.find_element_by_id(称重_年龄).clear()
+    driver.find_element_by_id(称重_年龄).set_value('5')
+    driver.find_element_by_id(称重_保存).click()
+#    assert operate.find_toast('年龄异常,建议年龄范围是6-60!!!')
+    driver.find_element_by_id(称重_年龄).clear()
+    driver.find_element_by_id(称重_年龄).set_value('61')
+    driver.find_element_by_id(称重_保存).click()
+ #   assert operate.find_toast('年龄异常,建议年龄范围是6-60!!!')
+    driver.find_element_by_id(称重_年龄).clear()
+    driver.find_element_by_id(称重_年龄).set_value('59')
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_年龄).clear()
+    driver.find_element_by_id(称重_年龄).set_value('6')
+    driver.find_element_by_id(称重_保存).click()
+    #安静心跳
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_安静心率).clear()
+    driver.find_element_by_id(称重_安静心率).set_value(49)
+    driver.find_element_by_id(称重_保存).click()
+  #  assert operate.find_toast('安静心跳异常,建议安静心跳的范围是50-80')
+    driver.find_element_by_id(称重_安静心率).clear()
+    driver.find_element_by_id(称重_安静心率).set_value(81)
+    driver.find_element_by_id(称重_保存).click()
+ #   assert operate.find_toast('安静心跳异常,建议安静心跳的范围是50-80')
+    driver.find_element_by_id(称重_安静心率).clear()
+    driver.find_element_by_id(称重_安静心率).set_value(80)
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_安静心率).clear()
+    driver.find_element_by_id(称重_安静心率).set_value(50)
+    driver.find_element_by_id(称重_保存).click()
+    #身高，
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_身高).clear()
+    driver.find_element_by_id(称重_身高).set_value(49)
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_element_by_id(称重_身高).clear()
+    driver.find_element_by_id(称重_身高).set_value(251)
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_element_by_id(称重_身高).clear()
+    driver.find_element_by_id(称重_身高).set_value(50)
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_身高).clear()
+    driver.find_element_by_id(称重_身高).set_value(249)
+    driver.find_element_by_id(称重_保存).click()
+    driver.find_elements_by_id(称重按钮)[0].click()
+    driver.find_element_by_id(称重_首次配对).click()
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_title').text == '搜索蓝牙秤'
+    time.sleep(5)
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content') == '没有找到蓝牙秤，请重试!'
+    driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
+    driver.find_element_by_id(称重_开始称重).click()
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content').text == '请先首次配对'
+    driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
+    assert driver.find_element_by_id(称重_体重).text == '--'
 
+
+
+    if sigu:
+        logger.info(str({"result": -1, "error_info": '\'' + str(rult_list) + '\''}))
+        return {"result": -1, "error_info": '\'' + str(rult_list) + '\''}
+    else:
+        logger.info(str({'driverName': str(driverName), "result": 1, }))
+        return {'driverName': str(driverName), "result": 1, }
 if __name__ == '__main__':
     context = {}
     system = 'Andriod'  # 手机系统
