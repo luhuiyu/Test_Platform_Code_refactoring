@@ -167,7 +167,6 @@ class user_information ():
             return True
         except:
             return False
-
     def login_pad(self):
         driver=self.driver
         driver.start_activity(教练pad, 登录页面的Activity)
@@ -226,8 +225,6 @@ class user_information ():
                     if  void_bind_list_down:
                         void_bind_list_down[random.randint(0,len(void_bind_list_down)-1)].click()
             self.ac_click(1730, 800, driverName)
-
-
     def  just_in_time_switch_unit(self):#准时的切换单元
         b = self.driver.find_elements_by_id('unit_duration')
         driver=self.driver
@@ -252,7 +249,6 @@ class user_information ():
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
-
     def end_courses(self):
         driver = self.driver
         driver.find_elements_by_id(单元小节图片)[6].click()
@@ -267,6 +263,33 @@ class user_information ():
             except:
                 i = i + 1
                 pass
+    def inspect_weight(self):
+        driver = self.driver
+        driver.find_element_by_id(称重_性别男).click()
+        driver.find_element_by_id(称重_年龄).clear()
+        driver.find_element_by_id(称重_年龄).set_value('25')
+        driver.find_element_by_id(称重_安静心率).clear()
+        driver.find_element_by_id(称重_安静心率).set_value('65')
+        driver.find_element_by_id(称重_姓名).clear()
+        driver.find_element_by_id(称重_姓名).set_value('appium_test')
+        driver.find_element_by_id(称重_身高).clear()
+        driver.find_element_by_id(称重_身高).set_value('165')
+        driver.find_element_by_id(称重_体重).click()
+        driver.find_element_by_id(弹窗_确认).click()
+        driver.find_element_by_id(称重_保存).click()
+    def inspect_weight_not_save(self):
+        driver = self.driver
+        driver.find_element_by_id(称重_性别男).click()
+        driver.find_element_by_id(称重_年龄).clear()
+        driver.find_element_by_id(称重_年龄).set_value('25')
+        driver.find_element_by_id(称重_安静心率).clear()
+        driver.find_element_by_id(称重_安静心率).set_value('65')
+        driver.find_element_by_id(称重_姓名).clear()
+        driver.find_element_by_id(称重_姓名).set_value('appium_test')
+        driver.find_element_by_id(称重_身高).clear()
+        driver.find_element_by_id(称重_身高).set_value('165')
+        driver.find_element_by_id(称重_体重).click()
+        driver.find_element_by_id(弹窗_确认).click()
 class  pad_mysql(orm_to_mysql):
 
     def __init__(self,phone):

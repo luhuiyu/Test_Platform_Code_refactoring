@@ -2,11 +2,11 @@ import re,time
 from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link_stage
 from my_python_code.basic_configuration.configuration_file import *
 
-def add_class(star_time,store_name,user_number,classes_checkin_number,course_code,subject_show_id,dict_index='3',coach_phone=None,end_time=None,environment='test'):
-    if environment=='test':
-        a = my_sql_link_test()
-    else:
+def add_class(star_time,store_name,user_number,classes_checkin_number,course_code,subject_show_id,user_uuid_list=False,dict_index='3',coach_phone=None,end_time=None,environment='test'):
+    if environment=='state':
         a=my_sql_link_stage()
+    else:
+        a = my_sql_link_test()
     db = a.db
     cursor = a.cursor
     if end_time == None:
@@ -16,11 +16,15 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
     start = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(star_time))
     end = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))
 
-
-    uuid =uuid_idct[dict_index]
+    if user_uuid_list == False:
+        uuid =uuid_idct[dict_index]
+    else:
+        uuid=user_uuid_list
+  #  print(uuid)
     def get_gym_id(user_name,cursor=cursor,db=db):  # 获取gym_id
         user_name = str(user_name)
         sql = 'select gym_id from coach WHERE tel like \'' + user_name + '\''
+       # print(sql)
         cursor.execute(sql)
         db.commit()
         gym_id = cursor.fetchone()
@@ -59,7 +63,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
         coach_id = str(cursor.fetchone())
         coach_id = re.sub("\D", "", coach_id)
         class_sql='INSERT IGNORE INTO classes(subject_id, course_code, gym_id, coach_id,  start_time, end_time,TYPE, capacity,subject_show_id)VALUES('+'\''+str(subject_id)+'\','+'\''+course_code+'\','+'\''+str(gym_id)+'\','+'\''+coach_id+'\','+'\''+start+'\','+'\''+end+'\','+'\'1\',\'12\','+str(subject_show_id)+')'
-        print(class_sql)
+   #     print(class_sql)
         cursor.execute(class_sql)
         # db.commit()
     except Exception as e:
@@ -85,7 +89,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
         for x in uuid[0:n]:
             sql = 'INSERT IGNORE  INTO user_classes (subject_id,user_uuid,classes_type,STATUS,create_time,user_subject_uuid,classes_times,classes_id)VALUES (\'1474199922280448\',\'' + x + '\',\'1\',\'0\',\''+start+'\',\'bd89c9ce-c41b-4256-8fa1-5640a0a149d3\',\'8\',' + url
             cursor.execute(sql)
-            print(sql)
+          #  print(sql)
      #   print('添加学员成功')
        # except:
          #   print('没有成功添加用户')
@@ -103,7 +107,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
             for x in uuid[0:n]:
                 sql = 'INSERT IGNORE INTO user_classes_checkin (user_uuid,STATUS,create_time,coach_id,classes_id) VALUES (\'' + x + '\',\'1\',\''+start+'\',\'1429863157778432\',' + url
                 cursor.execute(sql)
-                print(sql)
+               # print(sql)
            # print('学员签到成功')
         except:
             print('没有签到成功')

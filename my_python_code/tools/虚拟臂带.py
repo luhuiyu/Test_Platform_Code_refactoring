@@ -100,7 +100,6 @@ def UDP_put(put_data,my_pid):#用于发送给pad数据
     send_1.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     while 1:
         data=put_data.get()
-       # print('data',data)
         send_1.sendto(bytes(data), ('192.168.8.255', 8003))
 def put_null(put_data,bind_list_1,my_pid,sign=True,total=32):
     global  time_delay1
@@ -135,7 +134,7 @@ def put_null(put_data,bind_list_1,my_pid,sign=True,total=32):
                     95, 127, 134, 134, 191, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 34, 0, 0, 0, 0, 0,
                     0, 0, 0, 66]
             put_data.put(data)
-def fictitious_bind(sign,total=32,time_delay=1):
+def fictitious_bind(sign,total=32,time_delay=1,Q=False):
     global  time_delay1
     time_delay1=time_delay
     my_db = orm_to_mysql(my_sql_link())
@@ -159,7 +158,9 @@ def fictitious_bind(sign,total=32,time_delay=1):
     my_pid_list=[]
     for x in range(5):
         my_pid_list.append(  my_pid.get())
+    if Q :
+        Q.put(my_pid_list)
     my_db.table('web_platform_phone').updata({'phone_code': str(my_pid_list)},id=101)
     p1.join()
 if __name__=='__main__':
-    fictitious_bind(sign=True,total=32,time_delay=1)
+    fictitious_bind(sign=False,total=32,time_delay=1)

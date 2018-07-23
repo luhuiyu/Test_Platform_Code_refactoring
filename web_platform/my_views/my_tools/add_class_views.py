@@ -24,9 +24,9 @@ def add_classes(request):
         day=request.POST.get("day")
         up_time=request.POST.get("up_time")
         course_code=request.POST.get("course_code")
+        environment=request.POST.get("environment")
         user_number=request.POST.get("user_number")
         course_time=request.POST.get("course_time")
-        print(2222,request.POST)
         user_index=request.POST.get("user_index")
         classes_checkin_number=request.POST.get("classes_checkin_number")
         timeArray = time.strptime(day+' '+up_time, "%Y-%m-%d %H:%M")
@@ -35,7 +35,7 @@ def add_classes(request):
         course_code_list=get_course_code(course_code)
         subject_show_id=course_code_list[1]
         course_code=str(course_code_list[0])+str(course_time)
-        class_id=add_class(star_time, store_name, user_number, classes_checkin_number, course_code, subject_show_id,user_index)
+        class_id=add_class(star_time, store_name, user_number, classes_checkin_number, course_code, subject_show_id,user_index,environment=environment)
         messages.add_message(request, messages.INFO, class_id)
         context['class_id'] = str(class_id)
         if class_id:

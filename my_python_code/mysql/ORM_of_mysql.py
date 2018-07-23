@@ -6,7 +6,7 @@ def count_sub(s):
     return len(re.findall(r',',s))
 
 class orm_to_mysql():
-   def __init__(self, mysql_link=my_sql_link()):
+   def __init__(self, mysql_link):
         self.link=mysql_link
         self.db = self.link.db
         self.cursor=self.link.cursor_dict
@@ -27,7 +27,7 @@ class orm_to_mysql():
        return self
    def all(self):
      #  print(str(self.my_sql_statement))
-       self.cursor.execute(str(self.my_sql_statement))
+       self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
        return self.cursor.fetchall()
    def limit(self,*args):
@@ -36,8 +36,9 @@ class orm_to_mysql():
            self.my_sql_statement = str(self.my_sql_statement) + column +  str(args[0])
        else:
            self.my_sql_statement = str(self.my_sql_statement) + column + str(args[0])+','+ str(args[1])
+       return self
    def one(self):
-       self.cursor.execute(str(self.my_sql_statement))
+       self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
        return self.cursor.fetchone()
 
@@ -47,35 +48,40 @@ class orm_to_mysql():
            column_conditions = column_conditions + str(x) + ','
        search_criteria = ''
        for x in kw.items():
-           if str(x[0])[-6:] == "__LIKE":
-               column = str(x[0])[:-6]
+           key=x[0]
+           relationship= ' AND '
+           if str(key)[0:4]  == 'OR__' :
+               relationship = ' OR  '
+               key=str(key)[4:]
+           if str(key)[-6:] == "__LIKE":
+               column = str(key)[:-6]
                condition = '\'%' + str(x[1]) + '%\''
                operator = ' LIKE '
-           elif str(x[0])[-4:] == "__GT":
-               column = str(x[0])[:-4]
+           elif str(key)[-4:] == "__GT":
+               column = str(key)[:-4]
                condition = '\'' + str(x[1]) + '\''
                operator = ' > '
-           elif str(x[0])[-4:] == "__LT":
-               column = str(x[0])[:-4]
+           elif str(key)[-4:] == "__LT":
+               column = str(key)[:-4]
                condition = '\'' + str(x[1]) + '\''
                operator = ' < '
           # elif '__' in str(x[0]):
           #     raise NameError
-           elif  str(x[0])=='GROUP_BY':
+           elif  str(key)=='GROUP_BY':
                search_criteria=search_criteria[:-4]
                column = 'GROUP BY'
                condition =    str(x[1])
                operator = ' '
            else:
-               column = str(x[0])
+               column = str(key)
                condition = '\'' + str(x[1]) + '\''
                operator = ' =  '
-           if  '__' in str(x[0]):
+           if  '__' in str(key):
                column=column.replace('__', '.')
            if count_sub(self.my_table)>1 and column in condition :
                if '.'in condition:
                    condition=condition[1:-1]
-           sc = column + operator + condition + ' AND '
+           sc = column + operator + condition + relationship
            search_criteria = search_criteria + sc
        if search_criteria:
            search_criteria = ' where ' + search_criteria[:-4]
@@ -86,18 +92,31 @@ class orm_to_mysql():
        else:
            sql = "select  * " + "  from  " + str(self.my_table) + search_criteria
        self.my_sql_statement=str(sql)
+    #   print(sql)
        return self
 
    def insert(self, *args, **kw):
-       column = r''
-       condition = r''
-       for x in kw.items():
-           column = column + str(x[0]) + ','
-           condition = condition + '\'' + str(x[1]) + '\','
-       sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
-     #  print(sql)
-       self.cursor.execute(str(sql))
-       self.db.commit()
+       if kw:
+           column = r''
+           condition = r''
+           for x in kw.items():
+               column = column + str(x[0]) + ','
+               condition = condition + '\'' + str(x[1]) + '\','
+           sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+           self.cursor.execute(str(sql))
+           self.db.commit()
+       elif args:
+           column = r''
+           condition = r''
+           for x in args[0].items():
+               if  str(x[1]) =='None':
+                   pass
+               else:
+                   column = column + str(x[0]) + ','
+                   condition = condition + '\'' + str(x[1]) + '\','
+           sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+           self.cursor.execute(str(sql))
+           self.db.commit()
        return self
 
    def delete(self, *args, **kw):
@@ -127,6 +146,7 @@ class orm_to_mysql():
        sql = 'DELETE FROM  ' + str(self.my_table) + '  WHERE  ' + search_criteria[:-4]
        self.cursor.execute(str(sql))
        self.db.commit()
+       #print(sql)
        return self
 
    def updata(self, *args, **kw):
@@ -171,10 +191,10 @@ class orm_to_mysql():
    def close(self):
        self.db.close()
 
-   def sql(self, sql):
+   def my_sql(self, sql):
        self.cursor.execute(str(sql))
        self.db.commit()
-       return self
+       return self.cursor.fetchall()
 
 if __name__ == '__main__':
     a=orm_to_mysql()
