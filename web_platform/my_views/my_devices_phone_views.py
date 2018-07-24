@@ -14,6 +14,9 @@ def devices_phone_views(request):
         if  renew:
             devices_phone.objects.filter().delete()
             get_devices_info_Android()  # 本机使用这个更新数据库的连接信息
+            context['Android'] = get_devices_info('Android')
+            context['iOS'] = get_devices_info('iOS')
+            return render(request, 'my_devices_phone_html5.html', context)
 
         if Android_devices_list:
             devices_phone.objects.filter(platformName='Android').update(used=0)
