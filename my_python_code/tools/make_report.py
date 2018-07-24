@@ -11,9 +11,9 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
     client = requests.session()
     if user_uuid_list :
-        class_id=add_class(time.time(), 'B店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,user_uuid_list=user_uuid_list)
+        class_id=add_class(time.time(), 'A店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,user_uuid_list=user_uuid_list)
     else:
-        class_id=add_class(time.time(), 'B店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,dict_index=dict_index)
+        class_id=add_class(time.time(), 'A店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,dict_index=dict_index)
     headers1 = headers(client, user, password)
     login_pad = client.post(url='http://test.kuaikuaikeji.com/kcas/PadCoachLoginV2', headers=headers1)
     home = orm_to_mysql(my_sql_link())
