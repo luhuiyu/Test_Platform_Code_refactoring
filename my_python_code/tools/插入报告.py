@@ -23,6 +23,8 @@ def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
         tset_mysql.table('user_report').insert(x)
         buz_class_id = buz_mysql.table('classes').select(id=x['classes_id']).one()
         tset_mysql.table('classes').insert(buz_class_id)
+        buz_user_classes_id=buz_mysql.table('user_classes').select(classes_id=x['classes_id']).one()
+        tset_mysql.table('user_classes').insert(buz_user_classes_id)
         report_data2 = mongo_client["kk_buz"]["user_report_plus"].find({'uuid': x['uuid']})
         i = 0
         for y in report_data2:
@@ -42,4 +44,5 @@ if __name__ == '__main__':
     for user_uuid in user_list:
         user_uuid=user_uuid['user_uuid']
         up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql)
-        make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
+        print(user_uuid)
+      #  make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)

@@ -18,7 +18,7 @@ def get_error(test_case):  # 装饰器，
         try:
             return test_case(*args, **kw)
         except  Exception as e:
-            print(args)
+          #  print(args)
             return {'driverName':  args[0]['deviceName'], "result": -1, "error_info": '\'' + str(e) + '\''}
     return wrapper
 
@@ -111,7 +111,7 @@ class user_information ():
         x1=0.5*w
         y1=0.4*h
         y2=0.9*h
-        print(int(x1),int(y1),int(x1),int(y2))
+       # print(int(x1),int(y1),int(x1),int(y2))
         time.sleep(1)
         driver.swipe(int(x1),int(y1),int(x1),int(y2),1000)
         time.sleep(4)

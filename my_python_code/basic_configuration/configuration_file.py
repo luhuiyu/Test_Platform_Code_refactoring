@@ -63,9 +63,7 @@ uuid_idct['2']=[
 'b09bcd54-7b9d-41e8-9a6f-a8589f93569d',
 '8825d32a-6f77-49e6-8160-9f432fa7c126',]
 uuid_idct['3']=[
-    '0fd404f3-61f6-409d-b8d5-aafa74676295',
-'784125bc-0a89-4323-a5cc-45f66ac822e8',
-'6cfca81e-352b-4e66-b21f-1905287c0b8f',
+
 'f8fbeb76-9b64-4f87-94f3-6ebbefc4da06',
 '0a7a4b12dbb84343b5c1adfb775b4134',
 '7c5ad0c829b645a2bef518665517388b',
@@ -80,15 +78,7 @@ uuid_idct['3']=[
 '4f3b55d4-557c-4eb0-b574-fe3995c41f69',
     ]
 uuid_idct['4']=[
-    '00a5cb99-ec76-453e-b9a5-d81d8715a9a7',
-    'cc6d4005-a790-47aa-82ae-b2b1a1f15248',
-   # 'e9c10cbd-042b-4cf1-b49d-a7a6562e83c8',
-    '237f7020-af58-4144-8586-8531fabd898f',
-    'a78d2f2a-c9da-4427-8cd4-0358df32bcfb',
-    '9ca3fd9c-ad74-4784-b98d-3dc0dd58e3d7',
-    '9ba5e744-b9f1-4fbf-9999-54d634860819',
-    '4b3b78363712499a919a397322dff3e8',
-    '910bc5ef-6c1e-486f-a2d7-0ed52f6cdbf8',
+
     '650f0a9064bc460cb4a61e9b9023b288',
     '0b985409-adb4-4be0-879b-98a7bbb26e68',
     '8f2fee0e-ab04-4ca6-bc19-d797ed9b2fa0',
@@ -134,14 +124,13 @@ uuid_idct['0']=[
     #'e623c2ba-4469-4b5f-9b61-aa6874770476',
    # '0623c8d4-dd73-4e3e-ad22-a85018298336',
 #'001e5c0b-548d-45fc-b3d1-564d65c84dd3',
-'e260a966-9a44-4923-9c39-7a9bf4170cff' ,
-    'b2207bc8-d0ad-4fea-b472-ecad76a6116b',
-    '3a77bddc-5307-47b2-a308-0f6af95aeaff',
-    'fd6c1678-bb28-4727-bca8-dceae094e1ba',
-    '78bf0053-a627-4c75-859e-4e9e8822eb9d',
-    '49c64eb7-37f9-41fd-a081-fa0998bd200e',
-    'fbcdb2d7-c030-4768-92ef-c66d58844eab',
-    'fb01f387-7654-407e-bb57-839bafad8929',
+
+    '2b2345c6-0b9b-45fc-b895-570461240e65',
+    '62cd95fe854f4491a9ce0eaa9658d3bc',
+    'ed31a7da-7dbf-4314-aa3e-abd7db4fb84d',
+    '7165e70f5f4645f3bf8aaefec305f78e',
+    '37d526122e6947f39e767341e7dd15b4',
+    'd9f8b8f7c5064a1bb420565d444854e8',
     '91b4de98-c869-4b70-a652-b19f525ef11d',
     '482377be-d96d-4b7d-aab5-32440bd3aa1f',
     '399ce994-bd96-493b-85e3-54c5bd89c9c0',
