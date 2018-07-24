@@ -15,7 +15,7 @@ logger.info('正常上课')
 @get_error
 def wait_unit(driver,index):
     for i in range(index):
-        print(i)
+       # print(i)
         time.sleep(1)
         driver.find_element_by_id(连接臂带)
 
@@ -39,7 +39,7 @@ def test_case(context):
             driver = appium(platformVersion, driverName, url)
             use_mysql = pad_mysql(phone)
             operate = user_information(driver, phone, system,driverName)
-            print('课程' + str(x), driverName)
+          #  print('课程' + str(x), driverName)
             use_mysql.clear_classes()
             use_mysql.add_class(add_time=1,store_name=None, user_number='12',classes_checkin_number='12',course_code=course['course_code']+str(x),subject_show_id=str(course['subject_show_id']),dict_index=str(int(PORT)-4910))
             operate.login_pad()

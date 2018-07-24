@@ -100,11 +100,12 @@ def test_case(context):
         gym_list=[]
         for x in driver.find_elements_by_id(门店列表):
             gym_list.append(x.text)
-        print(gym_list)
+   #     print(gym_list)
         driver.find_elements_by_id(门店列表)[3].click()
         time.sleep(3)
         if driver.find_element_by_id(课程列表_当前门店).text == gym_list[3]:
-                print('通过')
+       #         print('通过')
+                    pass
         driver.find_element_by_id(课程列表_体测).click()
         assert driver.find_element_by_id(未上传体测).is_displayed(),'未上传体测'
         assert driver.find_element_by_id(专业版体测).is_displayed(),'专业版体测'

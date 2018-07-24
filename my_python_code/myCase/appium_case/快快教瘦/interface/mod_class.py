@@ -341,7 +341,7 @@ class  pad_mysql(orm_to_mysql):
         coach_phone=self.phone
         star_time=time.time()+add_time
         class_id =add_class(star_time=star_time,store_name=store_name,user_number=user_number,classes_checkin_number=classes_checkin_number,course_code=course_code,subject_show_id=subject_show_id,dict_index=dict_index,coach_phone=coach_phone,end_time=end_time)
-        print(class_id)
+       # print(class_id)
 
         return  class_id
 

@@ -73,6 +73,8 @@ def task_distribution(appium_Queue,task_Queue,task_info):
 def result_handling(the_case_result,statistical_results,task_info):
     start_time=task_info.get()
     get_now_task=task_info.get()
+    get_now_task.task_state = 1
+    get_now_task.save()
     case_list=task_info.get()
     case_total=len(case_list)
     report_data = {}  # 报告的json
@@ -105,7 +107,8 @@ def result_handling(the_case_result,statistical_results,task_info):
     my_report(user_name=web_user_name, report_data=report_data, report_result=report_result, uuid=uuid.uuid4(),
               App_name=get_now_task.task_project, terminal_number=1, test_type=get_now_task.task_type,
               App_version=App_version).save()
-
+    get_now_task.task_state = 2
+    get_now_task.save()
 
 def case_work(appium_Queue,task_Queue,the_case_result,statistical_results,):
     context=appium_Queue.get()

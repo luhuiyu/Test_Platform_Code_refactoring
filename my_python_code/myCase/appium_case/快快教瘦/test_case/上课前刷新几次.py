@@ -72,8 +72,8 @@ def test_case(context):
             p2.start()
             p1.join()
             pid_list=Q_pid.get()
-            print(pid_list)
-            print(id(pid_list))
+        #    print(pid_list)
+        #    print(id(pid_list))
             for x in pid_list:
                 os.popen('taskkill.exe /pid:' + str(x) + '   -t -f ')
             time.sleep(5)
