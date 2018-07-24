@@ -11,9 +11,9 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
     client = requests.session()
     if user_uuid_list :
-        class_id=add_class(time.time(), 'A店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,user_uuid_list=user_uuid_list)
+        class_id=add_class(time.time(), 'B店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,user_uuid_list=user_uuid_list)
     else:
-        class_id=add_class(time.time(), 'A店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,dict_index=dict_index)
+        class_id=add_class(time.time(), 'B店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,dict_index=dict_index)
     headers1 = headers(client, user, password)
     login_pad = client.post(url='http://test.kuaikuaikeji.com/kcas/PadCoachLoginV2', headers=headers1)
     home = orm_to_mysql(my_sql_link())
@@ -83,9 +83,9 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
 if __name__ == '__main__':
     #kk_test = orm_to_mysql(my_sql_link_test())
-    user_uuid = ['cf8fafdb-9ae1-4ef7-a3ea-db2b250da62c']
+    user_uuid = ['03a503dd-5c62-4d0c-8a77-78972b93ff40']
     for x in range(1):
-        make_report(buz_class_id=331096, course_code='SXTB.1.0.1.1', subject_show_id='13',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1)
+        make_report(buz_class_id=331096, course_code='JZX2.0.3.1', subject_show_id='1',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1)
 
     #  make_report(buz_class_id=218604,course_code='JZX2.0.4.1',subject_show_id='1',dict_index='4')
     # for  x in  range(1):

@@ -102,7 +102,7 @@ class orm_to_mysql():
            for x in kw.items():
                column = column + str(x[0]) + ','
                condition = condition + '\'' + str(x[1]) + '\','
-           sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+           sql = 'replace   INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
            self.cursor.execute(str(sql))
            self.db.commit()
        elif args:
