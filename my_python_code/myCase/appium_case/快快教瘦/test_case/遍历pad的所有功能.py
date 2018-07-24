@@ -8,7 +8,7 @@ import os,time,re
 import logging
 from PIL import Image,ImageDraw
 from  my_python_code.picture_contrast.similarity import classfiy_histogram_with_split
-logging.basicConfig(level=logging.ERROR)
+logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 logger.info('正常上课')
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import get_error
@@ -17,7 +17,7 @@ class  appium_case(user_information):
         pass
 @get_error
 def test_case(context):
-     print(os.getcwd())
+   #  print(os.getcwd())
      system=context['platformName']
      platformVersion=context['platformVersion']
      driverName=context['deviceName']
@@ -25,7 +25,7 @@ def test_case(context):
      phone=context['phone']
      case_address = context['case_address']
      case_address=case_address.replace('.','/')
-     print(case_address)
+  #   print(case_address)
      try:
         url='http://127.0.0.1:'+str(PORT)+'/wd/hub'
         driver = appium(platformVersion, driverName,url)
@@ -35,7 +35,7 @@ def test_case(context):
         driver.start_activity(教练pad, 登录页面的Activity)
         operate.check_element('id',登录_账号)
         driverName= re.sub("\W", "", driverName)
-        print(case_address+r'/img/登录页面'+driverName+'.png')
+     #   print(case_address+r'/img/登录页面'+driverName+'.png')
         driver.get_screenshot_as_file(case_address+r'/img/登录页面'+driverName+'.png')
         logon_img_standard=Image.open(case_address+r'/img/登录页面.png')
         logon_img_new =Image.open(case_address+r'/img/登录页面'+driverName+'.png')
@@ -122,8 +122,8 @@ if __name__ == '__main__':
     context={}
     case_address=r'F:/Test_Platform'+ '/my_python_code/myCase/appium_case/快快教瘦/test_case/遍历pad的所有功能'
     system = 'Andriod'  # 手机系统
-    platformVersion = '5.1.1'  # 版本号 一定要填对 6.0
-    driverName = 'YVF4C15821002901'  # 手机的  TJF6R17116002939 YVF6R15A29000229 73e97641 MWUBB17907202712 YVF6R15A29000229
+    platformVersion = '6.0'  # 版本号 一定要填对 6.0
+    driverName = '192.168.8.102:5555'  # 手机的  TJF6R17116002939 YVF6R15A29000229 73e97641 MWUBB17907202712 YVF6R15A29000229
     PORT = '4910'
     phone = '15600905550'
     context['platformName']= system

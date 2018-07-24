@@ -39,8 +39,10 @@ def my_task(request):
                         task_type=test_type,
                         task_data={'case_list': case_id_list},
                         create_time=todaytime).save()
-       # os.system('python    '+MY_RUN_API_CASE  )
-        os.popen('python    '+MY_RUN_API_CASE )
+        if test_type =='apitest':
+            os.popen('python    '+MY_RUN_API_CASE )
+        else:
+            os.popen('python    ' + MY_RUN_UI_CASE)
         return HttpResponseRedirect('/task')
     else:
         context_data = get_task_queue(context_data)

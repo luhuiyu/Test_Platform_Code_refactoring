@@ -104,7 +104,7 @@ def test_case(context):
     driver.find_element_by_id(称重_首次配对).click()
     assert driver.find_element_by_id('com.kk.coachpad:id/tv_title').text == '搜索蓝牙秤'
     time.sleep(5)
-    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content') == '没有找到蓝牙秤，请重试!'
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content').text == '没有找到蓝牙秤，请重试！'
     driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
     driver.find_element_by_id(称重_开始称重).click()
     assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content').text == '请先首次配对'

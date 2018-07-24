@@ -278,19 +278,37 @@ class user_information ():
         driver.find_element_by_id(称重_体重).click()
         driver.find_element_by_id(弹窗_确认).click()
         driver.find_element_by_id(称重_保存).click()
-    def inspect_weight_not_save(self):
+    def inspect_weight_JXSXBJ(self):
         driver = self.driver
+        A=driver.find_elements_by_id('com.kk.coachpad:id/edit_text')
         driver.find_element_by_id(称重_性别男).click()
-        driver.find_element_by_id(称重_年龄).clear()
-        driver.find_element_by_id(称重_年龄).set_value('25')
-        driver.find_element_by_id(称重_安静心率).clear()
-        driver.find_element_by_id(称重_安静心率).set_value('65')
-        driver.find_element_by_id(称重_姓名).clear()
-        driver.find_element_by_id(称重_姓名).set_value('appium_test')
-        driver.find_element_by_id(称重_身高).clear()
-        driver.find_element_by_id(称重_身高).set_value('165')
-        driver.find_element_by_id(称重_体重).click()
+        driver.find_element_by_id('com.kk.coachpad:id/tv_weight_delta').click()
         driver.find_element_by_id(弹窗_确认).click()
+        #姓名
+       # A[0].clear()
+      #  A[0].set_value('塑性防爆搏击')
+        A[1].clear()
+        A[1].set_value('27')
+        A[2].clear()
+        A[2].set_value('188')
+        A[3].clear()
+        A[3].set_value('70')
+        A[4].clear()
+        A[4].set_value('100')
+        A[5].clear()
+        A[5].set_value('90')
+        A[6].clear()
+        A[6].set_value('95')
+        A[7].clear()
+        A[7].set_value('40')
+        A[8].clear()
+        A[8].set_value('2')
+        A[9].clear()
+        A[9].set_value('40')
+        A[10].clear()
+        A[10].set_value('2')
+        driver.find_element_by_id(称重_保存).click()
+
 class  pad_mysql(orm_to_mysql):
 
     def __init__(self,phone):
@@ -319,7 +337,7 @@ class  pad_mysql(orm_to_mysql):
         self.db.commit()
 
 
-    def add_class(self,add_time=1,store_name=None, user_number='12',classes_checkin_number='10',course_code='FB.1.0.1.1',subject_show_id=4,dict_index='3',end_time=10800):
+    def add_class(self,add_time=1,store_name=None, user_number='12',classes_checkin_number='10',course_code='FB.1.0.1.1',subject_show_id=4,dict_index='2',end_time=10800):
         coach_phone=self.phone
         star_time=time.time()+add_time
         class_id =add_class(star_time=star_time,store_name=store_name,user_number=user_number,classes_checkin_number=classes_checkin_number,course_code=course_code,subject_show_id=subject_show_id,dict_index=dict_index,coach_phone=coach_phone,end_time=end_time)

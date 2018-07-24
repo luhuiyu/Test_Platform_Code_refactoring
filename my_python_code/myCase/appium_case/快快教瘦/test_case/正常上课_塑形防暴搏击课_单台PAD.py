@@ -10,8 +10,8 @@ from my_python_code.mysql.Basic_information import my_sql_link
 from my_python_code.tools.虚拟臂带 import fictitious_bind
 from multiprocessing import Process,Lock
 from multiprocessing import Queue
-import sys
-import os,time
+import signal
+import os,time,sys
 import logging
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ def  appium_data(context,Q,course,x):
     driver = appium(platformVersion, driverName, url)
     operate = user_information(driver, phone, system, driverName)
     use_mysql.clear_classes()
-    use_mysql.add_class(add_time=600, store_name=None, user_number='12', classes_checkin_number='12',
+    use_mysql.add_class(add_time=1000, store_name=None, user_number='12', classes_checkin_number='12',
                         course_code=course['course_code'] + str(x), subject_show_id=str(course['subject_show_id']),
                         dict_index=str(int(int(PORT) - 4910)))
     operate.login_pad()
@@ -38,12 +38,12 @@ def  appium_data(context,Q,course,x):
     driver.find_elements_by_id(课程标题)[0].click()
     driver.find_element_by_id(弹窗_确认).click()
     for x in driver.find_elements_by_id(称重按钮)[0:6]:
-        x.click()
-        operate.inspect_weight()
-    operate.binding_arm(driverName)
+           x.click()
+           operate.inspect_weight_JXSXBJ()
     Q.put(1)
     while driver.find_elements_by_id(同步电视):
         operate.wipe_down()
+    operate.binding_arm(driverName)
     operate.just_in_time_switch_unit()
     operate.end_courses()
     c = driver.find_elements_by_id('com.kk.coachpad:id/tv_look_report')
@@ -57,7 +57,7 @@ def test_case(context):
     L=Lock()
     phone = context['phone']
     my_db = orm_to_mysql(my_sql_link())
-    course_list=my_db.table('web_platform_course').select(name__LIKE='青少年体智能课').all()
+    course_list=my_db.table('web_platform_course').select(name__LIKE='塑形防暴搏击课').all()
     global rult_list
     sigu=False
     Q = Queue()
