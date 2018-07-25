@@ -40,10 +40,10 @@ def  appium_data(context,Q,course,x):
     for x in driver.find_elements_by_id(称重按钮)[0:6]:
         x.click()
         operate.inspect_weight()
-    operate.binding_arm(driverName)
     Q.put(1)
     while driver.find_elements_by_id(同步电视):
         operate.wipe_down()
+    operate.binding_arm(driverName)
     operate.just_in_time_switch_unit()
     operate.end_courses()
     c = driver.find_elements_by_id('com.kk.coachpad:id/tv_look_report')

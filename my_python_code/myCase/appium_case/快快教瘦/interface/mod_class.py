@@ -308,7 +308,8 @@ class user_information ():
         A[10].clear()
         A[10].set_value('2')
         driver.find_element_by_id(称重_保存).click()
-
+    def inspect_weight_SX(self):
+            pass
 class  pad_mysql(orm_to_mysql):
 
     def __init__(self,phone):

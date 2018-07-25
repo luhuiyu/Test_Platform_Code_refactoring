@@ -35,8 +35,34 @@ def test_case(context):
     driver.find_element_by_id(弹窗_确认).click()
     driver.find_elements_by_id(称重按钮)[0].click()
     # 正常的流程
+    A = driver.find_elements_by_id('com.kk.coachpad:id/edit_text')
+    driver.find_element_by_id(称重_性别男).click()
+    driver.find_element_by_id('com.kk.coachpad:id/tv_weight_delta').click()
+    print(          driver.find_element_by_id('android:id/numberpicker_input').location())
+    print(driver.find_element_by_id('android:id/numberpicker_input').get_attribute(),
 
-
+          )
+    driver.find_element_by_id(弹窗_确认).click()
+    A[1].clear()
+    A[1].set_value('27') #年龄
+    A[2].clear()
+    A[2].set_value('188') #身高
+    A[3].clear()
+    A[3].set_value('70') #心率
+    A[4].clear()
+    A[4].set_value('100')#腰围
+    A[5].clear()
+    A[5].set_value('90')#腹围
+    A[6].clear()
+    A[6].set_value('120')#臀围
+    A[7].clear()
+    A[7].set_value('90')#左大腿
+    A[8].clear()
+    A[8].set_value('50')#左小腿
+    A[9].clear()
+    A[9].set_value('90')#右大腿
+    A[10].clear()
+    A[10].set_value('60')#右小腿
 
     if sigu:
         logger.info(str({"result": -1, "error_info": '\'' + str(rult_list) + '\''}))
