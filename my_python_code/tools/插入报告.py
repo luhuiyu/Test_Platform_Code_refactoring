@@ -16,7 +16,7 @@ def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
     user_data = buz_mysql.table('user').select(uuid=user_uuid).one()
     tset_mysql.table('user').insert(user_data)
     # user_report=buz_mysql.table('user_report').select(subject_show_id=1,user_uuid=user_uuid,VERSION=3).limit(0,99).all()
-    user_report = buz_mysql.my_sql('SELECT * FROM user_report WHERE user_uuid= ' + '\'' + str(user_uuid) + '\'' + ' AND  (subject_show_id=1 OR  subject_show_id=0) AND VERSION=3 LIMIT 0,98')
+    user_report = buz_mysql.my_sql('SELECT * FROM user_report WHERE user_uuid= ' + '\'' + str(user_uuid) + '\'' + ' AND  (subject_show_id=1 OR  subject_show_id=0) AND VERSION=3 LIMIT 0,99')
     for x in user_daily_weight_data:
         tset_mysql.table('user_daily_weight').insert(x)
     for x in user_report:
@@ -40,9 +40,9 @@ if __name__ == '__main__':
     mongo_client = get_aliyun_mongo_client()
     buz_mysql = orm_to_mysql(my_sql_link_buz())
     tset_mysql = orm_to_mysql(my_sql_link_test())
-    user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 98;')
+    user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 99;')
     for user_uuid in user_list:
         user_uuid=user_uuid['user_uuid']
         up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql)
         print(user_uuid)
-      #  make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
+        make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)

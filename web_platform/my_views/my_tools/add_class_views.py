@@ -35,7 +35,7 @@ def add_classes(request):
         course_code_list=get_course_code(course_code)
         subject_show_id=course_code_list[1]
         course_code=str(course_code_list[0])+str(course_time)
-        class_id=add_class(star_time, store_name, user_number, classes_checkin_number, course_code, subject_show_id,user_index,environment=environment)
+        class_id=add_class(star_time=star_time, store_name=store_name, user_number=user_number, classes_checkin_number=classes_checkin_number, course_code=course_code, subject_show_id=subject_show_id,dict_index=user_index,environment=environment)
         messages.add_message(request, messages.INFO, class_id)
         context['class_id'] = str(class_id)
         if class_id:

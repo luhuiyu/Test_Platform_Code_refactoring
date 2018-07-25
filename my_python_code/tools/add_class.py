@@ -89,7 +89,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
         for x in uuid[0:n]:
             sql = 'INSERT IGNORE  INTO user_classes (subject_id,user_uuid,classes_type,STATUS,create_time,user_subject_uuid,classes_times,classes_id)VALUES (\'1474199922280448\',\'' + x + '\',\'1\',\'0\',\''+start+'\',\'bd89c9ce-c41b-4256-8fa1-5640a0a149d3\',\'8\',' + url
             cursor.execute(sql)
-          #  print(sql)
+           # print(sql)
      #   print('添加学员成功')
        # except:
          #   print('没有成功添加用户')
@@ -135,6 +135,6 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
     return id
 if __name__=='__main__':
 
-    print(add_class(time.time()+300, 'seven', 12, 12, 'JXSXBJ1.0.1.1', subject_show_id=9, dict_index='4', coach_phone=15600905550,environment='stage'))
-
+   # print(add_class(time.time()+300, 'seven', 12, 12, 'JXSXBJ1.0.1.1', subject_show_id=9, dict_index='2', coach_phone=15600905551))
+    print(add_class(star_time=1532486460.0, store_name='C店', user_number=12, classes_checkin_number=12, course_code='JZX2.0.4.1', subject_show_id=1,dict_index='0',environment='test'))
 

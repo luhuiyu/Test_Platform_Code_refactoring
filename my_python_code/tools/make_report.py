@@ -83,7 +83,7 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
 if __name__ == '__main__':
     #kk_test = orm_to_mysql(my_sql_link_test())
-    user_uuid = ['03a503dd-5c62-4d0c-8a77-78972b93ff40']
+    user_uuid = ['00a5cb99-ec76-453e-b9a5-d81d8715a9a7']
     for x in range(1):
         make_report(buz_class_id=331096, course_code='JZX2.0.3.1', subject_show_id='1',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1)
 
