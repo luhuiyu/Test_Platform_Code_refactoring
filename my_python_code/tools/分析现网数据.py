@@ -80,9 +80,9 @@ def report_data(x):
 
 
 if __name__=='__main__':
-  #  my_db = orm_to_mysql(my_sql_link_buz())
-    my_db = orm_to_mysql(my_sql_link_test())
-    data_uuid=my_db.table('user_class_data').select('data_uuid',class_id=63865).one()
+    my_db = orm_to_mysql(my_sql_link_buz())
+   # my_db = orm_to_mysql(my_sql_link_test())
+    data_uuid=my_db.table('user_class_data').select('data_uuid',class_id=318974).one()
     if data_uuid:
         report_data(data_uuid['data_uuid'])
     else:

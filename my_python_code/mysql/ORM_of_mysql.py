@@ -1,6 +1,8 @@
 import  pymysql
 from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link
 import re
+import logging
+from multiprocessing import Process,Queue,Pool,Lock
 
 def count_sub(s):
     return len(re.findall(r',',s))
@@ -10,39 +12,51 @@ class orm_to_mysql():
         self.link=mysql_link
         self.db = self.link.db
         self.cursor=self.link.cursor_dict
-        self.my_table='111'
+        self.my_table=''
+        self.my_db_lock=Lock()
    def  table(self,*args):
+           self.my_db_lock.acquire()
            table_list=[]
            for x in args:
                table_list.append(x)
            self.my_table = str(table_list)[1:-1].replace('\'', '')
+           self.my_db_lock.release()
            return self
 
    def order_by(self, *args):
+       self.my_db_lock.acquire()
        column = ' GROUP BY  '
        condition=''
        for x in args:
            condition=condition+ ', '+ str(x)
        self.my_sql_statement = str(self.my_sql_statement) + column + condition[1:]
+       self.my_db_lock.release()
        return self
    def all(self):
+       self.my_db_lock.acquire()
      #  print(str(self.my_sql_statement))
        self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
+       self.my_db_lock.release()
        return self.cursor.fetchall()
    def limit(self,*args):
-       column = 'limit '
+       self.my_db_lock.acquire()
+       column = '   limit   '
        if len(args) == 1:
            self.my_sql_statement = str(self.my_sql_statement) + column +  str(args[0])
        else:
            self.my_sql_statement = str(self.my_sql_statement) + column + str(args[0])+','+ str(args[1])
+       self.my_db_lock.release()
        return self
    def one(self):
+       self.my_db_lock.acquire()
        self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
+       self.my_db_lock.release()
        return self.cursor.fetchone()
 
    def select(self, *args, **kw):
+       self.my_db_lock.acquire()
        column_conditions = ''
        for x in args:
            column_conditions = column_conditions + str(x) + ','
@@ -93,9 +107,11 @@ class orm_to_mysql():
            sql = "select  * " + "  from  " + str(self.my_table) + search_criteria
        self.my_sql_statement=str(sql)
     #   print(sql)
+       self.my_db_lock.release()
        return self
 
    def insert(self, *args, **kw):
+       self.my_db_lock.acquire()
        if kw:
            column = r''
            condition = r''
@@ -117,9 +133,11 @@ class orm_to_mysql():
            sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
            self.cursor.execute(str(sql))
            self.db.commit()
+       self.my_db_lock.release()
        return self
 
    def delete(self, *args, **kw):
+       self.my_db_lock.acquire()
        search_criteria = ''
        for x in kw.items():
            if str(x[0])[-6:] == "__LIKE":
@@ -147,9 +165,11 @@ class orm_to_mysql():
        self.cursor.execute(str(sql))
        self.db.commit()
        #print(sql)
+       self.my_db_lock.release()
        return self
 
    def updata(self, *args, **kw):
+       self.my_db_lock.acquire()
        #        self.my_db.table('web_platform_phone').updata({'phone_code':self.fictitious_armband_pid},id=100)
        updata_data = ''
        search_criteria = ''
@@ -183,17 +203,19 @@ class orm_to_mysql():
            search_criteria = search_criteria + sc
 
        sql = 'UPDATE ' + str(self.my_table) + ' SET ' + updata_data[:-1] + ' WHERE ' + search_criteria[:-4]
-   #    print(sql)
        self.cursor.execute(str(sql))
        self.db.commit()
+       self.my_db_lock.release()
        return self
 
    def close(self):
        self.db.close()
 
    def my_sql(self, sql):
+       self.my_db_lock.acquire()
        self.cursor.execute(str(sql))
        self.db.commit()
+       self.my_db_lock.release()
        return self.cursor.fetchall()
 
 if __name__ == '__main__':

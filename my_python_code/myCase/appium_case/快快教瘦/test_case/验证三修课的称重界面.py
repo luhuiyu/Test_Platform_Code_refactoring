@@ -38,10 +38,8 @@ def test_case(context):
     A = driver.find_elements_by_id('com.kk.coachpad:id/edit_text')
     driver.find_element_by_id(称重_性别男).click()
     driver.find_element_by_id('com.kk.coachpad:id/tv_weight_delta').click()
-    print(          driver.find_element_by_id('android:id/numberpicker_input').location())
-    print(driver.find_element_by_id('android:id/numberpicker_input').get_attribute(),
-
-          )
+    operate.wipe_up(driver.find_element_by_id(称重_体重_滑块))
+    operate.wipe_down(driver.find_element_by_id(称重_体重_滑块))
     driver.find_element_by_id(弹窗_确认).click()
     A[1].clear()
     A[1].set_value('27') #年龄
@@ -63,7 +61,86 @@ def test_case(context):
     A[9].set_value('90')#右大腿
     A[10].clear()
     A[10].set_value('60')#右小腿
-
+    driver.find_element_by_id(称重_保存).click()
+ #   assert  driver.find_elements_by_id(称重按钮)[0].text == '65.0KG'
+    #校验 上半部分的基础信息
+    driver.find_elements_by_id(称重按钮)[0].click()
+    A[1].clear()
+    A[1].set_value('61')  # 年龄
+    driver.find_element_by_id(称重_保存).click()
+    A[1].clear()
+    A[1].set_value('5')  # 年龄
+    driver.find_element_by_id(称重_保存).click()
+    A[1].clear()
+    driver.find_element_by_id(称重_保存).click()
+    A[1].set_value('25')  # 年龄
+    #身高
+    A[2].clear()
+    A[2].set_value('251')  # 身高
+    driver.find_element_by_id(称重_保存).click()
+    A[2].clear()
+    A[2].set_value('49')  # 身高
+    driver.find_element_by_id(称重_保存).click()
+    A[2].clear()
+    driver.find_element_by_id(称重_保存).click()
+    A[2].set_value('165')  # 身高
+    # 心率
+    A[3].clear()
+    A[3].set_value('49')  # 心率
+    driver.find_element_by_id(称重_保存).click()
+    A[3].clear()
+    A[3].set_value('81')  # 心率
+    driver.find_element_by_id(称重_保存).click()
+    A[3].clear()
+    driver.find_element_by_id(称重_保存).click()
+    A[3].set_value('75')  # 心率
+    #下半部分
+    '''
+    限制都是1-200.我都不想测了
+    '''
+    # 腰围
+    A[4].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert  driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[4].set_value('100')
+    # 腹围
+    A[5].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[5].set_value('90')
+    # 臀围
+    A[6].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[6].set_value('90')
+    #左大腿
+    A[7].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[7].set_value('90')
+    A[8].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[8].set_value('90')
+    #右边
+    A[9].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[9].set_value('90')
+    A[10].clear()
+    driver.find_element_by_id(称重_保存).click()
+    assert driver.find_element_by_id(三秀课_提示).is_enabled()
+    A[10].set_value('90')
+#下面的按键
+    driver.find_element_by_id(称重_首次配对).click()
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_title').text == '搜索蓝牙秤'
+    time.sleep(5)
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content').text == '没有找到蓝牙秤，请重试！'
+    driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
+    driver.find_element_by_id(称重_开始称重).click()
+    assert driver.find_element_by_id('com.kk.coachpad:id/tv_tip_content').text == '请先首次配对'
+    driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
+    assert driver.find_element_by_id(称重_体重).text == '--'
     if sigu:
         logger.info(str({"result": -1, "error_info": '\'' + str(rult_list) + '\''}))
         return {"result": -1, "error_info": '\'' + str(rult_list) + '\''}

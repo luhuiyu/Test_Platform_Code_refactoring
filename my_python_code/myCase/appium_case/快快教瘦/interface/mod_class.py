@@ -95,43 +95,66 @@ class user_information ():
         subject_id=str(subject_id)
         subject_id=re.sub("\D", "",subject_id)   #去除非数字
         return subject_id
-    def wipe_up(self):#上滑
+    def wipe_up(self,element=False):#上滑
         driver=self.driver
-        w= self.w
-        h= self.h
-        x1=0.5*w
-        y1=0.5*h
-        y2=0.7*h
-        driver.swipe(int(x1),int(y2),int(x1),int(y1),500)
+        if element:
+            location = element.location
+            x = location['x']
+            y = location['y']
+            driver.swipe(int(x), int(y), int(x), int(y+300), 1000)
+        else:
+            w= self.w
+            h= self.h
+            x1=0.5*w
+            y1=0.5*h
+            y2=0.7*h
+            driver.swipe(int(x1),int(y2),int(x1),int(y1),500)
         time.sleep(2)
-    def wipe_down(self):#下滑
+    def wipe_down(self,element=False):#下滑
         driver=self.driver
-        w= self.w
-        h= self.h
-        x1=0.5*w
-        y1=0.4*h
-        y2=0.9*h
-       # print(int(x1),int(y1),int(x1),int(y2))
-        time.sleep(1)
-        driver.swipe(int(x1),int(y1),int(x1),int(y2),1000)
-        time.sleep(4)
+        if element:
+            location = element.location
+            x = location['x']
+            y = location['y']
+            driver.swipe(int(x), int(y), int(x), int(y - 300), 1000)
+        else:
+            w= self.w
+            h= self.h
+            x1=0.5*w
+            y1=0.4*h
+            y2=0.9*h
+            time.sleep(1)
+            driver.swipe(int(x1),int(y1),int(x1),int(y2),1000)
+        time.sleep(3)
     def wipe_left(self): #左滑
-        driver=self.driver
-        w= self.w
-        h= self.h
-        x1=0.2*w
-        y1=0.5*h
-        x2=0.6*w
-        driver.swipe(int(x2),int(y1),int(x1),int(y1),1000)
+        driver = self.driver
+        if element:
+            location = element.location
+            x = location['x']
+            y = location['y']
+            driver.swipe(int(x), int(y), int(x - 300), int(y), 1000)
+        else:
+            w= self.w
+            h= self.h
+            x1=0.2*w
+            y1=0.5*h
+            x2=0.6*w
+            driver.swipe(int(x2),int(y1),int(x1),int(y1),1000)
         time.sleep(2)
-    def wipe_right(self): #右滑
-        driver=self.driver
-        w= self.w
-        h= self.h
-        x1=0.6*w
-        y1=0.5*h
-        x2=0.4*w
-        driver.swipe(int(x2),int(y1),int(x1),int(y1),1000)
+    def wipe_right(self,element=False): #右滑
+        driver = self.driver
+        if  element:
+            location = element.location
+            x=location['x']
+            y=location['y']
+            driver.swipe(int(x), int(y), int(x+300), int(y), 1000)
+        else:
+            w= self.w
+            h= self.h
+            x1=0.6*w
+            y1=0.5*h
+            x2=0.4*w
+            driver.swipe(int(x2),int(y1),int(x1),int(y1),1000)
         time.sleep(2)
     def click(self,x,y):#点击屏幕,x,y是相对坐标
         driver=self.driver

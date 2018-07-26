@@ -66,16 +66,16 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
     start_time=time.time()
     updata=client.post(url='http://test.kuaikuaikeji.com/kcas/PadUploadAllClassDataV2', json=data)
     end_time=time.time()
-    print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
-    print(end_time-start_time)
+  #  print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
+  #  print(end_time-start_time)
 
     json = {"classesId": class_id, "subjectId": 1441109786806272}
     PadGetClassReportList = client.post(url='http://test.kuaikuaikeji.com/kcas/PadGetClassReportListV2', json=json,headers=headers1)  # 获取报告
     home.close()
     kk_buz.close()
     kk_test.close()
-    print(class_id)
-    print(PadGetClassReportList.json())
+   # print(class_id)
+  #  print(PadGetClassReportList.json())
     if PadGetClassReportList.json():
          return PadGetClassReportList.json()
     else:
@@ -83,7 +83,7 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
 if __name__ == '__main__':
     #kk_test = orm_to_mysql(my_sql_link_test())
-    user_uuid = ['00a5cb99-ec76-453e-b9a5-d81d8715a9a7']
+    user_uuid = ['05ddaf38-d946-4649-b06d-36c02fed1e69']
     for x in range(1):
         make_report(buz_class_id=331096, course_code='JZX2.0.3.1', subject_show_id='1',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1)
 

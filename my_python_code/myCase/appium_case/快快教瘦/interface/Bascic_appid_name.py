@@ -59,3 +59,7 @@ APPIUM输入法='io.appium.android.ime/.UnicodeIME'
 称重_保存='com.kk.coachpad:id/tv_confirm'
 称重_开始称重='com.kk.coachpad:id/tv_start_scale'
 称重_首次配对='com.kk.coachpad:id/tv_start_pair'
+
+称重_体重_滑块='android:id/numberpicker_input'
+
+三秀课_提示='com.kk.coachpad:id/tv_input_tip'
