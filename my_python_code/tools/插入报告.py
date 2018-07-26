@@ -51,11 +51,24 @@ if __name__ == '__main__':
         user_uuid=user_uuid['user_uuid']
         up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql)
         my_url=make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
-        json_url=str(my_url['classReportList'][1]['reportUrl']).replace('http://test.kuaikuaikeji.com/kas/movereport/?i=','http://192.168.41.41/KKNewReport/PadGetUUIDUserReportV3?i=')
-        json_data=client.get(url=json_url ).json()
-        json_list=[]
-        for x in    json_data['strengthAvgs']['strengthHundred']:
-            json_list.append(x['totalStrength'])
-        print(json_list)
-        with open('json.txt', 'a') as f:
-            f.write(str(json_list)+',')
+        print(my_url)
+        time.sleep(3)
+
+
+
+
+
+
+
+
+
+
+        # json_url=str(my_url['classReportList'][1]['reportUrl']).replace('http://test.kuaikuaikeji.com/kas/movereport/?i=','http://192.168.41.41/KKNewReport/PadGetUUIDUserReportV3?i=')
+
+        #        json_data=client.get(url=json_url ).json()
+     #   json_list=[]
+      #  for x in    json_data['strengthAvgs']['strengthHundred']:
+      #      json_list.append(x['totalStrength'])
+      #  print(json_list)
+     #A   with open('json.txt', 'a') as f:
+     #       f.write(str(json_list)+',')

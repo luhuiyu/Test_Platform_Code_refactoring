@@ -59,7 +59,7 @@ def task_distribution(appium_Queue,task_Queue,task_info):
         the_context={}
         the_context['platformName'] = my_test_phone_data.platformName
         the_context['platformVersion'] = my_test_phone_data.platformVersion
-        the_context['deviceName'] = my_test_phone_data.deviceName
+        the_context['driverName'] = my_test_phone_data.deviceName
         the_context['PORT'] = str(4910+x)
         the_context['phone'] = my_test_phone_number
         the_context['system']=my_test_phone_data

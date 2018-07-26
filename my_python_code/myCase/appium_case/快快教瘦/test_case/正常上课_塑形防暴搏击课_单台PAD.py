@@ -18,39 +18,48 @@ logger = logging.getLogger(__name__)
 logger.info(str(os.path.basename(sys.argv[0]).split(".")[0] ))
 rult_list=[]
 def  appium_data(context,Q,course,x):
-    global rult_list
-    system = context['platformName']
-    platformVersion = context['platformVersion']
-    driverName = context['deviceName']
-    PORT = context['PORT']
-    phone = context['phone']
-    use_mysql = pad_mysql(phone)
-    url = 'http://127.0.0.1:' + PORT + '/wd/hub'
-    driver = appium(platformVersion, driverName, url)
-    operate = user_information(driver, phone, system, driverName)
-    use_mysql.clear_classes()
-    use_mysql.add_class(add_time=1000, store_name=None, user_number='12', classes_checkin_number='12',
-                        course_code=course['course_code'] + str(x), subject_show_id=str(course['subject_show_id']),
-                        dict_index=str(int(int(PORT) - 4910)))
-    operate.login_pad()
-    Q.put(1)
-    time.sleep(5)
-    driver.find_elements_by_id(课程标题)[0].click()
-    driver.find_element_by_id(弹窗_确认).click()
-    for x in driver.find_elements_by_id(称重按钮)[0:6]:
-           x.click()
-           operate.inspect_weight_JXSXBJ()
-    Q.put(1)
-    while driver.find_elements_by_id(同步电视):
-        operate.wipe_down()
-    operate.binding_arm(driverName)
-    operate.just_in_time_switch_unit()
-    operate.end_courses()
-    c = driver.find_elements_by_id('com.kk.coachpad:id/tv_look_report')
-    assert len(c) == 9, '生成报告成功'
-    rult_list.append({'course_code': course['course_code'] + str(x), "result": 1, })
-    logger.info(str({'course_code': course['course_code'] + str(x), "result": 1, }))
-
+    global rult_list, sigu
+    try:
+        system = context['platformName']
+        platformVersion = context['platformVersion']
+        driverName = context['deviceName']
+        PORT = context['PORT']
+        phone = context['phone']
+        use_mysql = pad_mysql(phone)
+        url = 'http://127.0.0.1:' + PORT + '/wd/hub'
+        driver = appium(platformVersion, driverName, url)
+        operate = user_information(driver, phone, system, driverName)
+        use_mysql.clear_classes()
+        use_mysql.add_class(add_time=1000, store_name=None, user_number='12', classes_checkin_number='12',
+                            course_code=course['course_code'] + str(x), subject_show_id=str(course['subject_show_id']),
+                            dict_index=str(int(int(PORT) - 4910)))
+        operate.login_pad()
+        Q.put(1)
+        time.sleep(5)
+        driver.find_elements_by_id(课程标题)[0].click()
+        driver.find_element_by_id(弹窗_确认).click()
+        for x in driver.find_elements_by_id(称重按钮)[0:6]:
+               x.click()
+               operate.inspect_weight_JXSXBJ()
+        Q.put(1)
+        while driver.find_elements_by_id(同步电视):
+            operate.wipe_down()
+        operate.binding_arm(driverName)
+        operate.just_in_time_switch_unit()
+        operate.end_courses()
+        c = driver.find_elements_by_id('com.kk.coachpad:id/tv_look_report')
+        assert len(c) == 9, '生成报告成功'
+        rult_list.append({'course_code': course['course_code'] + str(x), "result": 1, })
+        logger.info(str({'course_code': course['course_code'] + str(x), "result": 1, }))
+    except Exception as e:
+        sigu = True
+        rult_list.append(
+            {'course_code': course['course_code'] + str(x), "result": -1, "error_info": '\'' + str(e) + '\''})
+        Q.put(1)
+        Q.put(1)
+        Q.put(1)
+        Q.put(1)
+        return
 
 
 def test_case(context):
