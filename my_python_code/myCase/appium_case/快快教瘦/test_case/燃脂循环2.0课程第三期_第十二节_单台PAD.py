@@ -92,9 +92,8 @@ def test_case(context):
         logger.info(str({"result": -1, "error_info": '\'' + str( rult_list ) + '\''}))
         return {"result": -1, "error_info": '\'' + str( rult_list ) + '\''}
     else:
-        logger.info(str({'driverName': str(driverName), "result": 1, }))
-        return {'driverName': str(driverName), "result": 1, }
-
+        logger.info(str({'driverName': str(context['deviceName']), "result": 1, }))
+        return {'driverName': str(context['deviceName']), "result": 1, }
 
 if __name__ == '__main__':
     context = {}

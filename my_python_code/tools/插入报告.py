@@ -22,8 +22,7 @@ def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
     for x in user_daily_weight_data:
         tset_mysql.table('user_daily_weight').insert(x)
     today_weight= tset_mysql.table('user_daily_weight').select('id',user_uuid=user_uuid).order_by('id').limit(1).one()
-    todaytime = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-    tset_mysql.table('user_daily_weight').updata({'create_time':todaytime},id=today_weight['id'])
+ #   tset_mysql.table('user_daily_weight').updata({'create_time':time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))},id=today_weight['id'])
     for x in user_report:
         tset_mysql.table('user_report').insert(x)
         buz_class_id = buz_mysql.table('classes').select(id=x['classes_id']).one()
@@ -35,7 +34,7 @@ def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
         for y in report_data2:
             test_db_coll.insert(y)
             i = i + 1
-
+    return
 
 if __name__ == '__main__':
     user_list=['0ab00aef-0692-4269-ae27-849e9dd75163','0d406f44-df35-44c5-9b8b-2239f8b1cf85']
@@ -45,15 +44,17 @@ if __name__ == '__main__':
     mongo_client = get_aliyun_mongo_client()
     buz_mysql = orm_to_mysql(my_sql_link_buz())
     tset_mysql = orm_to_mysql(my_sql_link_test())
-    user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 99;')
+   # user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 99;')
     client = requests.session()
+    user_list=[{'user_uuid': '03a503dd-5c62-4d0c-8a77-78972b93ff40'},]
+
     for user_uuid in user_list:
         user_uuid=user_uuid['user_uuid']
         up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql)
         my_url=make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
         print(my_url)
         time.sleep(3)
-
+        print(user_uuid)
 
 
 
