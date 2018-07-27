@@ -38,7 +38,7 @@ class API_case(Basics_case):
                 db=self.db
                 cursor=self.cursor
                 old_fatRate_list = [22, 22, 22]
-                corr_time_list = [345600, 180800, 86401]
+                corr_time_list = [345600, 180800, 24*3600*4]
                 fatRate = 21  # 称重得到的体脂率
                 corr_Fatrate = 21  # 被修改后的体脂率
                 case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock)

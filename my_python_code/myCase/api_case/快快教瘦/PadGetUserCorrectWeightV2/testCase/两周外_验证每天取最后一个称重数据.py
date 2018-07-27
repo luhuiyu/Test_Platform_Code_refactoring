@@ -25,7 +25,7 @@ class API_case(Basics_case):
                 db=self.db
                 cursor=self.cursor
                 old_fatRate_list = [10, 23, 10, 23, 10, 23]  # 创造在数据库里面已经有的体脂率的数据，int类型或是str
-                corr_time_list = [1800050, 1800000, 1600040, 1600000, 1300005, 1300000]  # 数据创建的时间 int类型
+                corr_time_list = [18*3600*24+100, 18*3600*24,17*3600*24+50, 17*3600*24+50,15*3600*24+50,15*3600*24]  # 数据创建的时间 int类型
                 fatRate = 10  # 称重得到的体脂率  int类型
                 corr_Fatrate = 19.5  # 被修改后的体脂率   int类型
                 case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock)
