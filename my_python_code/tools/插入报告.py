@@ -6,7 +6,7 @@ from sshtunnel import SSHTunnelForwarder
 from my_python_code.mysql.my_mogodb_aliyun import get_aliyun_mongo_client
 from django.utils import timezone
 import requests
-#test mogo
+from my_python_code.basic_configuration.configuration_file import *
 import time
 
 def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
@@ -37,16 +37,16 @@ def up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql):
     return
 
 if __name__ == '__main__':
+    buz_mysql = orm_to_mysql(my_sql_link_buz())
+    tset_mysql = orm_to_mysql(my_sql_link_test())
     user_list=['0ab00aef-0692-4269-ae27-849e9dd75163','0d406f44-df35-44c5-9b8b-2239f8b1cf85']
     test_client = pymongo.MongoClient("192.168.40.207:27017")
     test_db = test_client["kk_buz"]
     test_db.authenticate("root", "Kuaimongodb001Kuai")
     mongo_client = get_aliyun_mongo_client()
-    buz_mysql = orm_to_mysql(my_sql_link_buz())
-    tset_mysql = orm_to_mysql(my_sql_link_test())
    # user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 99;')
     client = requests.session()
-    user_list=[{'user_uuid': '03a503dd-5c62-4d0c-8a77-78972b93ff40'},]
+    user_list=[{'user_uuid': 'dbca07d2-f9fb-42ca-a181-d065c065bab6'}, ]
 
     for user_uuid in user_list:
         user_uuid=user_uuid['user_uuid']

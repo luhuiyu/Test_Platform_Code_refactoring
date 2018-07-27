@@ -11,6 +11,7 @@ import my_python_code.myCase.api_case.interface.login_args
 from imp import reload
 
 import logging
+from multiprocessing import Process,Queue,Pool,Lock
 
 logging.basicConfig(level=logging.INFO)
 
@@ -36,7 +37,7 @@ class API_case(Basics_case):
                 cursor=self.cursor
 
                 old_fatRate_list = [25, 25, 25]  # 创造在数据库里面已经有的体脂率的数据，int类型或是str
-                corr_time_list = [400000, 260000, 95000]  # 数据创建的时间 int类型
+                corr_time_list = [6*24*3600+300, 5*24*3600+300, 4*24*3600+300]  # 数据创建的时间 int类型
                 fatRate = 20  # 称重得到的体脂率  int类型
                 corr_Fatrate = 23  # 被修改后的体脂率   int类型
 
@@ -64,8 +65,8 @@ if __name__=='__main__':
 
     #print(testCase_login())
 
-    example=API_case()
-
+    my_db_lock = Lock()
+    example = API_case(my_db_lock=my_db_lock)
     print(example.test_case())
 
 

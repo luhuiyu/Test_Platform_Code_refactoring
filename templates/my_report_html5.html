@@ -266,7 +266,7 @@
                                                     <td>通过</td>
                                                 {% else %}
                                                <td>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_name}}">
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_id}}">
                                               未通过
                                             </button></td>
                                                 {% endif %}
@@ -298,7 +298,7 @@
                                                 {% else %}
 
                                                <td>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_name}}">
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ x.case_id}}">
                                               未通过
                                             </button></td>
                                                 {% endif %}
@@ -319,8 +319,9 @@
 </div>
 
       {% for x  in test_case_result %}
+
                                     <!-- /. 模态框  -->
-                                                <div class="modal fade" id="{{ x.case_name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="{{ x.case_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                      <div class="modal-content">
                                                         <div class="modal-header">
@@ -328,6 +329,7 @@
                                                             <h4 class="modal-title" id="myModalLabel">报错信息</h4>
                                                         </div>
                                                           <div class="modal-body">
+
                                                             {%  if  x.error_info %}
                                                             {{  x.error_info }}
                                                              {% else %}

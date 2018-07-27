@@ -5,6 +5,7 @@
 from  my_python_code.myCase.api_case.快快教瘦.PadGetUserCorrectWeightV2.weight_interface.function import weight_testCase
 
 from my_python_code.basic_configuration.configuration_file import *
+from multiprocessing import Process,Queue,Pool,Lock
 
 import my_python_code.myCase.api_case.interface.login_args
 
@@ -36,8 +37,8 @@ class API_case(Basics_case):
 
                 old_fatRate_list = [15, 23, 15, 23, 15, 23]  # 创造在数据库里面已经有的体脂率的数据，int类型或是str
                 corr_time_list = [444001, 442001, 270000, 260000, 95000, 90000]  # 数据创建的时间 int类型
-                fatRate = 20  # 称重得到的体脂率  int类型
-                corr_Fatrate =21  # 被修改后的体脂率   int类型
+                fatRate = 10  # 称重得到的体脂率
+                corr_Fatrate =22  # 被修改后的体脂率
 
                 case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock)
 
@@ -62,8 +63,8 @@ class API_case(Basics_case):
 if __name__=='__main__':
 
     #print(testCase_login())
-
-    example=API_case()
+    my_db_lock = Lock()
+    example=API_case(my_db_lock=my_db_lock)
 
     print(example.test_case())
 

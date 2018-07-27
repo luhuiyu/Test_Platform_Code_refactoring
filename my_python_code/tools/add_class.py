@@ -134,7 +134,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
     db.commit()
     return id
 if __name__=='__main__':
-
+    user_uuid_list=['08dc9018-c2ff-4d83-b163-3ef4ed678cd2']
    # print(add_class(time.time()+300, 'seven', 12, 12, 'JXSXBJ1.0.1.1', subject_show_id=9, dict_index='2', coach_phone=15600905551))
-    print(add_class(star_time=1532486460.0, store_name='C店', user_number=12, classes_checkin_number=12, course_code='JZX2.0.4.1', subject_show_id=1,dict_index='0',environment='test'))
+    print(add_class(star_time=time.time(), store_name='C店', user_number=12, classes_checkin_number=12, course_code='JZX2.0.4.1', subject_show_id=1,user_uuid_list=user_uuid_list,environment='test'))
 
