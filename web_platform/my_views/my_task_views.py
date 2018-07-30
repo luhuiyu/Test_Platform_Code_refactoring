@@ -20,7 +20,18 @@ def my_task(request):
         context_data["todaytime"] = str(time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(time.time())))
         context_data=get_ui_case_info(context_data)
         return render(request=request, template_name='my_task_html5/my_task_ui_html5.html', context=context_data)
+    elif   request.method == 'GET' and request.GET.get('reset') == 'reset':
+        get_reset_task = task_management.objects.filter(task_state=1)
+        for x in get_reset_task:
+            print(x.id)
+            x.task_state = 0
+            x.save()
+            print('ok')
+        os.popen('python    ' + MY_RUN_API_CASE)
+        os.popen('python    ' + MY_RUN_UI_CASE)
+        return HttpResponseRedirect('/task')
     elif  request.method == 'POST' :
+        print(request.POST.get('reset'))
         selected_case=request.POST.getlist("selected_case")
         task_info=request.POST.get('task_info')
         todaytime = request.POST.get('todaytime')

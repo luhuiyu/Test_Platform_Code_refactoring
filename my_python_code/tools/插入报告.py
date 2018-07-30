@@ -46,14 +46,14 @@ if __name__ == '__main__':
     mongo_client = get_aliyun_mongo_client()
    # user_list=buz_mysql.my_sql( 'SELECT user_uuid FROM user_report  WHERE (subject_show_id=1 OR subject_show_id=0 ) AND VERSION=3 GROUP BY user_uuid HAVING COUNT(user_uuid) > 99;')
     client = requests.session()
-    user_list=[{'user_uuid': 'dbca07d2-f9fb-42ca-a181-d065c065bab6'}, ]
+    user_list=[{'user_uuid': 'dbf8dffc-8675-4daa-aa74-eadc5ae34c08'}, ]
 
     for user_uuid in user_list:
         user_uuid=user_uuid['user_uuid']
         up_report_to_test(user_uuid,test_db,mongo_client,buz_mysql,tset_mysql)
-        my_url=make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
-        print(my_url)
-        time.sleep(3)
+       # my_url=make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1',user_uuid_list=[user_uuid],user_number=1, classes_checkin_number=1)
+       # print(my_url)
+       # time.sleep(3)
         print(user_uuid)
 
 

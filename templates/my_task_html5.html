@@ -6,9 +6,14 @@
      <div id="page-inner">
          <div class="row">
              <div class="col-md-12">
+                 <form action="" method="GET">
+                   {% csrf_token %}
                     <h1 class="page-header">
-                        任务管理 <small>kktest</small>
+                        任务管理
+                        <small>kktest</small>
+                        <button class="btn btn-default" name="reset" value="reset"><i class=" fa fa-refresh "></i> Reset</button>
                     </h1>
+                 </form>
              </div>
          </div>
         <!-- /.  选择测试类型模块 -->
