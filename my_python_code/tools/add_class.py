@@ -62,7 +62,7 @@ def add_class(star_time,store_name,user_number,classes_checkin_number,course_cod
         # db.commit()
         coach_id = str(cursor.fetchone())
         coach_id = re.sub("\D", "", coach_id)
-        class_sql='INSERT IGNORE INTO classes(subject_id, course_code, gym_id, coach_id,  start_time, end_time,TYPE, capacity,subject_show_id)VALUES('+'\''+str(subject_id)+'\','+'\''+course_code+'\','+'\''+str(gym_id)+'\','+'\''+coach_id+'\','+'\''+start+'\','+'\''+end+'\','+'\'1\',\'12\','+str(subject_show_id)+')'
+        class_sql='INSERT IGNORE INTO classes(subject_id, course_code, gym_id, coach_id,  start_time, end_time,TYPE, capacity,subject_show_id)VALUES('+'\''+str(0)+'\','+'\''+course_code+'\','+'\''+str(gym_id)+'\','+'\''+coach_id+'\','+'\''+start+'\','+'\''+end+'\','+'\'1\',\'12\','+str(subject_show_id)+')'
    #     print(class_sql)
         cursor.execute(class_sql)
         # db.commit()

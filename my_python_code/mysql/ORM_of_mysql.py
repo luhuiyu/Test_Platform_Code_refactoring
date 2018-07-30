@@ -34,7 +34,7 @@ class orm_to_mysql():
        return self
    def all(self):
        self.my_db_lock.acquire()
-     #  print(str(self.my_sql_statement))
+       logging.info(str(self.my_sql_statement))
        self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
        self.my_db_lock.release()
@@ -50,6 +50,7 @@ class orm_to_mysql():
        return self
    def one(self):
        self.my_db_lock.acquire()
+       logging.info(str(self.my_sql_statement))
        self.cursor.execute(str(self.my_sql_statement) )
        self.db.commit()
        self.my_db_lock.release()
@@ -131,6 +132,7 @@ class orm_to_mysql():
                    column = column + str(x[0]) + ','
                    condition = condition + '\'' + str(x[1]) + '\','
            sql = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+           logging.info(str(sql))
            self.cursor.execute(str(sql))
            self.db.commit()
        self.my_db_lock.release()
@@ -164,7 +166,7 @@ class orm_to_mysql():
        sql = 'DELETE FROM  ' + str(self.my_table) + '  WHERE  ' + search_criteria[:-4]
        self.cursor.execute(str(sql))
        self.db.commit()
-       #print(sql)
+       logging.info(str(sql))
        self.my_db_lock.release()
        return self
 
@@ -204,6 +206,7 @@ class orm_to_mysql():
 
        sql = 'UPDATE ' + str(self.my_table) + ' SET ' + updata_data[:-1] + ' WHERE ' + search_criteria[:-4]
        self.cursor.execute(str(sql))
+       logging.info(str(sql))
        self.db.commit()
        self.my_db_lock.release()
        return self
@@ -214,6 +217,7 @@ class orm_to_mysql():
    def my_sql(self, sql):
        self.my_db_lock.acquire()
        self.cursor.execute(str(sql))
+       logging.info(str(sql))
        self.db.commit()
        self.my_db_lock.release()
        return self.cursor.fetchall()
