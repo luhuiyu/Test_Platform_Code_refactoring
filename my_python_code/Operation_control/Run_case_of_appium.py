@@ -153,6 +153,7 @@ def case_work(appium_Queue,task_Queue,the_case_result,statistical_results,):
              statistical_results.put(
                  {'completion_Success': completion_Success, 'pass_case': the_case_pass, 'failure_case': the_case_not_pass,
                   'Collapse_case': Collapse_case, 'App_version': App_version})
+             time.sleep(10)
              if task_Queue.empty():
                  return
 

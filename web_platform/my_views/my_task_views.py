@@ -31,7 +31,6 @@ def my_task(request):
         os.popen('python    ' + MY_RUN_UI_CASE)
         return HttpResponseRedirect('/task')
     elif  request.method == 'POST' :
-        print(request.POST.get('reset'))
         selected_case=request.POST.getlist("selected_case")
         task_info=request.POST.get('task_info')
         todaytime = request.POST.get('todaytime')
