@@ -68,15 +68,32 @@ class user_information ():
         time.sleep(3)
         driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
     def wait_unit(self):
-        while 1:
+        i = 0
+        while i <   60:
+            if self.driver.find_elements_by_id(课程剩余时间):
+                start_time= self.driver.find_element_by_id(课程剩余时间).text
+                return
+            else:
+                start_time=False
+            i=i+1
+        assert start_time
+        time_total=int(start_time[0:2])*60+int(start_time[3:5])
+        while i < time_total:
             try:
+                i = i + 1
                 if self.driver.find_elements_by_id(课程剩余时间):
                     if self.driver.find_element_by_id(课程剩余时间).text == '00:00':
                         return
                 else:
                     self.ac_click(1730, 800, self.driverName)
             except:
+                i = i + 3
                 self.ac_click(1730, 800, self.driverName)
+
+
+
+
+
                 #else:
                  #   print(self.driver.find_element_by_id(课程剩余时间).text )
     def get_screenshot_by_element(self, element,TEMP_FILE):  #第一个参数  driver.find_element_by_id(登录页面_快快身体评测)  第二个是保存的地址
@@ -209,7 +226,8 @@ class user_information ():
             driver.find_element_by_id(安卓6请求权限的弹窗).click()
             driver.find_element_by_id(安卓6请求权限的弹窗).click()
         time.sleep(1)
-        while not driver.find_elements_by_id('body_ms'):
+        logon_index=0
+        while not driver.find_elements_by_id('body_ms')  and logon_index<5  :
             logger.info('body_ms')
             if driver.find_elements_by_id('bt_ok'):
                 driver.find_element_by_id('bt_cancel').click()
@@ -220,6 +238,7 @@ class user_information ():
                 driver.find_element_by_id(登录_密码).set_value('123456')
                 driver.find_element_by_id(登录按钮).click()
             time.sleep(5)
+            logon_index=logon_index+1
     def binding_arm(self,driverName=None,arm_times=12):
         if driverName == None:
             driverName=self.driverName
@@ -277,7 +296,7 @@ class user_information ():
         driver = self.driver
         driver.find_elements_by_id(单元小节图片)[6].click()
         i = 0
-        while not driver.find_elements_by_id(报告页标题) and i < 10:
+        while not driver.find_elements_by_id(报告页标题) and i < 5:
             try:
                 if driver.find_elements_by_id(弹窗_取消):
                     driver.find_element_by_id(弹窗_取消).click()
@@ -286,7 +305,8 @@ class user_information ():
                 i = i + 1
             except:
                 i = i + 1
-                pass
+                if i>5:
+                    return
     def inspect_weight(self):
         driver = self.driver
         driver.find_element_by_id(称重_性别男).click()

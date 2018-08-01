@@ -83,10 +83,10 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
 
 if __name__ == '__main__':
     #kk_test = orm_to_mysql(my_sql_link_test())
-    user_uuid = ['40838a50-fdce-4de3-83f3-9399a45b9282']
+    user_uuid = ['44d2b485-1b72-4960-93b9-7b67d4f2f85a']
     for x in range(1):
-        print(        make_report(buz_class_id=331096, course_code='SXYB.1.0.1.1', subject_show_id='11',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1))
-    #  make_report(buz_class_id=218604,course_code='JZX2.0.4.1',subject_show_id='1',dict_index='4')
+        print(        make_report(buz_class_id=331096, course_code='JZX2.0.4.1', subject_show_id='1',user_uuid_list=user_uuid,user_number=1, classes_checkin_number=1))
+    #  print(      make_report(buz_class_id=320626,course_code='JZX2.0.4.1',subject_show_id='1',dict_index='4'))
     # for  x in  range(1):
      #  #  kk_test.table('user_daily_weight').updata({'weight':x},id=)
       #   make_report(buz_class_id=331096, course_code='JZX2.0.2.5', subject_show_id='1', dict_index='4')
