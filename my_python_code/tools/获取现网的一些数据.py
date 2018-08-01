@@ -1,8 +1,8 @@
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
-from my_python_code.mysql.Basic_information import my_sql_link_buz
+from my_python_code.mysql.Basic_information import my_sql_link_buz_pool
 import time
 
-my_db=orm_to_mysql(my_sql_link_buz())
+my_db=orm_to_mysql(my_sql_link_buz_pool())
 all_gym_data=my_db.table('gym').select('id','name','start_date',status=1,start_date__GT='2015-12-10').all()
 for gym_data in all_gym_data:
     timestamp = time.mktime(time.strptime(gym_data['start_date'], "%Y-%m-%d"))

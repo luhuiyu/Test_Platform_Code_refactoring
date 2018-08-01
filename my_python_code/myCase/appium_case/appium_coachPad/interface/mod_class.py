@@ -163,9 +163,6 @@ class user_information ():
                     pass
     def  un_bind(self):
         driver = self.driver
-
-
-
     def choice_of_courses(self,index_cures):
         driver=self.driver
         courses_list= driver.find_elements_by_id(课程标题)
@@ -181,7 +178,6 @@ class user_information ():
             except:
                 pass
         driver.find_element_by_id(弹窗_确认).click()
-
     def  Switching_unit(self,Repetitions):
         driver=self.driver
         b = driver.find_elements_by_id('unit_duration')

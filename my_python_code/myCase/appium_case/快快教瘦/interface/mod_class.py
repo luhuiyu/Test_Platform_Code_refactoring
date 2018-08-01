@@ -81,7 +81,6 @@ class user_information ():
         time_total=int(start_time[0:2])*60+int(start_time[3:5])
         while i < time_total:
             try:
-                i = i + 1
                 subject_time=self.driver.find_elements_by_id(课程剩余时间)
                 if subject_time:
                     logger.info(str('课程剩余时间：'+str(subject_time[0].text)))
@@ -91,7 +90,7 @@ class user_information ():
                     logger.info(str('点击 ：'+'1730, 800'))
                     self.ac_click(1730, 800, self.driverName)
             except:
-                i = i + 3
+                i = i + 1
                 logger.info('查询失败 '+str('点击 ：' + '1730, 800'))
                 self.ac_click(1730, 800, self.driverName)
 
@@ -246,7 +245,7 @@ class user_information ():
                 driver.find_element_by_id(登录按钮).click()
             time.sleep(5)
             logon_index=logon_index+1
-    def binding_arm(self,driverName=None,arm_times=12):
+    def binding_arm(self,driverName=None,arm_times=6):
         if driverName == None:
             driverName=self.driverName
         for i in range(arm_times):

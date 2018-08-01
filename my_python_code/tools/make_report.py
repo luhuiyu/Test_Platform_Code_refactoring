@@ -16,9 +16,9 @@ def make_report(buz_class_id,course_code,subject_show_id,user_uuid_list=0,user_n
         class_id=add_class(time.time(), 'A店', str(user_number), str(classes_checkin_number), course_code, subject_show_id,dict_index=dict_index)
     headers1 = headers(client, user, password)
     login_pad = client.post(url='http://test.kuaikuaikeji.com/kcas/PadCoachLoginV2', headers=headers1)
-    home = orm_to_mysql(my_sql_link())
-    kk_buz=orm_to_mysql(my_sql_link_buz())
-    kk_test=orm_to_mysql(my_sql_link_test())
+    home = orm_to_mysql(my_sql_link_pool())
+    kk_buz=orm_to_mysql(my_sql_link_buz_pool())
+    kk_test=orm_to_mysql(my_sql_link_test_pool())
     data_uuid=kk_buz.table("user_class_data").select("data_uuid",class_id=buz_class_id).one()['data_uuid']
     if data_uuid == None:
         return {'classReportList':[{'reportUrl':'没有这个classid，看看是不是现网的'}]}

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import requests
-from my_python_code.mysql.Basic_information import my_sql_link_buz,my_sql_link_test
-from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
+from my_python_code.mysql.Basic_information import *
+from my_python_code.mysql.ORM_of_mysql import *
 
 def report_data(x):
      url = "http://kkuserdata.oss-cn-beijing.aliyuncs.com/bodydata/"+x+".txt"
@@ -83,7 +83,7 @@ def report_data(x):
 
 
 if __name__=='__main__':
-    my_db = orm_to_mysql(my_sql_link_buz())
+    my_db = orm_to_mysql(my_sql_link_buz_pool())
    # my_db = orm_to_mysql(my_sql_link_test())
     data_uuid=my_db.table('user_class_data').select('data_uuid',class_id=320626).one()
     if data_uuid:

@@ -1,3 +1,1 @@
-import os
-
-os.popen(r'python  F:/Test_Platform/my_python_code/tools/armband.py  1 ')
+import my_python_code.myCase.api_case.快快教瘦.PadGetUserCorrectWeightV2.testCase.test_48h_72h发生变化
