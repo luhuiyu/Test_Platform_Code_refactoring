@@ -72,6 +72,7 @@ class user_information ():
         while i <   60:
             if self.driver.find_elements_by_id(课程剩余时间):
                 start_time= self.driver.find_element_by_id(课程剩余时间).text
+                logger.info('start_time:'+str(start_time))
                 return
             else:
                 start_time=False
@@ -81,13 +82,17 @@ class user_information ():
         while i < time_total:
             try:
                 i = i + 1
-                if self.driver.find_elements_by_id(课程剩余时间):
+                subject_time=self.driver.find_elements_by_id(课程剩余时间)
+                if subject_time:
+                    logger.info(str('课程剩余时间：'+str(subject_time[0].text)))
                     if self.driver.find_element_by_id(课程剩余时间).text == '00:00':
                         return
                 else:
+                    logger.info(str('点击 ：'+'1730, 800'))
                     self.ac_click(1730, 800, self.driverName)
             except:
                 i = i + 3
+                logger.info('查询失败 '+str('点击 ：' + '1730, 800'))
                 self.ac_click(1730, 800, self.driverName)
 
 
@@ -114,6 +119,7 @@ class user_information ():
         return subject_id
     def wipe_up(self,element=False):#上滑
         driver=self.driver
+        logging.info('wipe_up')
         if element:
             location = element.location
             x = location['x']
@@ -128,6 +134,7 @@ class user_information ():
             driver.swipe(int(x1),int(y2),int(x1),int(y1),500)
         time.sleep(2)
     def wipe_down(self,element=False):#下滑
+        logging.info('wipe_down')
         driver=self.driver
         if element:
             location = element.location
@@ -228,7 +235,7 @@ class user_information ():
         time.sleep(1)
         logon_index=0
         while not driver.find_elements_by_id('body_ms')  and logon_index<5  :
-            logger.info('body_ms')
+            logger.info('进入登录重试循环，次数为 ： '+str(logon_index))
             if driver.find_elements_by_id('bt_ok'):
                 driver.find_element_by_id('bt_cancel').click()
             if driver.find_elements_by_id(登录_密码):
@@ -272,23 +279,28 @@ class user_information ():
         b = self.driver.find_elements_by_id('unit_duration')
         driver=self.driver
         self.wait_unit()
+        logging.info('第一单元')
         b[1].click()
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
         b[2].click()
+        logging.info('第二单元')
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
         b[3].click()
+        logging.info('第三单元')
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
         b[4].click()
+        logging.info('第四单元')
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
         b[5].click()
+        logging.info('第五单元')
         driver.find_element_by_id(弹窗_确认).click()
         time.sleep(4)
         self.wait_unit()
@@ -297,6 +309,7 @@ class user_information ():
         driver.find_elements_by_id(单元小节图片)[6].click()
         i = 0
         while not driver.find_elements_by_id(报告页标题) and i < 5:
+            logging.info('结束课程  尝试 第 '+str(i)+ '次')
             try:
                 if driver.find_elements_by_id(弹窗_取消):
                     driver.find_element_by_id(弹窗_取消).click()

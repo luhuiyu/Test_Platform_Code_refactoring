@@ -46,7 +46,7 @@
                                         {%  for y in value.0 %}
                                              <div class="panel-heading">
                                             <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#{{ y }}" class="collapsed">  {{ y }}</a> <td> <input type="checkbox" name= "{{ y }}" value={{y}}  checked="checked" ></td>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#{{ y }}" class="collapsed">  {{ y }}</a>
                                         </h4>
                                             </div>
                                              <div id="{{ y }}" class="panel-collapse collapse" style="height: 0px;">
@@ -59,7 +59,7 @@
                                             <th>id</th>
                                             <th>modele_name</th>
                                             <th>case_name</th>
-                                             <th>confirm</th>
+                                             <th>confirm<input type="checkbox"   checked="checked"  id= 'all_selected_case'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -96,21 +96,12 @@
 
 
 <script type="text/javascript">
-    //checkbox 全选/取消全选
-    var isCheckAll = false;
-    function swapCheck() {
-        if (isCheckAll) {
-            $("input[type='checkbox']  ").each(function() {
-                this.checked = false;
-            });
-            isCheckAll = false;
-        } else {
-            $("input[type='checkbox'  ]").each(function() {
-                this.checked = true;
-            });
-            isCheckAll = true;
-        }
-    }
+function selectAll(){
+    var isCheck=$("#all_selected_case").is(':checked');  //获得全选复选框是否选中
+    $("input[type='checkbox']").each(function() {
+        this.checked = isCheck;       //循环赋值给每个复选框是否选中
+    });
+}
 </script>
 
 
