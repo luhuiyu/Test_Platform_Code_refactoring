@@ -10,7 +10,7 @@ from web_platform.models import add_class_record
 def add_classes(request):
     context = get_basic_data()
     context=get_record(context)
-    context['store_name'] = ['硬件测试专用店A','硬件测试专用店B','重庆江北区东原D7店','武汉江岸区航天双城店','西安融侨馨苑店','Seven店','上海亚都国际名园七星旗舰店','西安逸翠店','通州万达店','Rocky店','A店','B店','C店','D店','E店']
+    context['store_name'] = ['硬件测试专用店A','硬件测试专用店B','重庆江北区东原D7店','武汉江岸区航天双城店','西安融侨馨苑店','Seven店','上海亚都国际名园七星旗舰店','西安逸翠店','通州万达店','Rocky店','A店','B店','C店','D店','E店','北京双井优士阁店']
     context['user_number'] = range(1, 25)
     context['classes_checkin_number'] = range(1, 25)
     context['course_code'] = get_course_name()

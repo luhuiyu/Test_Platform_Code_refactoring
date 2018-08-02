@@ -1,4 +1,8 @@
+# -*-coding: utf-8-*-
 
+import logging
+from my_python_code.mysql.Basic_information import *
+logging.basicConfig(level=logging.INFO)
 
 class simple_mysql():
     """
@@ -6,15 +10,11 @@ class simple_mysql():
     适用于单个表的删增改查
 
     """
-    def __init__(self):
+    def __init__(self,mysql_link):
         self.my_table = ''  #表的名称
         self.my_column_name='' #列名　
         self.my_type=''  # sql操作类型  有  select  updata
-        self.my_sql_statement='' #完整的sql语句
-    def _my_print(self):
-        print(self.my_sql_statement)
-        print(self.my_table)
-        print(self.my_column_name)
+        self.link = mysql_link
     def TABLE(self, *args):
         table_list = []
         for x in args:
@@ -28,8 +28,44 @@ class simple_mysql():
             condition = condition + ', ' + str(x)
         self.my_sql_statement = str(self.my_sql_statement) + column + condition[1:]
         return self
+    def LIMIT(self, *args,**kw):
+        column = ' limit '
+        if len(args) == 1:
+            self.my_sql_statement = str(self.my_sql_statement) + column + str(args[0])
+        else:
+            self.my_sql_statement = str(self.my_sql_statement) + column + str(args[0]) + ',' + str(args[1])
+        return self
+    def IN (self,*args,**kwargs):
+        '''
+        SELECT column_name(s)
+        FROM table_name
+        WHERE column_name IN (value1,value2,...)
+        :param args:
+        :param kw:
+        :return:
+        '''
+        sc = ''
+        for x in kwargs.items():
+            key = x[0]
+            operator = ' IN '
+            column = str(key)
+            condition =  str(x[1])
+            sc = column + operator + condition
+        if self.my_sql_statement[-6:]=='WHERE ':
+            self.my_sql_statement = self.my_sql_statement+   sc
+        else:
+            self.my_sql_statement = self.my_sql_statement + ' AND ' + sc
     def SELECT(self,*args,isdistinct=False,**kwargs):
-
+        '''
+        select  phone_code from   web_platform_phone WHERE id =  '3'
+        TABLE('web_platform_phone').SELECT('phone_code').WHERE(id=3).EXECUTE_ALL()
+        select   * from   web_platform_phone WHERE id =  '3'
+        TABLE('web_platform_phone').SELECT().WHERE(id=3).EXECUTE_ALL()
+        :param args:
+        :param isdistinct:
+        :param kwargs:
+        :return:
+        '''
         if len(args) > 0 :
             column_conditions = ''
         else:
@@ -69,7 +105,7 @@ class simple_mysql():
                 condition = '\'' + str(x[1]) + '\''
                 operator = ' =  '
             sc = column + operator + condition
-        self.my_sql_statement = self.my_sql_statement+' where ' + sc
+        self.my_sql_statement = self.my_sql_statement+' WHERE ' + sc
         return self
     def OR(self,**kwargs):
         search_criteria = ''
@@ -94,7 +130,7 @@ class simple_mysql():
                 operator = ' =  '
             sc = '  OR  ' + column + operator + condition
             search_criteria = search_criteria + sc
-        if self.my_sql_statement[-6:]=='where ':
+        if self.my_sql_statement[-6:]=='WHERE ':
             self.my_sql_statement = self.my_sql_statement + search_criteria[4:]
         else:
             self.my_sql_statement = self.my_sql_statement+   search_criteria
@@ -122,12 +158,22 @@ class simple_mysql():
                 operator = ' =  '
             sc = ' AND ' + column + operator + condition
             search_criteria = search_criteria + sc
-        if self.my_sql_statement[-6:]=='where ':
+        if self.my_sql_statement[-6:]=='WHERE ':
             self.my_sql_statement = self.my_sql_statement + search_criteria[4:]
         else:
             self.my_sql_statement = self.my_sql_statement+   search_criteria
         return self
     def INSERT(self, *args,**kw):
+        '''
+        原sql ：
+            REPLACE INTO web_platform_my_img (id,img_data,uuid,remarks,create_time) VALUES ('100','11eeeeee111','adadaAFAFA','1','2010-02-22 10:00:00')
+        对应的：
+            TABLE('web_platform_my_img').INSERT_IGNORE(id=100,img_data='11111',uuid='adadaAFAFA',remarks=1,create_time='2010-02-22 00:00:00').EXECUTE_ONE()
+            TABLE('web_platform_my_img').REPLACE_INTO( {'id':101,'img_data':'11eeeeee111','uuid':'2222ada','remarks':2,'create_time':'2010-02-22 10:00:00'}).EXECUTE_ONE()
+        :param args:
+        :param kw:
+        :return:
+        '''
         column = r''
         condition = r''
         for x in kw.items():
@@ -157,6 +203,21 @@ class simple_mysql():
                     condition = condition + '\'' + str(x[1]) + '\','
         self.my_sql_statement = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
         return self
+    def REPLACE_INTO(self, *args, **kw):
+        column = r''
+        condition = r''
+        for x in kw.items():
+            column = column + str(x[0]) + ','
+            condition = condition + '\'' + str(x[1]) + '\','
+        for y in range(0, len(args)):
+            for x in args[y].items():
+                if str(x[1]) == 'None':
+                    pass
+                else:
+                    column = column + str(x[0]) + ','
+                    condition = condition + '\'' + str(x[1]) + '\','
+        self.my_sql_statement = ' REPLACE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+        return self
     def UPDATA(self, *args, **kw):
         '''
         UPDATE 表名称 SET 列名称 = 新值
@@ -181,10 +242,42 @@ class simple_mysql():
         self.my_sql_statement='UPDATE ' + str(self.my_table) + ' SET ' + updata_data[:-1]
         return self
     def DELETE(self, *args, **kw):
-        pass
+        '''
+        DELETE FROM 表名称 WHERE 列名称 = 值
+        :param args:
+        :param kw:
+        :return:
+        '''
+        self.my_sql_statement='DELETE FROM  ' + str(self.my_table )
+        return self
+    def EXECUTE_ALL(self,my_sql_statement=False):
+        if my_sql_statement:
+            with self.link.cursor() as cursor:
+                logging.info('simple_mysql :' + str(my_sql_statement))
+                cursor.execute(str(my_sql_statement))
+                return cursor.fetchall()
+        else:
+            with self.link.cursor() as cursor:
+                logging.info('simple_mysql :'+str(self.my_sql_statement))
+                cursor.execute(str(self.my_sql_statement))
+                return cursor.fetchall()
+    def EXECUTE_ONE(self,my_sql_statement=False):
+        if my_sql_statement:
+            with self.link.cursor() as cursor:
+                logging.info('simple_mysql :' + str(my_sql_statement))
+                cursor.execute(str(my_sql_statement))
+                return cursor.fetchone()
+        else:
+            with self.link.cursor() as cursor:
+                logging.info('simple_mysql :'+ str(self.my_sql_statement))
+                cursor.execute(str(self.my_sql_statement))
+                return cursor.fetchone()
+
 if __name__ == '__main__':
-    a=simple_mysql()
-     #SELECT * FROM user_classes_checkin WHERE classes_id=56634
-    a.TABLE('AAAA').INSERT(aa=33)
-    a.TABLE('AAAA').UPDATA({'11':'11'},{'22':'22'},AA='AA').WHERE().AND(id=33).OR(id=4)
-    print(a.my_sql_statement)
+    a=simple_mysql(my_sql_link_pool())
+   # A=a.TABLE('web_platform_my_img').REPLACE_INTO(id=100,img_data='11eeeeee111',uuid='adadaAFAFA',remarks=1,create_time='2010-02-22 10:00:00').EXECUTE_ONE()
+    #A=a.TABLE('web_platform_my_img').REPLACE_INTO( {'id':101,'img_data':'11eeeeee111','uuid':'2222ada','remarks':2,'create_time':'2010-02-22 10:00:00'}).EXECUTE_ONE()
+    A=a.TABLE('web_platform_phone').UPDATA(id=10,phone='15900900000')
+    TABLE('web_platform_phone').UPDATA({})
+    TABLE('web_platform_phone').UPDATA(id=10, phone='15900900000')
+    print(A)
