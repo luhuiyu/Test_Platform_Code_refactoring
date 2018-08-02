@@ -6,72 +6,185 @@ class simple_mysql():
     适用于单个表的删增改查
 
     """
-
     def __init__(self):
         self.my_table = ''  #表的名称
         self.my_column_name='' #列名　
         self.my_type=''  # sql操作类型  有  select  updata
         self.my_sql_statement='' #完整的sql语句
-
-    def my_print(self):
+    def _my_print(self):
         print(self.my_sql_statement)
         print(self.my_table)
         print(self.my_column_name)
-    def table(self, *args):
+    def TABLE(self, *args):
         table_list = []
         for x in args:
             table_list.append(x)
         self.my_table = str(table_list)[1:-1].replace('\'', '')
         return self
-    def order_by(self, *args):
+    def ORDER_BY(self, *args):
         column = ' GROUP BY  '
         condition = ''
         for x in args:
             condition = condition + ', ' + str(x)
         self.my_sql_statement = str(self.my_sql_statement) + column + condition[1:]
         return self
-    def select(self,*args,isdistinct=True,**kwargs):
-        column_conditions = ''
+    def SELECT(self,*args,isdistinct=False,**kwargs):
+
+        if len(args) > 0 :
+            column_conditions = ''
+        else:
+            column_conditions = ' * '
         for x in args:
             column_conditions = column_conditions + str(x) + ','
-        search_criteria = ''
-        for y in kwargs:
-            if  type(kwargs[y]) is list:
-                for z in kwargs[y]:
-                    search_criteria = search_criteria + str(y) + '.' + str(z) + ','
-            else:
-                search_criteria = search_criteria + str(y) + '.' + str(kwargs[y]) + ','
-        self.my_column_name=column_conditions+search_criteria
+        self.my_column_name=column_conditions[:-1]
         if isdistinct:
-            self.my_type = ' select  distinct   '
+            if column_conditions != ' * ':
+                self.my_type = ' select  distinct   '
+            else:
+                self.my_type = ' select  '
         else:
             self.my_type = ' select  '
         if self.my_column_name:
             self.my_sql_statement=  self.my_type +   self.my_column_name + ' from   '+ self.my_table
         return self
-    def where(self,*args,**kwargs):
-
-        self.my_sql_statement = self.my_sql_statement+' where  '
+    def WHERE(self,**kwargs):
+        sc=''
+        for x in kwargs.items():
+            key = x[0]
+            relationship = ' AND '
+            if str(key)[-6:] == "__LIKE":
+                column = str(key)[:-6]
+                condition = '\'%' + str(x[1]) + '%\''
+                operator = ' LIKE '
+            elif str(key)[-4:] == "__GT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' > '
+            elif str(key)[-4:] == "__LT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' < '
+            else:
+                column = str(key)
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' =  '
+            sc = column + operator + condition
+        self.my_sql_statement = self.my_sql_statement+' where ' + sc
         return self
-    def subconditions(self,symbol=' = ',relation=' AND ' ,**kwargs ):
-        for x in  kwargs.items():
-            clause= '  '+str(x[0])+symbol+str(x[1])+relation
-            self.my_sql_statement=self.my_sql_statement+clause
+    def OR(self,**kwargs):
+        search_criteria = ''
+        for x in kwargs.items():
+            key = x[0]
+            relationship = ' AND '
+            if str(key)[-6:] == "__LIKE":
+                column = str(key)[:-6]
+                condition = '\'%' + str(x[1]) + '%\''
+                operator = ' LIKE '
+            elif str(key)[-4:] == "__GT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' > '
+            elif str(key)[-4:] == "__LT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' < '
+            else:
+                column = str(key)
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' =  '
+            sc = '  OR  ' + column + operator + condition
+            search_criteria = search_criteria + sc
+        if self.my_sql_statement[-6:]=='where ':
+            self.my_sql_statement = self.my_sql_statement + search_criteria[4:]
+        else:
+            self.my_sql_statement = self.my_sql_statement+   search_criteria
         return self
-
-
-
-
-
-
-
-
-
+    def AND(self,**kwargs):
+        search_criteria = ''
+        for x in kwargs.items():
+            key = x[0]
+            relationship = ' AND '
+            if str(key)[-6:] == "__LIKE":
+                column = str(key)[:-6]
+                condition = '\'%' + str(x[1]) + '%\''
+                operator = ' LIKE '
+            elif str(key)[-4:] == "__GT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' > '
+            elif str(key)[-4:] == "__LT":
+                column = str(key)[:-4]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' < '
+            else:
+                column = str(key)
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' =  '
+            sc = ' AND ' + column + operator + condition
+            search_criteria = search_criteria + sc
+        if self.my_sql_statement[-6:]=='where ':
+            self.my_sql_statement = self.my_sql_statement + search_criteria[4:]
+        else:
+            self.my_sql_statement = self.my_sql_statement+   search_criteria
+        return self
+    def INSERT(self, *args,**kw):
+        column = r''
+        condition = r''
+        for x in kw.items():
+            column = column + str(x[0]) + ','
+            condition = condition + '\'' + str(x[1]) + '\','
+        for y in range(0,len(args)):
+            for x in args[y].items():
+                if str(x[1]) == 'None':
+                    pass
+                else:
+                    column = column + str(x[0]) + ','
+                    condition = condition + '\'' + str(x[1]) + '\','
+        self.my_sql_statement = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+        return self
+    def INSERT_IGNORE(self, *args,**kw):
+        column = r''
+        condition = r''
+        for x in kw.items():
+            column = column + str(x[0]) + ','
+            condition = condition + '\'' + str(x[1]) + '\','
+        for y in range(0,len(args)):
+            for x in args[y].items():
+                if str(x[1]) == 'None':
+                    pass
+                else:
+                    column = column + str(x[0]) + ','
+                    condition = condition + '\'' + str(x[1]) + '\','
+        self.my_sql_statement = 'INSERT IGNORE INTO ' + str(self.my_table) + ' (' + column[:-1] + ') VALUES (' + condition[:-1] + ')'
+        return self
+    def UPDATA(self, *args, **kw):
+        '''
+        UPDATE 表名称 SET 列名称 = 新值
+        :param args:
+        :param kw:
+        :return:
+        '''
+        updata_data = ''
+        for y in range(0, len(args)):
+            for x in args[y].items():
+                column = str(x[0])
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' =  '
+                sc = column + operator + condition + ','
+                updata_data = updata_data + sc
+        for x in kw.items():
+            column = str(x[0])
+            condition = '\'' + str(x[1]) + '\''
+            operator = ' =  '
+            sc = column + operator + condition + ','
+            updata_data = updata_data + sc
+        self.my_sql_statement='UPDATE ' + str(self.my_table) + ' SET ' + updata_data[:-1]
+        return self
+    def DELETE(self, *args, **kw):
+        pass
 if __name__ == '__main__':
     a=simple_mysql()
-  #  a.table('user','classes').select('user_uuid',user='wwww',classes='222222',AA=[22,33,55,1,77,8]).where(a='<__44444__OR',b='222',c='<=__ee').order_by()
      #SELECT * FROM user_classes_checkin WHERE classes_id=56634
-   # a.table('user','classes').select(11,user='ee',classes='ww',AA=[22,33,55,1,77,8]).where()
- #   a.where(a='<__44444__OR',b='222',c='<=__ee',d=('<','ddd','or'))
-    a.table('user').select('user_uuid').where().subconditions(id=111,cd=1234,symbol='<').subconditions(ss=22)
+    a.TABLE('AAAA').INSERT(aa=33)
+    a.TABLE('AAAA').UPDATA({'11':'11'},{'22':'22'},AA='AA').WHERE().AND(id=33).OR(id=4)
     print(a.my_sql_statement)

@@ -3,7 +3,7 @@ from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link_
 from my_python_code.basic_configuration.configuration_file import *
 
 def add_class(star_time,store_name,user_number,classes_checkin_number,course_code,subject_show_id,user_uuid_list=False,dict_index='3',coach_phone=None,end_time=None,environment='test'):
-    if environment=='state':
+    if environment=='stage':
         a=my_sql_link_stage()
     else:
         a = my_sql_link_test()
