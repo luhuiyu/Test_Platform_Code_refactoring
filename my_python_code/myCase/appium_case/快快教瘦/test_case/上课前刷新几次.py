@@ -6,7 +6,7 @@ from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import a
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import user_information
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import pad_mysql
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
-from my_python_code.mysql.Basic_information import my_sql_link
+from my_python_code.mysql.Basic_information import my_sql_link_pool as my_sql_link
 from my_python_code.tools.虚拟臂带 import fictitious_bind
 from multiprocessing import Process,Lock
 from multiprocessing import Queue

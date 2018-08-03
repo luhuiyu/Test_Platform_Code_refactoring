@@ -6,7 +6,6 @@ from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import a
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import user_information
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import pad_mysql
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
-from my_python_code.mysql.Basic_information import my_sql_link
 import os,time
 import logging
 logging.basicConfig(level=logging.ERROR)

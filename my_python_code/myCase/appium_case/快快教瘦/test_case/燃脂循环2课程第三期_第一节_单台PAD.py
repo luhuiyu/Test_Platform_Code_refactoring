@@ -6,7 +6,7 @@ from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import a
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import user_information
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import pad_mysql
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
-from my_python_code.mysql.Basic_information import my_sql_link
+from my_python_code.mysql.Basic_information import my_sql_link_pool
 from my_python_code.tools.虚拟臂带 import fictitious_bind
 from multiprocessing import Process,Lock
 from multiprocessing import Queue
@@ -68,7 +68,7 @@ def  appium_data(context,Q,course,x):
 def test_case(context):
     L=Lock()
     phone = context['phone']
-    my_db = orm_to_mysql(my_sql_link())
+    my_db = orm_to_mysql(my_sql_link_pool())
     course=my_db.table('web_platform_course').select(name__LIKE='燃脂循环2.0课程第三期').one()
     global rult_list,sigu
     sigu=False

@@ -6,7 +6,7 @@ from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import a
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import user_information
 from my_python_code.myCase.appium_case.快快教瘦.interface.mod_class import pad_mysql
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
-from my_python_code.mysql.Basic_information import my_sql_link
+from my_python_code.mysql.Basic_information import my_sql_link_pool
 import os,time
 import logging
 logging.basicConfig(level=logging.ERROR)
@@ -28,7 +28,7 @@ def test_case(context):
     PORT = context['PORT']
     phone = context['phone']
     url = 'http://127.0.0.1:' + PORT + '/wd/hub'
-    my_db = orm_to_mysql(my_sql_link())
+    my_db = orm_to_mysql(my_sql_link_pool())
     course_list=my_db.table('web_platform_course').select(name__LIKE='防暴课').all()
     rult_list=[]
     sigu=False
