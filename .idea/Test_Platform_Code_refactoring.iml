@@ -19,6 +19,10 @@
   <component name="PackageRequirementsSettings">
     <option name="requirementsPath" value="" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="analyzeDoctest" value="false" />
+    <option name="myDocStringFormat" value="Plain" />
+  </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
@@ -28,7 +32,7 @@
     </option>
   </component>
   <component name="TestRunnerService">
-    <option name="projectConfiguration" value="py.test" />
-    <option name="PROJECT_TEST_RUNNER" value="py.test" />
+    <option name="projectConfiguration" value="Nosetests" />
+    <option name="PROJECT_TEST_RUNNER" value="Nosetests" />
   </component>
 </module>

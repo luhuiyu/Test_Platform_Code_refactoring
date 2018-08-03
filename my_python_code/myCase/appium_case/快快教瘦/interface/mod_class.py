@@ -4,7 +4,7 @@ import time,os,re
 import pymysql
 from  my_python_code.tools.add_class import add_class
 import logging
-from my_python_code.mysql.Basic_information import my_sql_link_test_pool
+from my_python_code.mysql.Basic_information import my_sql_link_test
 from  my_python_code.myCase.appium_case.快快教瘦.interface.Bascic_appid_name import  *
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -368,7 +368,7 @@ class user_information ():
 class  pad_mysql(orm_to_mysql):
 
     def __init__(self,phone):
-        a = my_sql_link_test_pool()
+        a = my_sql_link_test()
         self.db = a.db
         self.cursor = a.cursor_dict
         self.phone=phone

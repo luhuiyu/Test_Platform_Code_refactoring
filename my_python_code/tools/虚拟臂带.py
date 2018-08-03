@@ -2,7 +2,7 @@ import socket,time,os
 import random
 from multiprocessing import Process
 from multiprocessing import Queue
-from my_python_code.mysql.Basic_information import my_sql_link
+from my_python_code.mysql.Basic_information import my_sql_link_pool
 from my_python_code.mysql.ORM_of_mysql import orm_to_mysql
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -137,7 +137,7 @@ def put_null(put_data,bind_list_1,my_pid,sign=True,total=32):
 def fictitious_bind(sign,total=32,time_delay=1,Q=False):
     global  time_delay1
     time_delay1=time_delay
-    my_db = orm_to_mysql(my_sql_link())
+    my_db = orm_to_mysql(my_sql_link_pool())
     my_db.table('web_platform_phone').updata({'phone_code': str(os.getpid())},id=101)
     UDP_data = Queue()  # 传接从pad收到包
     user_cord = Queue()  # 解析出来的用户数据
