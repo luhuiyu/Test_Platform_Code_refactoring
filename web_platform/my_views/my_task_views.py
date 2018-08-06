@@ -27,8 +27,8 @@ def my_task(request):
             x.task_state = 0
             x.save()
             print('ok')
-        os.popen('python    ' + MY_RUN_API_CASE)
-        os.popen('python    ' + MY_RUN_UI_CASE)
+     #   os.popen('python    ' + MY_RUN_API_CASE)
+     #   os.popen('python    ' + MY_RUN_UI_CASE)
         return HttpResponseRedirect('/task')
     elif  request.method == 'POST' :
         selected_case=request.POST.getlist("selected_case")
@@ -49,10 +49,10 @@ def my_task(request):
                         task_type=test_type,
                         task_data={'case_list': case_id_list},
                         create_time=todaytime).save()
-        if test_type =='apitest':
-            os.popen('python    '+MY_RUN_API_CASE )
-        else:
-            os.popen('python    ' + MY_RUN_UI_CASE)
+       # if test_type =='apitest':
+       #     os.popen('python    '+MY_RUN_API_CASE )
+       # else:
+        #    os.popen('python    ' + MY_RUN_UI_CASE)
         return HttpResponseRedirect('/task')
     else:
         context_data = get_task_queue(context_data)

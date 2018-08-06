@@ -147,4 +147,10 @@ def result_handling(task_info,the_case_result,statistical_results):
 
 
 if __name__=='__main__':
-    run_case_of_api_main(10)
+
+    while 1 :
+        time.sleep(30)
+        try:
+            run_case_of_api_main(10)
+        except:
+            pass

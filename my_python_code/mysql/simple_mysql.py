@@ -100,6 +100,14 @@ class simple_mysql():
                 column = str(key)[:-4]
                 condition = '\'' + str(x[1]) + '\''
                 operator = ' < '
+            elif str(key)[-6:] == "__GTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' >= '
+            elif str(key)[-4:] == "__LTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' <= '
             else:
                 column = str(key)
                 condition = '\'' + str(x[1]) + '\''
@@ -124,6 +132,14 @@ class simple_mysql():
                 column = str(key)[:-4]
                 condition = '\'' + str(x[1]) + '\''
                 operator = ' < '
+            elif str(key)[-6:] == "__GTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' >= '
+            elif str(key)[-4:] == "__LTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' <= '
             else:
                 column = str(key)
                 condition = '\'' + str(x[1]) + '\''
@@ -152,6 +168,14 @@ class simple_mysql():
                 column = str(key)[:-4]
                 condition = '\'' + str(x[1]) + '\''
                 operator = ' < '
+            elif str(key)[-6:] == "__GTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' >= '
+            elif str(key)[-4:] == "__LTEQ":
+                column = str(key)[:-6]
+                condition = '\'' + str(x[1]) + '\''
+                operator = ' <= '
             else:
                 column = str(key)
                 condition = '\'' + str(x[1]) + '\''
@@ -272,7 +296,12 @@ class simple_mysql():
                 logging.info('simple_mysql :'+ str(self.my_sql_statement))
                 cursor.execute(str(self.my_sql_statement))
                 return cursor.fetchone()
-
+    def __print__(self):
+        print( self.my_table ,
+        self.my_column_name,
+        self.my_type,
+        self.link,
+        )
 if __name__ == '__main__':
     a=simple_mysql(my_sql_link_pool())
    # A=a.TABLE('web_platform_my_img').REPLACE_INTO(id=100,img_data='11eeeeee111',uuid='adadaAFAFA',remarks=1,create_time='2010-02-22 10:00:00').EXECUTE_ONE()
@@ -280,4 +309,6 @@ if __name__ == '__main__':
    # a.TABLE('web_platform_phone').UPDATA(id=10,phone_code='15900900000').WHERE(id=100).EXECUTE_ALL()
    # a.TABLE('web_platform_phone').UPDATA({'id':10,'phone_code':'1560090000'}).WHERE(id=100).EXECUTE_ALL()
  #   a.TABLE('web_platform_phone').UPDATA({'phone_code':1560090000},id=10).WHERE(id=100).EXECUTE_ALL()
-    a.TABLE('web_platform_phone').DELETE().WHERE(id__GT=150,phoe__LT=100,name__LIKE='北京').EXECUTE_ALL()
+  #  a.TABLE('web_platform_phone').DELETE().WHERE(id__GT=150,phoe__LT=100,name__LIKE='北京').EXECUTE_ALL()
+    a.TABLE('web_platform_phone').SELECT().WHERE(id__GT=150).EXECUTE_ALL()
+    a.__print__()
