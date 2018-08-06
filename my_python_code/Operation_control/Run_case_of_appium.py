@@ -25,6 +25,10 @@ def run_case_of_ui_main():
         负责单个case的运行，
     :return:
     '''
+    if  task_management.objects.filter(task_type=task_type, task_state=task_state_custom,create_time__lte=now_time).all():
+        pass
+    else:
+        return
     appium_Queue=Queue()
     task_Queue=Queue()
     the_case_result=Queue()
@@ -161,4 +165,9 @@ def case_work(appium_Queue,task_Queue,the_case_result,statistical_results,):
 
 
 if __name__=='__main__':
-    run_case_of_ui_main()
+    while 1:
+        time.sleep(30)
+        try:
+            run_case_of_ui_main()
+        except:
+            pass

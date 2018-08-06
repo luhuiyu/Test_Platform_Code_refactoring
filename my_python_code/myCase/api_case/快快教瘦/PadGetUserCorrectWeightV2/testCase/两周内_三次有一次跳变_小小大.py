@@ -29,16 +29,12 @@ class API_case(Basics_case):
         reload(my_python_code.myCase.api_case.interface.login_args)
 
         try:
-
                 db=self.db
-
                 cursor=self.cursor
-
                 old_fatRate_list = [22, 22]  # 创造在数据库里面已经有的体脂率的数据，int类型或是str
                 corr_time_list = [250000, 100000]  # 数据创建的时间 int类型
                 fatRate = 30  # 称重得到的体脂率  int类型
                 corr_Fatrate = 22  # 被修改后的体脂率   int类型
-
                 case_Result=weight_testCase(self.client,db, cursor, user_uuid,old_fatRate_list,fatRate,corr_Fatrate,corr_time_list,self.my_db_lock)
 
                 return case_Result

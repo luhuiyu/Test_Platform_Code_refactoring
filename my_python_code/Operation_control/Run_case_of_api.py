@@ -12,6 +12,10 @@ import time
 
 
 def run_case_of_api_main(work_process_quantity=4):
+    if task_management.objects.filter(task_type=task_type,task_state=task_state_custom,create_time__lte=now_time).all():
+        pass
+    else:
+        return
     '''
     mian 负责控制所有的进程
         返回 启动的结果，不需要返回运行结果
