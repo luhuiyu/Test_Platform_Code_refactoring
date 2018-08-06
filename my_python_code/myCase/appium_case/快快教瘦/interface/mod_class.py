@@ -68,18 +68,8 @@ class user_information ():
         time.sleep(3)
         driver.find_element_by_id('com.kk.coachpad:id/btn_confirm').click()
     def wait_unit(self):
-        i = 0
-        while i <   60:
-            if self.driver.find_elements_by_id(课程剩余时间):
-                start_time= self.driver.find_element_by_id(课程剩余时间).text
-                logger.info('start_time:'+str(start_time))
-                return
-            else:
-                start_time=False
-            i=i+1
-        assert start_time
-        time_total=int(start_time[0:2])*60+int(start_time[3:5])
-        while i < time_total:
+        i=0
+        while i < 3000:
             try:
                 subject_time=self.driver.find_elements_by_id(课程剩余时间)
                 if subject_time:
