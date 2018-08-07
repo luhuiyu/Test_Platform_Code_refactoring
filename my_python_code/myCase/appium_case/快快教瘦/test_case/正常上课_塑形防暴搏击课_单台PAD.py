@@ -10,15 +10,15 @@ from my_python_code.mysql.Basic_information import my_sql_link_pool
 from my_python_code.tools.虚拟臂带 import fictitious_bind
 from multiprocessing import Process,Lock
 from multiprocessing import Queue
-import signal
-import os,time,sys
+import sys
+import os,time
 import logging
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 logger.info(str(os.path.basename(sys.argv[0]).split(".")[0] ))
 rult_list=[]
-def  appium_data(context,Q,course,x):
-    global rult_list, sigu
+def  appium_data(context,Q,course,x,rult_list):
+    global sigu
     try:
         system = context['platformName']
         platformVersion = context['platformVersion']
@@ -39,8 +39,8 @@ def  appium_data(context,Q,course,x):
         driver.find_elements_by_id(课程标题)[0].click()
         driver.find_element_by_id(弹窗_确认).click()
         for x in driver.find_elements_by_id(称重按钮)[0:6]:
-               x.click()
-               operate.inspect_weight_JXSXBJ()
+            x.click()
+            operate.inspect_weight()
         Q.put(1)
         while driver.find_elements_by_id(同步电视):
             operate.wipe_down()
@@ -49,55 +49,54 @@ def  appium_data(context,Q,course,x):
         operate.end_courses()
         c = driver.find_elements_by_id('com.kk.coachpad:id/tv_look_report')
         assert len(c) == 9, '生成报告成功'
-        rult_list.append({'course_code': course['course_code'] + str(x), "result": 1, })
+        rult_list.put([{'course_code': course['course_code'] + str(x), "result": 1, }])
         logger.info(str({'course_code': course['course_code'] + str(x), "result": 1, }))
+        return
     except Exception as e:
         sigu = True
-        rult_list.append(
-            {'course_code': course['course_code'] + str(x), "result": -1, "error_info": '\'' + str(e) + '\''})
-        Q.put(1)
-        Q.put(1)
-        Q.put(1)
-        Q.put(1)
+        rult_list.put(
+            [{'course_code': course['course_code'] + str(x), "result": -1, "error_info": '\'' + str(e) + '\''}])
+        Q.put(0)
+        Q.put(0)
+        Q.put(0)
+        Q.put(0)
+
         return
+
 
 
 def test_case(context):
     L=Lock()
     phone = context['phone']
     my_db = orm_to_mysql(my_sql_link_pool())
-    course_list=my_db.table('web_platform_course').select(name__LIKE='塑形防暴搏击课').all()
-    global rult_list
+    course=my_db.table('web_platform_course').select(name__LIKE='塑形防暴搏击课').one()
+    global sigu
     sigu=False
     Q = Queue()
+    rult_list=Queue()
     Q_pid = Queue()
-    for  course  in  course_list:
-        for  x  in range(1,int(course['subject_total'])):
-            L.acquire()
-            p1 = Process(target=appium_data, args=(context,Q,course,x))
-            p2 = Process(target=fictitious_bind, args=(False,32,1,Q_pid,))
-            p1.start()
-            Q.get()
-            p2.start()
-            p1.join()
-            pid_list=Q_pid.get()
-         #   print(pid_list)
-        #    print(id(pid_list))
-            for x in pid_list:
-                os.popen('taskkill.exe /pid:' + str(x) + '   -t -f ')
-            time.sleep(5)
-            Q.get()
-            L.release()
+  #  print(course)
+    L.acquire()
+    p1 = Process(target=appium_data, args=(context,Q,course,1,rult_list)) #第四个参数是上课的节数
+    p2 = Process(target=fictitious_bind, args=(False,32,1,Q_pid,))
+    p1.start()
+    if Q.get() == 0:
+        return {"result": -1, "error_info": '\'' + str(rult_list.get()) + '\''}
+    p2.start()
+    p1.join()
+    pid_list=Q_pid.get()
+    for y in pid_list:
+        os.popen('taskkill.exe /pid:' + str(y) + '   -t -f ')
+    time.sleep(5)
+    if Q.get() == 0:
+        return {"result": -1, "error_info": '\'' + str(rult_list.get()) + '\''}
+    L.release()
     if sigu:
-        logger.info(str({"result": -1, "error_info": '\'' + str( rult_list ) + '\''}))
-        return {"result": -1, "error_info": '\'' + str( rult_list ) + '\''}
+        logger.info(str({"result": -1, "error_info": '\'' + str( rult_list.get() ) + '\''}))
+        return {"result": -1, "error_info": '\'' + str( rult_list.get() ) + '\''}
     else:
         logger.info(str({'driverName': str(context['deviceName']), "result": 1, }))
         return {'driverName': str(context['deviceName']), "result": 1, }
-
-
-
-              #
 
 
 if __name__ == '__main__':
