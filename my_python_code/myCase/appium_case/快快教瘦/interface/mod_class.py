@@ -297,7 +297,7 @@ class user_information ():
         driver = self.driver
         driver.find_elements_by_id(单元小节图片)[6].click()
         i = 0
-        while not driver.find_elements_by_id(报告页标题) and i < 5:
+        while not driver.find_elements_by_id(报告页标题) and i < 10:
             logging.info('结束课程  尝试 第 '+str(i)+ '次')
             try:
                 if driver.find_elements_by_id(弹窗_取消):
@@ -307,7 +307,7 @@ class user_information ():
                 i = i + 1
             except:
                 i = i + 1
-                if i>5:
+                if i>10:
                     return
     def inspect_weight(self):
         driver = self.driver
@@ -362,7 +362,6 @@ class  pad_mysql(orm_to_mysql):
         self.db = a.db
         self.cursor = a.cursor_dict
         self.phone=phone
-
     def get_gymId(self):
         cursor = self.cursor
         gym_Id = 'SELECT gym_id FROM coach WHERE TEL= '+str(self.phone)
@@ -387,8 +386,6 @@ class  pad_mysql(orm_to_mysql):
         coach_phone=self.phone
         star_time=time.time()+add_time
         class_id =add_class(star_time=star_time,store_name=store_name,user_number=user_number,classes_checkin_number=classes_checkin_number,course_code=course_code,subject_show_id=subject_show_id,dict_index=dict_index,coach_phone=coach_phone,end_time=end_time)
-       # print(class_id)
-
         return  class_id
 
 

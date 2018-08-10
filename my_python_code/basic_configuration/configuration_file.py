@@ -15,21 +15,58 @@ user_uuid = '4be9950e-cb60-4d0d-8861-f22debd00210' #用于测试的用户
 web_user_name='luhuiyu'
 oss_url='http://kkuserdata.oss-cn-beijing.aliyuncs.com/bodydata/'
 
+config = {
+    'pool_name': 'local',
+    'host': '192.168.41.27',
+    'port': 33061,
+    'user': 'root',
+    'password': '123456',
+    'database': 'test_platform'}
+test_config = {
+        'pool_name': 'test',
+        'host': '192.168.41.20',
+        'port': 33061,
+        'user': 'kms',
+        'password': 'kuaikuaikms',
+        'database': 'kk_test'}
+buz_config = {
+        'pool_name': 'buz',
+        'host': '101.201.142.45',
+        'port': 33061,
+        'user': 'look',
+        'password': 'LookForDev',
+        'database': 'kk_buz'}
+stage_config = {
+           'pool_name': 'stage',
+           'host': '47.93.124.146',
+           'port': 33061,
+           'user': 'kas',
+           'password': 'kuaikuaikas',
+           'database': 'kk_test'
+       }
 
 
 
 
 
-
-
-
-
-
-
-
-
-uuid_idct={'1':  [
-    '3b1d5be6-90f2-46c4-ac6f-82df7433584d',
+uuid_idct={}
+uuid_idct['0']=[
+    '0959353b-e23e-4e1f-b22d-8f3a2a88f846',
+    '0ab00aef-0692-4269-ae27-849e9dd75163',
+    '0d406f44-df35-44c5-9b8b-2239f8b1cf85',
+    '0dc9662c-939e-4ce3-bfb6-f9697eef578d',
+    '0ddbde49-f749-4b29-9d0b-a59697cec848',
+    '10de2ca3-a1dd-4e65-a7f4-053ee03ae0f4',
+    '1118ad05-a87c-40f8-81ed-3066779a0c42',
+    '11dcf4ba-d070-4fc0-9092-a15a378644b4',
+    '132aebfa-aa47-477c-8023-5112549babf9',
+    '179407f6-41ad-4243-9b0b-84589ac4c60b',
+    '19624fb9-d301-45de-a9f0-5615a8ae8804',
+    '1b3ceb4d-6c73-45e1-be5c-c4fd17cdc6df',
+    '1fed3027-98c5-461d-9c56-97e333dc217b',
+]
+uuid_idct['1']=[
+'3b1d5be6-90f2-46c4-ac6f-82df7433584d',
 '85dc8136-2aef-40a1-8c73-0b9412f3a1e8',
 '62cd95fe854f4491a9ce0eaa9658d3bc',
 'ed31a7da-7dbf-4314-aa3e-abd7db4fb84d',
@@ -45,7 +82,7 @@ uuid_idct={'1':  [
 'a1d3287bb5c94c6a948f8dddf30e39e7',
 'b41ebc90117d46599fef75be3ceebf1e',
 '4eb5284b0fc74d59bd6c7b5a0d800689',
-            ]}
+            ]
 uuid_idct['2']=[
 'c1f0a33587e747ad81be7dbe58e36cc9',
 '15ce2e663df14a33946fab848a214494',
@@ -96,34 +133,13 @@ uuid_idct['4']=[
 
 
 ]
-
-uuid_idct['0']=[
-    '0959353b-e23e-4e1f-b22d-8f3a2a88f846',
-    '0ab00aef-0692-4269-ae27-849e9dd75163',
-    '0d406f44-df35-44c5-9b8b-2239f8b1cf85',
-    '0dc9662c-939e-4ce3-bfb6-f9697eef578d',
-    '0ddbde49-f749-4b29-9d0b-a59697cec848',
-    '10de2ca3-a1dd-4e65-a7f4-053ee03ae0f4',
-    '1118ad05-a87c-40f8-81ed-3066779a0c42',
-    '11dcf4ba-d070-4fc0-9092-a15a378644b4',
-    '132aebfa-aa47-477c-8023-5112549babf9',
-    '179407f6-41ad-4243-9b0b-84589ac4c60b',
-    '19624fb9-d301-45de-a9f0-5615a8ae8804',
-    '1b3ceb4d-6c73-45e1-be5c-c4fd17cdc6df',
-    '1fed3027-98c5-461d-9c56-97e333dc217b',
-]
-
-
 uuid_idct['5']=[
-    '1d074a60-ae89-41cb-88c3-240a807613c5',
-    '8c215f9c-48c0-4bf9-94e2-39796e211a1c',
-    '0f3f9fb8-a046-46c6-90ea-871faf2b414a',
-    '6b2432c0-f8ba-4db5-9878-8660f755399b',
-    'dfa8ed1b-4fb4-4c1d-9b26-b1e0aab86355',
-    '852a196e-ba1e-439c-b803-c45b430b559d',
-    'b2b22226-4492-4bf1-acc3-c34f794bf3d8',
-    'e3f2a096-339b-4094-a60a-89ce648a536a',
-    '21470f69-ce70-4a9f-b139-623bf32a45ba',
-    '0866ea40-6deb-45e5-a278-0d27482e1e88',
 
+    '15a11e0b-0ba5-464a-813e-a710b16a01a6',
+    'ec7455bd-9178-44fe-ad16-cc4e9b1191fd',
+    '0e0d92d9-1aed-4308-9329-b459a255c64c',
+    '668c44a8-0898-47e9-a5de-a0ab046f6769',
+    '83db7cc1-479c-4988-a461-e48044d5a46f',
+    'd18374fb-db69-4b1b-9710-25cda6bd1749',
+    '169ac766-eabb-412f-9d08-56a4a4ef13a5',
 ]

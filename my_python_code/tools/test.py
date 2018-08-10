@@ -1,6 +1,11 @@
-from my_python_code.mysql.Basic_information import my_sql_link_test,my_sql_link_buz
-from  my_python_code.mysql.ORM_of_mysql import orm_to_mysql
+import records
 
-buz_mysql = orm_to_mysql(my_sql_link_buz())
-
-print()
+rows = [
+    {"x": 1, "y": 2},
+    {"x": 2, "y": 3},
+    {"x": 3, "y": 4},
+    {"x": 4, "y": 9}
+]
+results = records.RecordCollection(iter(rows))
+with open('demo.xls', 'wb') as f:
+    f.write(results.export('xlsx'))

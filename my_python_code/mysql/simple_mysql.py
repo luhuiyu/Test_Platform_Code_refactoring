@@ -83,7 +83,7 @@ class simple_mysql():
         if self.my_column_name:
             self.my_sql_statement=  self.my_type +   self.my_column_name + ' from   '+ self.my_table
         return self
-    def WHERE(self,**kwargs):
+    def WHERE(self,*args,**kwargs):
         sc=''
         for x in kwargs.items():
             key = x[0]
@@ -310,5 +310,5 @@ if __name__ == '__main__':
    # a.TABLE('web_platform_phone').UPDATA({'id':10,'phone_code':'1560090000'}).WHERE(id=100).EXECUTE_ALL()
  #   a.TABLE('web_platform_phone').UPDATA({'phone_code':1560090000},id=10).WHERE(id=100).EXECUTE_ALL()
   #  a.TABLE('web_platform_phone').DELETE().WHERE(id__GT=150,phoe__LT=100,name__LIKE='北京').EXECUTE_ALL()
-    a.TABLE('web_platform_phone').SELECT().WHERE(id__GT=150).EXECUTE_ALL()
+    a.TABLE('user_report,user ').SELECT('user_report.user_uuid','user_report.score','user_report.composite_rate','user.sex').WHERE(id__GT=150).EXECUTE_ALL()
     a.__print__()
