@@ -27,8 +27,8 @@ def my_task(request):
             x.task_state = 0
             x.save()
             print('ok')
-     #   os.popen('python    ' + MY_RUN_API_CASE)
-     #   os.popen('python    ' + MY_RUN_UI_CASE)
+        os.popen('python    ' + MY_RUN_API_CASE)
+        os.popen('python    ' + MY_RUN_UI_CASE)
         return HttpResponseRedirect('/task')
     elif  request.method == 'POST' :
         selected_case=request.POST.getlist("selected_case")
