@@ -1,7 +1,4 @@
-from django.test import TestCase
+import requests
 
-# Create your tests here.
-from django.utils import timezone
-
-
-print(timezone.now())
+A=requests.get(url='http://test.kuaikuaikeji.com/kcas/appcheck21?build=20454')
+print(A.json())

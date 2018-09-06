@@ -1,2 +1,0 @@
-[ 2018-01-29 11:10:20,711 - 正确的密码没有账号.py:15 - INFO ] [Case_login]   {'Content-Encoding': 'gzip', 'Accept-encoding': 'gzip', 'Connection': 'keep-alive', 'Authorization': 'user="",response="ZDEzZmYxOTUxYzBlZmQ3OGQ0OTUyNWZmMjc4OGQ2ZTA="'}
-[ 2018-01-29 11:10:20,750 - 正确的密码没有账号.py:17 - INFO ] [Case_login]   200
